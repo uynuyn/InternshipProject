@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="commmon/home" extends="base.definition">
+		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
+		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
+		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+	
+	<definition name="common/cart" extends="base.definition">
+		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
+		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
+		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/cart.jsp" />
+		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+	
+	<definition name="common/products/list" extends="base.definition">
+		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
+		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
+		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/listProduct.jsp" />
+		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+	
+	<definition name="common/products/single" extends="base.definition">
+		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
+		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
+		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/singleProduct.jsp" />
+		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+	
+	<definition name="common/checkout" extends="base.definition">
+		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
+		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
+		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/checkout.jsp" />
+		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+</tiles-definitions>

@@ -13,6 +13,9 @@
 
 	<!-- insert logo and cart -->
 	<tiles:insertAttribute name="logo" />
+	
+	<!-- insert menu -->
+	<tiles:insertAttribute name="menu" />
 
 	<!-- insert body -->
 	<tiles:insertAttribute name="body" />

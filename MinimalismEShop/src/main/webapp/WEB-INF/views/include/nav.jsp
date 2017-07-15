@@ -44,7 +44,7 @@
             </div>
         </div>
     </div> <!-- End header area -->
-    <script
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -82,22 +82,55 @@
 				<div class="modal-body" >
 					<label class="sr-only" for="inputUserName">User name</label>
 					<input type="text" autofocus required placeholder="User name" name="username" class="form-control setfontinput" id="inputUserName">
+					<label class="sr-only" for="inputEmail">Email</label>
+					<input type="email" required placeholder="Email... ex@example.com" name="email" class="form-control setfontinput" id="inputEmail">
+					<label class="sr-only" for="inputPhone">Phone</label>
+					<input type="tel" pattern="d{10,11}" required placeholder="Phone" name="phone" class="form-control setfontinput" id="inputPhone">
 					<label class="sr-only" for="inputPassword">Password</label>
-					<input type="password" name="password" required placeholder="Password" class="form-control setfontinput" id="inputPassword">
+					<input type="password" pattern="{6,20}" name="password" required placeholder="Password more than 6 less 20" class="form-control setfontinput" id="inputPassword">
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+					<button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="confirmationlink">Sign up</button>
 					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
 				</div>
 				</form>
 			</div>
 		</div>
 	</div> <!-- End Login Modal -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(document).on('click','#loginlink',function(e) {
-				$("#modalLogin").modal("show");
-		});
-	});
-</script> 
 	
+	<!-- Message confirm -->
+	<div class="modal fade myModal" id="modalConfirm" role="dialog">
+		<div class="modal-dialog modal-sm" style="width: 500px">
+			<div class="modal-content">
+				<div class="modal-header">
+						<h2 class="form-signin-heading">Confirmation</h2>
+				</div>
+				<form action="">
+				<div class="modal-body" >
+					<label>Enter the confirmation code from the mail</label>
+					<input type="text" autofocus required placeholder="User name" name="Confirmation" class="form-control setfontinput" id="inputConfirmation">
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-lg btn-primary">Confirmation</button>
+					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div> <!-- End Login Modal -->
+	
+<!-- Latest jQuery form server -->
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    
+    <!-- Bootstrap JS form CDN -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+    <!-- jQuery sticky menu -->
+    <script src="/shop/resources/js/owl.carousel.min.js"></script>
+    <script src="/shop/resources/js/jquery.sticky.js"></script>
+    
+    <!-- jQuery easing -->
+    <script src="/shop/resources/js/jquery.easing.1.3.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="/shop/resources/js/main.js"></script>

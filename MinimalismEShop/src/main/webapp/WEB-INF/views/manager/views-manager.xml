@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="admin/home" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/include/nav-admin.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/index.jsp" />
+	</definition>
+	<definition name="admin/login" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/views/manager/login.jsp" />
+	</definition>
+	<definition name="add-product" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/manager/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/manager/nav-admin.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/add-product.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/manager/footer-admin.jsp" />
+	</definition>
+	<definition name="listview" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/manager/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/manager/nav-admin.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/view-products.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/manager/footer-admin.jsp" />
+	</definition>
+	<definition name="import-store" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/manager/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/manager/nav-admin.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/import-store.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/manager/footer-admin.jsp" />
+	</definition>
+	<definition name="add-promotion" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/manager/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/manager/nav-admin.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/add-promotion.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/manager/footer-admin.jsp" />
+	</definition>
+	<definition name="list-order" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/manager/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/manager/nav-admin.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/list-order.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/manager/footer-admin.jsp" />
+	</definition>
+	<definition name="update-product" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/manager/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/manager/nav-admin.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/update-product.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/manager/footer-admin.jsp" />
+	</definition>
+</tiles-definitions>

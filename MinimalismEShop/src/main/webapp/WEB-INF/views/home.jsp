@@ -1,33 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-    <div class="mainmenu-area">
-        <div class="container">
-            <div class="row">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div> 
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="shop.html">Shop page</a></li>
-                        <li><a href="single-product.html">Single product</a></li>
-                        <li><a href="cart.html">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>  
-            </div>
-        </div>
-    </div> <!-- End mainmenu area -->
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>       
     <div class="slider-area">
         <div class="zigzag-bottom"></div>
         <div id="slide-list" class="carousel carousel-fade slide" data-ride="carousel">
@@ -424,22 +397,40 @@
             </div>
         </div>
     </div> <!-- End product widget area -->
-   
-   
-   
-   
-    <!-- Latest jQuery form server -->
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    
-    <!-- Bootstrap JS form CDN -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    
-    <!-- jQuery sticky menu -->
-    <script src="/shop/resources/js/owl.carousel.min.js"></script>
-    <script src="/shop/resources/js/jquery.sticky.js"></script>
-    
-    <!-- jQuery easing -->
-    <script src="/shop/resources/js/jquery.easing.1.3.min.js"></script>
-    
-    <!-- Main Script -->
-    <script src="/shop/resources/js/main.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(document).on('click', '#loginlink', function(e) {
+			$("#modalLogin").modal("show");
+		});
+		$(document).on('click', '#registerlink', function(e) {
+			$("#modalRegister").modal("show");
+		});
+		$(document).on('click', '#confirmationlink', function(e) {
+			$("#modalConfirm").modal("show");
+		});
+	});
+</script>
+<script type="text/javascript">
+	/* show defaut */
+	$(document).ready(function() {
+		$("#modalConfirm").modal('show');
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#confirmationlink").CLICK(function() {
+			$.ajax({
+				type : "POST",
+				url : '/register',
+				success : function(result) {
+					/* kết quả */
+				}
+			});
+		});
+	});
+</script>
+
+
+
+
+
