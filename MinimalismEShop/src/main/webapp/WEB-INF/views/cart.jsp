@@ -75,7 +75,7 @@
                     <div class="product-content-right">
                         <div class="woocommerce">
                             <form method="post" action="#">
-                                <table cellspacing="0" class="shop_table cart">
+                                <table  class="shop_table cart">
                                     <thead>
                                         <tr>
                                             <th class="product-remove">&nbsp;</th>

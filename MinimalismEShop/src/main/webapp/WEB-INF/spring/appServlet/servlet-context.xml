@@ -10,7 +10,7 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.minimalism.*" />
+	<context:component-scan base-package="com.minimalism.shop.*" />
 	<!-- Enables the Spring MVC @Controller programming model -->
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
@@ -18,7 +18,7 @@
 	<resources mapping="/resources/**" location="/resources/static/" />
 	<annotation-driven />
 	<default-servlet-handler />
-	
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean
@@ -63,7 +63,7 @@
 	<beans:bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="packagesToScan" value="com.phong.entities" />
+		<beans:property name="packagesToScan" value="com.minimalism.shop.entities" />
 		<beans:property name="hibernateProperties">
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect
@@ -74,12 +74,19 @@
 
 			</beans:props>
 		</beans:property>
+		<beans:property name="annotatedClasses">
+			<beans:list>
+				<beans:value>com.minimalism.shop.entities.User</beans:value>
+			</beans:list>
+		</beans:property>
 	</beans:bean>
 
 	<beans:bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
+
 	</beans:bean>
+
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 

@@ -1,6 +1,8 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>       
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
     <div class="slider-area">
         <div class="zigzag-bottom"></div>
         <div id="slide-list" class="carousel carousel-fade slide" data-ride="carousel">
@@ -410,26 +412,6 @@
 		});
 	});
 </script>
-<script type="text/javascript">
-	/* show defaut */
-	$(document).ready(function() {
-		$("#modalConfirm").modal('show');
-	});
-</script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#confirmationlink").CLICK(function() {
-			$.ajax({
-				type : "POST",
-				url : '/register',
-				success : function(result) {
-					/* kết quả */
-				}
-			});
-		});
-	});
-</script>
-
 
 
 

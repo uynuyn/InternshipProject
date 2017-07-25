@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
  <div class="header-area">
         <div class="container">
             <div class="row">
@@ -48,55 +51,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<!-- Modal Login -->
-    <div class="modal fade myModal" id="modalLogin" role="dialog">
-		<div class="modal-dialog modal-sm" style="width: 500px">
-			<div class="modal-content">
-				<div class="modal-header">
-						<h2 class="form-signin-heading">Please sign in</h2>
-				</div>
-				<form action="">
-				<div class="modal-body" >
-					<label class="sr-only" for="inputUserName">User name</label>
-					<input type="text" autofocus required placeholder="User name" name="username" class="form-control setfontinput" id="inputUserName">
-					<label class="sr-only" for="inputPassword">Password</label>
-					<input type="password" name="password" required placeholder="Password" class="form-control setfontinput" id="inputPassword">
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
-					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
-				</div>
-				</form>
-			</div>
-		</div>
-	</div> <!-- End Login Modal -->
 	
-	<!-- Modal Register -->
-    <div class="modal fade myModal" id="modalRegister" role="dialog">
-		<div class="modal-dialog modal-sm" style="width: 500px">
-			<div class="modal-content">
-				<div class="modal-header">
-						<h2 class="form-signin-heading">Please sign up</h2>
-				</div>
-				<form action="">
-				<div class="modal-body" >
-					<label class="sr-only" for="inputUserName">User name</label>
-					<input type="text" autofocus required placeholder="User name" name="username" class="form-control setfontinput" id="inputUserName">
-					<label class="sr-only" for="inputEmail">Email</label>
-					<input type="email" required placeholder="Email... ex@example.com" name="email" class="form-control setfontinput" id="inputEmail">
-					<label class="sr-only" for="inputPhone">Phone</label>
-					<input type="tel" pattern="d{10,11}" required placeholder="Phone" name="phone" class="form-control setfontinput" id="inputPhone">
-					<label class="sr-only" for="inputPassword">Password</label>
-					<input type="password" pattern="{6,20}" name="password" required placeholder="Password more than 6 less 20" class="form-control setfontinput" id="inputPassword">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-lg btn-primary" data-dismiss="modal" id="confirmationlink">Sign up</button>
-					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
-				</div>
-				</form>
-			</div>
-		</div>
-	</div> <!-- End Login Modal -->
+	
+	
 	
 	<!-- Message confirm -->
 	<div class="modal fade myModal" id="modalConfirm" role="dialog">
