@@ -33,6 +33,18 @@
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
+	<definition name="common/products/lists" extends="base.definition">
+		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
+		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
+		<put-attribute name="logo"
+			value="/WEB-INF/views/include/logoandcart.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/listProducts.jsp" />
+		<put-attribute name="footertop"
+			value="/WEB-INF/views/include/footertop.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+	</definition>
+	
 	<definition name="common/products/single" extends="base.definition">
 		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
 		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
@@ -53,7 +65,7 @@
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
-	<definition name="common/register" extends="base.definition">
+	<definition name="register" extends="base.definition">
 		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
 		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
@@ -63,7 +75,7 @@
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
-	<definition name="common/login" extends="base.definition">
+	<definition name="login" extends="base.definition">
 		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
 		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />

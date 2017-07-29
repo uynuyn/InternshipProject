@@ -75,22 +75,16 @@ public class UserController {
 		return "common/login";
 	}
 	
-	@RequestMapping(value = {"/home",""}, method = RequestMethod.GET)
-	public String home() {
-		return "common/home";
-	}
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	public String cart() {		
 		return "common/cart";
 	}
+	
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public String products() {		
 		return "common/products/list";
 	}
-	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	public String product() {		
-		return "common/products/single";
-	}
+	
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String checkout() {		
 		return "common/checkout";

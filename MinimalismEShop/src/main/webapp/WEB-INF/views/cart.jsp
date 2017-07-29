@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
    <div class="product-big-title-area">
         <div class="container">
             <div class="row">
@@ -87,13 +89,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach items="${sessionScope.cart }" var="c" varStatus="i">
                                         <tr class="cart_item">
                                             <td class="product-remove">
-                                                <a title="Remove this item" class="remove" href="#">×</a> 
+                                            <spring:url value="/cart/remove/${c.value.id }" var="remove"></spring:url>
+                                                <a title="Remove this item" class="remove" href="${remove }"><i class="fa fa-times" aria-hidden="true"></i>
+                                                </a> 
                                             </td>
 
                                             <td class="product-thumbnail">
-                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="<c:url value = '/resources/img/product-thumb-2.jpg'/>"></a>
+                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="<c:url value = '${c.value.imgPath }'/>"></a>
                                             </td>
 
                                             <td class="product-name">
@@ -101,21 +106,22 @@
                                             </td>
 
                                             <td class="product-price">
-                                                <span class="amount">£15.00</span> 
+                                                <input hidden="" disabled="disabled" class="amount" value="${c.value.price }" id="b${i.index }"/> 
+                                                <span class="amount">${c.value.price }</span>
                                             </td>
 
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
-                                                    <input type="button" class="minus" value="-">
-                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="1" min="0" step="1">
-                                                    <input type="button" class="plus" value="+">
+                                                    <input hidden="" type="number" size="4" class="input-text qty text" title="Qty" value="1" min="0" step="1" id="${i.index }">
+                                                    <input hidden="" value="${c.value.id }" id="a${i.index }">
                                                 </div>
                                             </td>
 
                                             <td class="product-subtotal">
-                                                <span class="amount">£15.00</span> 
+                                                <span class="amount" id="d${c.value.id }">${c.value.total }</span> 
                                             </td>
                                         </tr>
+                                        </c:forEach>
                                         <tr>
                                             <td class="actions" colspan="6">
                                                 <div class="coupon">
@@ -189,3 +195,35 @@
             </div>
         </div>
     </div>
+    <script>
+$(document).ready(function(){
+    $(".qty").click(function(){
+    	var qty = $(this).val();
+    	var getId = $(this).id();
+    	var id = $("#a"+getId).val();
+    	var price = $("#b"+getId).val();
+		alert(qty);
+		event.preventDefault();
+    	$.ajax({
+			url : "/shop/cart/addCart/"+id+"/" + qty ,
+			contentType : "application/json",
+			type : 'POST',
+			dataType : 'json',
+			timeout : 100000
+		});
+		$("#d"+getId).val(parseInt(qty)*parseInt(price));
+    });
+    $(".remove").click(function() {
+		href = $(this).attr("href");
+		console.log(href);
+		$.ajax({
+			url : href,
+			dataType : "json"
+			});
+		$(this).parents("tr").hide(500).html("");
+		return false;
+	});
+
+   
+});
+</script>

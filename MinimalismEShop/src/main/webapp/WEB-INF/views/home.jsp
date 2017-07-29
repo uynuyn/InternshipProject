@@ -129,95 +129,23 @@
                     <div class="latest-product">
                         <h2 class="section-title">Latest Products</h2>
                         <div class="product-carousel">
+                        <c:forEach items="${products }" var="p">
                             <div class="single-product">
                                 <div class="product-f-image">
-                                    <img src="<c:url value = '/resources/img/product-1.jpg'/>" alt="">
+                                    <img src="<c:url value = '${p.imge }'/>" alt="" style="width:200pt;height:220pt;">
                                     <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                        <a href="#" class="add-to-cart-link" id="${p.id }"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                         <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>
                                 
-                                <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
+                                <h2><a href="single-product.html">${p.name }</a></h2>
                                 
                                 <div class="product-carousel-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
+                                    <i>${p.price }</i>
                                 </div> 
                             </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/shop/resources/img/product-2.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="single-product.html">Apple new mac book 2015 March :P</a></h2>
-                                <div class="product-carousel-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                                </div> 
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/shop/resources/img/product-3.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="single-product.html">Apple new i phone 6</a></h2>
-
-                                <div class="product-carousel-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                                </div>                                 
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/shop/resources/img/product-4.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
-
-                                <div class="product-carousel-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                                </div>                            
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/shop/resources/img/product-5.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="single-product.html">Sony Smart Air Condtion</a></h2>
-
-                                <div class="product-carousel-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                                </div>                                 
-                            </div>
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="/shop/resources/img/product-6.jpg" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-                                
-                                <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
-
-                                <div class="product-carousel-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                                </div>                            
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -411,6 +339,22 @@
 			$("#modalConfirm").modal("show");
 		});
 	});
+</script>
+<script>
+$(document).ready(function(){
+    $(".add-to-cart-link").click(function(event){
+		var id = $(this).attr('id');
+		alert(id);
+		event.preventDefault();
+    	$.ajax({
+			url : "/shop/cart/addCart/"+ id +"/"+1,
+			contentType : "application/json",
+			type : 'POST',
+			dataType : 'json',
+			timeout : 100000
+		});
+    });
+});
 </script>
 
 

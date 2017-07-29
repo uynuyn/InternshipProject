@@ -26,15 +26,15 @@ public class Common {
 		return null;
 	}
 	
-	public static boolean checkNullandBlank(Object object){
-		if(object== null || object.equals("")){
+	public static <E> boolean checkNullandBlank(E e){
+		if(e== null || e.equals("")){
 			return true;
 		}
 		return false;
 	}
 	
-	public static boolean checkListNullandBlank(List<Object> list){
-		if(list==null || list.isEmpty()){
+	public static <E> boolean checkListNullandBlank(List<E> e){
+		if(e==null || e.isEmpty()){
 			return true;
 		}
 		return false;

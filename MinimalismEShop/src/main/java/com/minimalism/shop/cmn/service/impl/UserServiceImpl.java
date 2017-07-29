@@ -11,24 +11,24 @@ import com.minimalism.shop.entities.User;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	private UserRepositoryImpl userServiceImpl;
+	private UserRepositoryImpl userRepository;
 
 	@Override
 	public User findUserbyUsername(String username, String email) {
 		// TODO Auto-generated method stub
-		return userServiceImpl.findUserbyUsername(username, email);
+		return userRepository.findUserbyUsername(username, email);
 	}
 
 	@Override
 	public User save(User user) {
 		// TODO Auto-generated method stub
-		return userServiceImpl.save(user);
+		return userRepository.save(user);
 	}
 
 	@Override
 	public boolean loginUser(User user) {
 		// TODO Auto-generated method stub
-		return userServiceImpl.loginUser(user);
+		return userRepository.loginUser(user);
 	}
 
 }

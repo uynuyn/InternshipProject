@@ -27,6 +27,7 @@ public class Department implements Serializable {
 	private static final long serialVersionUID = 8924509690829550577L;
 	private Integer id;
 	private String name;
+	private String code;
 	@Transient
 	private List<Category> categories = new ArrayList<>();
 
@@ -62,6 +63,16 @@ public class Department implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Column(name = "code")
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
 	public List<Category> getCategories() {

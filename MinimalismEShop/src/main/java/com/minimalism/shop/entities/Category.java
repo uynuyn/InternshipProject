@@ -1,5 +1,4 @@
 package com.minimalism.shop.entities;
-// Generated Jul 11, 2017 9:54:23 PM by Hibernate Tools 4.3.5.Final
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +29,7 @@ public class Category implements Serializable {
 	private Integer id;
 	private Department department;
 	private String name;
+	private String code;
 	private String description;
 	@Transient
 	private List<GroupProduct> groupProducts = new ArrayList<>();
@@ -78,6 +78,15 @@ public class Category implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Column(name = "code")
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Column(name = "description")
