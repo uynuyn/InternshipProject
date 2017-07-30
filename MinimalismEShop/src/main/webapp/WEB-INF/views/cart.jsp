@@ -15,7 +15,7 @@
         </div>
     </div> <!-- End Page title area -->
     
-    
+    <c:set value="${sessionScope.cart }" var="cart"></c:set>
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
@@ -89,7 +89,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${sessionScope.cart }" var="c" varStatus="i">
+                                    <c:forEach items="${cart }" var="c" varStatus="i">
                                         <tr class="cart_item">
                                             <td class="product-remove">
                                             <spring:url value="/cart/remove/${c.value.id }" var="remove"></spring:url>
@@ -113,6 +113,7 @@
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
                                                     <input hidden="" type="number" size="4" class="input-text qty text" title="Qty" value="1" min="0" step="1" id="${i.index }">
+                                                    <span class="amount">${c.value.quantity }</span>
                                                     <input hidden="" value="${c.value.id }" id="a${i.index }">
                                                 </div>
                                             </td>
@@ -130,7 +131,10 @@
                                                     <input type="submit" value="Apply Coupon" name="apply_coupon" class="button">
                                                 </div>
                                                 <input type="submit" value="Update Cart" name="update_cart" class="button">
-                                                <input type="submit" value="Proceed to Checkout" name="proceed" class="checkout-button button alt wc-forward">
+                                                <c:if test='${cart ne null || not empty cart }'>
+                                                <spring:url value="/checkout"  var="checkout"></spring:url>
+                                                	<a class="checkout-button button alt wc-forward" href="${checkout }">Proceed to Checkout</a>
+                                                </c:if>
                                             </td>
                                         </tr>
                                     </tbody>

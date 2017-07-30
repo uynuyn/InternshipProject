@@ -34,9 +34,9 @@
 								<div class="product-f-image">
 									<img src="<c:url value = '${p.imge }'/>" alt="" style="width:200pt;height:230pt;">
 									<div class="product-hover">
-										<a href="#" class="add-to-cart-link"><i
+										<a href="#" class="add-to-cart-link" id="${p.id }"><i
 											class="fa fa-shopping-cart"></i> Add to cart</a> <a
-											href="single-product.html" class="view-details-link"><i
+											href="#" class="view-details-link"><i
 											class="fa fa-link"></i> See details</a>
 									</div>
 								</div>
@@ -57,3 +57,19 @@
 		</c:forEach>
 	</div>
 </div>
+<script>
+$(document).ready(function(){
+    $(".add-to-cart-link").click(function(event){
+		var id = $(this).attr('id');
+		alert(id);
+		event.preventDefault();
+    	$.ajax({
+			url : "/shop/cart/addCart/"+ id +"/"+1,
+			contentType : "application/json",
+			type : 'POST',
+			dataType : 'json',
+			timeout : 100000
+		});
+    });
+});
+</script>

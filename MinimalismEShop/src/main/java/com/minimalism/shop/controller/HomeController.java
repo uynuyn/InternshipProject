@@ -19,22 +19,26 @@ import com.minimalism.shop.entities.GroupProduct;
 
 @Controller
 public class HomeController {
-	@Autowired
-	private DepartmentServiceImpl departmentService;
+	
 	
 	@Autowired
 	private GroupProductServiceImpl groupProductService;
+		
+	@Autowired
+	private DepartmentServiceImpl departmentService;
 	
 	@PostConstruct
-	public void init(){
+	public void homeController(){
 	}
 	
 	private void getAllListProduct(HttpSession session){
+		
 		List<Department> listDepartment = departmentService.findAllList();
 		if(!Common.checkListNullandBlank(listDepartment)){
 			session.setAttribute("listDepartment", listDepartment);
 		}
 	}
+	
 	
 	private void getProductTop(Model model){
 		List<GroupProduct> list = groupProductService.findListProductTop();

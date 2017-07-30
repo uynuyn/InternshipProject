@@ -40,7 +40,7 @@
                         </div>  
                         
                         <div class="product-option-shop">
-                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#" id="${p.id }">Add to cart</a>
                         </div>                       
                     </div>
                 </div>
@@ -74,3 +74,19 @@
             </div>
         </div>
     </div>
+    <script>
+$(document).ready(function(){
+    $(".add_to_cart_button").click(function(event){
+		var id = $(this).attr('id');
+		alert(id);
+		event.preventDefault();
+    	$.ajax({
+			url : "/shop/cart/addCart/"+ id +"/"+1,
+			contentType : "application/json",
+			type : 'POST',
+			dataType : 'json',
+			timeout : 100000
+		});
+    });
+});
+</script>
