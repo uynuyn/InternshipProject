@@ -16,20 +16,23 @@
 					modelAttribute="userFormLogin">
 					<div class="modal-body">
 					<spring:bind path="username">
-						<label class="sr-only" for="inputUserName">User name</label>
-						<form:input path="username" type="text" placeholder="User name"
-							name="username" class="form-control setfontinput"
-							id="inputUserName"/> 
-						<form:errors path="username" class="control-label" />					
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<label class="sr-only" for="inputUserName">User name</label>
+							<form:input path="username" type="text" placeholder="User name"
+								name="username" class="form-control setfontinput"
+								id="inputUserName" /> 
+							<form:errors path="username" class="control-label" />
+						</div>				
 					</spring:bind>
 					<spring:bind path="password">
-							<div class="form-group ${status.error ? 'has-error' : ''}">
-						<label class="sr-only" for="inputPassword">Password</label>
-						<form:input path="password" type="password" name="password" placeholder="Password"
-							class="form-control setfontinput" id="inputPassword" />
-						<form:errors path="password" class="control-label"></form:errors>
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<label class="sr-only" for="inputPassword">Password</label>
+							<form:input path="password" type="password" name="password" placeholder="Password"
+								class="form-control setfontinput" id="inputPassword" />
+							<form:errors path="password" class="control-label"></form:errors>
 						</div>
 					</spring:bind>
+						
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-lg btn-primary">Sign in</button>

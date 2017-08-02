@@ -38,10 +38,19 @@
                         <div class="product-carousel-price">
                             <i>${p.price }</i>
                         </div>  
+                        <c:choose>
+                        	<c:when test="${p.endProduct }">
+                        		<div class="product-option-shop">
+                            		<a class="add_to_cart_button addProduct" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#" id="${p.id }">Add to cart</a>
+                        		</div>
+                        	</c:when>
+                        	<c:otherwise>
+		                        <div class="product-option-shop">
+		                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#" id="${p.id }">Sorry</a>
+		                        </div>                     	
+                        	</c:otherwise>
+                        </c:choose>
                         
-                        <div class="product-option-shop">
-                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#" id="${p.id }">Add to cart</a>
-                        </div>                       
                     </div>
                 </div>
                 </c:forEach>
@@ -76,7 +85,7 @@
     </div>
     <script>
 $(document).ready(function(){
-    $(".add_to_cart_button").click(function(event){
+    $(".addProduct").click(function(event){
 		var id = $(this).attr('id');
 		alert(id);
 		event.preventDefault();
@@ -85,7 +94,11 @@ $(document).ready(function(){
 			contentType : "application/json",
 			type : 'POST',
 			dataType : 'json',
-			timeout : 100000
+			timeout : 100000,
+			success : function(response) {
+				console.log($("#add-cart").text());
+				$("#add-cart").html(Number(response));
+			}
 		});
     });
 });

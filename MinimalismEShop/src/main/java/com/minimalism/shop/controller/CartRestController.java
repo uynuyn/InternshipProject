@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.minimalism.shop.cmn.base.Common;
 import com.minimalism.shop.cmn.service.impl.GroupProductServiceImpl;
+import com.minimalism.shop.cmn.service.impl.ProductServiceImpl;
 import com.minimalism.shop.dto.ProductDto;
+import com.minimalism.shop.dto.ViewCart;
 import com.minimalism.shop.entities.GroupProduct;
 
 @RestController
@@ -25,12 +27,16 @@ public class CartRestController {
 
 	@Autowired	private GroupProductServiceImpl groupProductService;
 	
+	@Autowired private ProductServiceImpl productService; 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/addCart/{id}/{qty}", method = RequestMethod.POST)
-	public @ResponseBody void addCart(Model model, HttpSession session, 
+	public @ResponseBody Integer addCart(Model model, HttpSession session, 
 			@PathVariable("id") int id,
 			@PathVariable("qty") int qty){
+		session.removeAttribute("viewCart");
+		ViewCart viewCart = new ViewCart();
 		GroupProduct groupProduct = groupProductService.findProductbyId(id);
+		int productQty = productService.countProductbyGroupProductandflag(groupProduct, true);
 		Map<Integer, ProductDto> mapItem = (Map<Integer, ProductDto>) session.getAttribute("cart");
 		ProductDto product = new ProductDto();
 		if(mapItem==null){
@@ -53,23 +59,44 @@ public class CartRestController {
 				product.setDiscount(0);
 			}else {
 				int quantity = mapItem.get(id).getQuantity() + 1;
-				if(quantity <= groupProduct.getQuantity()){
+				if(quantity <= productQty){
 					mapItem.get(id).setQuantity(quantity);
 				}
 			}
 		}
+		Double amount = 0.0;
+		Integer integer = 0;
 		mapItem.put(groupProduct.getId(), product);
+		for (ProductDto productDto : mapItem.values()) {
+			amount += productDto.getQuantity()*productDto.getPrice();
+			integer += productDto.getQuantity();
+		}
+		viewCart.setAmount(amount);
+		viewCart.setQty(integer);
+		session.setAttribute("viewCart", viewCart);
 		session.setAttribute("cart", mapItem);
+		return integer;
 	}
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/remove/{id}")
-	private @ResponseBody void remove(HttpServletRequest request, @PathVariable("id") int id) {
+	private @ResponseBody Integer remove(HttpServletRequest request, @PathVariable("id") int id) {
 		HttpSession session = request.getSession();
+		session.removeAttribute("viewCart");
 		Map<Integer, ProductDto> listProduct = (Map<Integer, ProductDto>) session.getAttribute("cart");
-
 		if (listProduct != null) {
 			listProduct.remove(id);
 		}
+		Double amount = 0.0;
+		Integer integer = 0;
+		ViewCart viewCart = new ViewCart();
+		for (ProductDto productDto : listProduct.values()) {
+			amount += productDto.getQuantity()*productDto.getPrice();
+			integer += productDto.getQuantity();
+		}
+		viewCart.setAmount(amount);
+		viewCart.setQty(integer);
+		session.setAttribute("viewCart", viewCart);
+		return integer;
 	}
 
 	

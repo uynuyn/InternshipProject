@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,7 +17,8 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="home">Home</a></li>
+                    <spring:url value="/home" var="home"></spring:url>
+                        <li class="active"><a href="${home }">Home</a></li>
                         <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" id="departments">Departments<b class="caret"></b></a>
                         	<ul class="dropdown-content multi-column columns-3">
@@ -46,8 +48,6 @@
 							</ul>
                         
                         </li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>  
             </div>

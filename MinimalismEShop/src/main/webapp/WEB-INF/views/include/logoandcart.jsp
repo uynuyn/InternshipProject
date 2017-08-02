@@ -8,13 +8,17 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="index.html"><span>Minimalism</span>Shop</a></h1>
+                    <spring:url value="/home" var="home"></spring:url>
+                        <h1><a href="${home }"><span>Minimalism</span>Shop</a></h1>
                     </div>
                 </div>
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                    <spring:url value="/cart" var="cart"></spring:url>
+                        <a href="${cart }">Cart - <span class="cart-amunt" id="totalCartID">${sessionScope.viewCart.amount }</span> <i class="fa fa-shopping-cart"></i>
+                         		<span id ="add-cart" class="product-count">${sessionScope.viewCart.qty }</span>
+                         </a>
                     </div>
                 </div>
             </div>

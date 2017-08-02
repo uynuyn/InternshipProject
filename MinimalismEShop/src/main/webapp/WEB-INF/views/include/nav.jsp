@@ -3,19 +3,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
+<c:set value="${sessionScope.users }" var="u"></c:set>
  <div class="header-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#" id="loginlink" class="loginlink"><i class="fa fa-user"></i> Login</a></li>
-							<li><a href="#" id="registerlink" class="registerlink"><i class="fa fa-user"></i> Register</a></li>
+                            <spring:url value="/cart" var="cart"/>
+                            <li><a href="${cart }"><i class="fa fa-user"></i> My Cart</a></li>
+                            <c:choose>
+                            	<c:when test="${u eq null || empty u }">
+                            	<spring:url value="/login" var="l"/>
+		                            <li><a href="${l }" id="loginlink" class="loginlink"><i class="fa fa-user"></i> Login</a></li>
+		                           <spring:url value="/register" var="r"></spring:url>
+									<li><a href="${r }" id="registerlink" class="registerlink"><i class="fa fa-user"></i> Register</a></li>                            	
+                            	</c:when>
+                            	<c:otherwise>
+                          			<li><a href="#" class="loginlink"><i class="fa fa-user"></i> Hello ${u.username }</a></li>		
+                            	</c:otherwise>
+                            </c:choose>
                             
                         </ul>
                     </div>
@@ -28,8 +36,7 @@
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">USD</a></li>
-                                    <li><a href="#">INR</a></li>
-                                    <li><a href="#">GBP</a></li>
+                                    <li><a href="#">VND</a></li>
                                 </ul>
                             </li>
 
@@ -37,8 +44,7 @@
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">English</a></li>
-                                    <li><a href="#">French</a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="#">Tiếng Việt</a></li>
                                 </ul>
                             </li>
                         </ul>

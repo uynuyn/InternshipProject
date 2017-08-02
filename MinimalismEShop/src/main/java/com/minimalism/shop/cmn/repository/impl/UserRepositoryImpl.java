@@ -4,6 +4,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	public User findUserbyUsername(String username, String email) {
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("select user from User user where user.username = :username and user.email = :email");
+		Query query = session.createQuery("from User user where user.username = :username or user.email = :email");
 		query.setParameter("username", username);
 		query.setParameter("email", email);
 		User user =  (User) query.uniqueResult();
@@ -41,10 +42,10 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public boolean loginUser(User user) {
+	public User loginUser(User user) {
 		// TODO Auto-generated method stub
 		if(Common.checkNullandBlank(user)){
-			return false;
+			return new User();
 		}
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(User.class)
@@ -53,11 +54,28 @@ public class UserRepositoryImpl implements UserRepository{
 		if(!Common.checkNullandBlank(users)){
 			user.setPassword(Common.passEncode(user.getPassword(), users.getSalt()));
 			if(user.getPassword().equals(users.getPassword())){
-				return true;
+				return users;
 			}
 		}
 		
-		return false;
+		return users;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.update(user);
+			tx.commit();
+			return user;
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
 	}
 
 }

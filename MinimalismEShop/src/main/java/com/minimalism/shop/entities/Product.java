@@ -29,6 +29,15 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1234667748821998843L;
 	private Integer id;
 	private GroupProduct groupProduct;
+	private boolean flag;
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+
 	@Transient
 	private List<OrderDetail> orderDetails = new ArrayList<>();
 

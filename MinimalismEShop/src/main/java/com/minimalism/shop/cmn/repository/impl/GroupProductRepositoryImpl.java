@@ -7,10 +7,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.minimalism.shop.cmn.base.Common;
 import com.minimalism.shop.cmn.repository.GroupProductRepository;
 import com.minimalism.shop.entities.GroupProduct;
 
@@ -67,10 +69,32 @@ public class GroupProductRepositoryImpl implements GroupProductRepository{
 	@Override
 	public List<GroupProduct> findListProductTop() {
 		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(GroupProduct.class).setFirstResult(0).setMaxResults(9);
+		Criteria criteria = session.createCriteria(GroupProduct.class).add(Restrictions.eq("endProduct", true)).setFirstResult(0).setMaxResults(9);
 		List<GroupProduct> list = criteria.list();
 		session.close();
 		return list;
+	}
+
+	@Override
+	public boolean updateGroupProduct(GroupProduct groupProduct) {
+		// TODO Auto-generated method stub
+		if(Common.checkNullandBlank(groupProduct)){
+			return false;
+		}
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.update(groupProduct);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+		return false;
+		
 	}
 
 

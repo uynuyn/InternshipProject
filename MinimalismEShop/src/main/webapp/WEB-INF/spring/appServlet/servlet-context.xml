@@ -86,6 +86,12 @@
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 
 	</beans:bean>
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basename">
+			<beans:value>validation</beans:value>
+		</beans:property>
+	</beans:bean>
 
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -96,5 +102,40 @@
 
 		<!-- setting maximum upload size -->
 		<beans:property name="maxUploadSize" value="2098000" />
+	</beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/checkout" />
+			<exclude-mapping path="/login"/>
+			<exclude-mapping path="/register"/>
+			<beans:bean class="com.minimalism.shop.cmn.interceptor.AuthenticateInterceptor" />
+		</interceptor>
+	</interceptors>
+	<interceptors>
+		<interceptor>
+			<mapping path="/login" />
+			<mapping path="/register"/>
+			<exclude-mapping path="/home"/>
+			<beans:bean class="com.minimalism.shop.cmn.interceptor.UserInterceptor" />
+		</interceptor>
+	</interceptors>
+	<!-- Production implementation of the JavaMailSender interface, supporting 
+		both JavaMail MimeMessages and Spring SimpleMailMessages -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<beans:property name="username" value="thucuyen.tran.0508@gmail.com" />
+		<beans:property name="password" value="thucuyen(0508))" />
+ 		<beans:property name="defaultEncoding" value="UTF-8"/> 
+ 
+		<!-- The name of the property, following JavaBean naming conventions -->
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
 	</beans:bean>
 </beans:beans>

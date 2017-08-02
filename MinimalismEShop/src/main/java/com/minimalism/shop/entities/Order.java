@@ -3,6 +3,7 @@ package com.minimalism.shop.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,12 +30,11 @@ public class Order implements Serializable {
 	private static final long serialVersionUID = 3218023722523928603L;
 	private Integer id;
 	private User user;
-	private String orderDate;
-	private String deliveryDate;
+	private Date orderDate;
+	private Date deliveryDate;
 	private int amount;
 	private Boolean status;
 	private String note;
-	private String receiverName;
 	private String address;
 	@Transient
 	private List<OrderDetail> orderDetails = new ArrayList<>();
@@ -42,24 +42,22 @@ public class Order implements Serializable {
 	public Order() {
 	}
 
-	public Order(User user, String orderDate, int amount, String receiverName,
+	public Order(User user, Date orderDate, int amount,
 			String address) {
 		this.user = user;
 		this.orderDate = orderDate;
 		this.amount = amount;
-		this.receiverName = receiverName;
 		this.address = address;
 	}
 
-	public Order(User user, String orderDate, String deliveryDate, int amount, Boolean status,
-			String note, String receiverName, String address, List<OrderDetail> orderDetails) {
+	public Order(User user, Date orderDate, Date deliveryDate, int amount, Boolean status,
+			String note, String address, List<OrderDetail> orderDetails) {
 		this.user = user;
 		this.orderDate = orderDate;
 		this.deliveryDate = deliveryDate;
 		this.amount = amount;
 		this.status = status;
 		this.note = note;
-		this.receiverName = receiverName;
 		this.address = address;
 		this.orderDetails = orderDetails;
 	}
@@ -87,20 +85,20 @@ public class Order implements Serializable {
 	}
 
 	@Column(name = "orderDate", nullable = false)
-	public String getOrderDate() {
+	public Date getOrderDate() {
 		return this.orderDate;
 	}
 
-	public void setOrderDate(String orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 
 	@Column(name = "deliveryDate")
-	public String getDeliveryDate() {
+	public Date getDeliveryDate() {
 		return this.deliveryDate;
 	}
 
-	public void setDeliveryDate(String deliveryDate) {
+	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
@@ -129,15 +127,6 @@ public class Order implements Serializable {
 
 	public void setNote(String note) {
 		this.note = note;
-	}
-
-	@Column(name = "receiverName", nullable = false)
-	public String getReceiverName() {
-		return this.receiverName;
-	}
-
-	public void setReceiverName(String receiverName) {
-		this.receiverName = receiverName;
 	}
 
 	@Column(name = "address", nullable = false)

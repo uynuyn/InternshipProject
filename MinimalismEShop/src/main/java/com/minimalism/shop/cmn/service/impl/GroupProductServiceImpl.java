@@ -49,5 +49,11 @@ public class GroupProductServiceImpl implements GroupProductService {
 		// TODO Auto-generated method stub
 		return groupProductRepository.findListProductTop();
 	}
+
+	@Override
+	public boolean updateGroupProduct(GroupProduct groupProduct) {
+		// TODO Auto-generated method stub
+		return groupProductRepository.updateGroupProduct(groupProduct);
+	}
 	
 }

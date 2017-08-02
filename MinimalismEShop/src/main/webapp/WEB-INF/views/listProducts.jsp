@@ -34,10 +34,18 @@
 								<div class="product-f-image">
 									<img src="<c:url value = '${p.imge }'/>" alt="" style="width:200pt;height:230pt;">
 									<div class="product-hover">
-										<a href="#" class="add-to-cart-link" id="${p.id }"><i
-											class="fa fa-shopping-cart"></i> Add to cart</a> <a
-											href="#" class="view-details-link"><i
-											class="fa fa-link"></i> See details</a>
+									<c:choose>
+										<c:when test="${p.endProduct }">
+											<a href="#" class="add-to-cart-link addProduct" id="${p.id }">
+												<i class="fa fa-shopping-cart"></i> Add to cart</a>
+										</c:when>
+										<c:otherwise>
+											<a href="#" class="add-to-cart-link" id="${p.id }">
+												<i class="fa fa-times"></i> Sorry</a>
+										</c:otherwise>
+									</c:choose>
+										<a href="#" class="view-details-link">
+										<i class="fa fa-link"></i> See details</a>
 									</div>
 								</div>
 
@@ -59,7 +67,7 @@
 </div>
 <script>
 $(document).ready(function(){
-    $(".add-to-cart-link").click(function(event){
+    $(".addProduct").click(function(event){
 		var id = $(this).attr('id');
 		alert(id);
 		event.preventDefault();
@@ -68,7 +76,11 @@ $(document).ready(function(){
 			contentType : "application/json",
 			type : 'POST',
 			dataType : 'json',
-			timeout : 100000
+			timeout : 100000,
+			success : function(response) {
+				console.log($("#add-cart").text());
+				$("#add-cart").html(Number(response));
+			}
 		});
     });
 });

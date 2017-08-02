@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,6 +17,22 @@
     </div> <!-- End Page title area -->
     
     <c:set value="${sessionScope.cart }" var="cart"></c:set>
+    <c:choose>
+		<c:when test="${cart eq null || empty cart }">
+			<div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                    	<h2><i class="fa fa-shopping-cart" style="color: red"></i></h2>
+                        <h2>Your Shopping Cart is empty</h2>
+                        <spring:url value="/home" var="home"></spring:url>
+						<h2><a class="button alt wc-forward" href="${home }">Home</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>	
+		</c:when>
+		<c:otherwise>
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
@@ -29,7 +46,7 @@
                         </form>
                     </div>
                     
-                    <div class="single-sidebar">
+<%--                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Products</h2>
                         <div class="thubmnail-recent">
                             <img src="<c:url value = '/resources/img/product-thumb-1.jpg'/>" class="recent-thumb" alt="">
@@ -60,16 +77,16 @@
                             </div>                             
                         </div>
                     </div>
-                    
+          --%>           
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Recent Posts</h2>
-                        <ul>
+                        <!-- <ul>
                             <li><a href="#">Sony Smart TV - 2015</a></li>
                             <li><a href="#">Sony Smart TV - 2015</a></li>
                             <li><a href="#">Sony Smart TV - 2015</a></li>
                             <li><a href="#">Sony Smart TV - 2015</a></li>
                             <li><a href="#">Sony Smart TV - 2015</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 
@@ -125,15 +142,15 @@
                                         </c:forEach>
                                         <tr>
                                             <td class="actions" colspan="6">
-                                                <div class="coupon">
+                                                <!-- <div class="coupon">
                                                     <label for="coupon_code">Coupon:</label>
                                                     <input type="text" placeholder="Coupon code" value="" id="coupon_code" class="input-text" name="coupon_code">
                                                     <input type="submit" value="Apply Coupon" name="apply_coupon" class="button">
                                                 </div>
-                                                <input type="submit" value="Update Cart" name="update_cart" class="button">
+                                                <input type="submit" value="Update Cart" name="update_cart" class="button"> -->
                                                 <c:if test='${cart ne null || not empty cart }'>
                                                 <spring:url value="/checkout"  var="checkout"></spring:url>
-                                                	<a class="checkout-button button alt wc-forward" href="${checkout }">Proceed to Checkout</a>
+                                                	<a id="mycheckout" class="checkout-button button alt wc-forward" href="${checkout }" >Proceed to Checkout</a>
                                                 </c:if>
                                             </td>
                                         </tr>
@@ -144,7 +161,7 @@
                             <div class="cart-collaterals">
 
 
-                            <div class="cross-sells">
+<%--                             <div class="cross-sells">
                                 <h2>You may be interested in...</h2>
                                 <ul class="products">
                                     <li class="product">
@@ -168,16 +185,16 @@
                                     </li>
                                 </ul>
                             </div>
+ --%>
 
-
-                            <div class="cart_totals ">
+                            <div class="cart_totals " id ="cart_totalsid">
                                 <h2>Cart Totals</h2>
 
                                 <table >
                                     <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">£15.00</span></td>
+                                            <td><span class="amount" >${sessionScope.viewCart.amount }</span></td>
                                         </tr>
 
                                         <tr class="shipping">
@@ -187,7 +204,7 @@
 
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">£15.00</span></strong> </td>
+                                            <td><strong><span class="amount">${sessionScope.viewCart.amount }</span></strong> </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -199,6 +216,8 @@
             </div>
         </div>
     </div>
+    </c:otherwise>
+    </c:choose>
     <script>
 $(document).ready(function(){
     $(".qty").click(function(){
@@ -222,7 +241,16 @@ $(document).ready(function(){
 		console.log(href);
 		$.ajax({
 			url : href,
-			dataType : "json"
+			dataType : "json",
+			success : function(response) {
+				console.log(response);
+				$("#add-cart").html(Number(response));
+				if(response==0){
+					document.getElementById("mycheckout").style.display = "none";
+					document.getElementById("cart_totalsid").style.display = "none";
+					document.getElementById("totalCartID").innerHTML='0.0';
+					}
+			}
 			});
 		$(this).parents("tr").hide(500).html("");
 		return false;

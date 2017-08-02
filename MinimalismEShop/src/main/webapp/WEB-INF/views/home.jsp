@@ -176,7 +176,7 @@
         </div>
     </div> <!-- End brands area -->
     
-    <div class="product-widget-area">
+<!--     <div class="product-widget-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
@@ -326,7 +326,7 @@
                 </div>
             </div>
         </div>
-    </div> <!-- End product widget area -->
+        </div> End product widget area -->
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(document).on('click', '#loginlink', function(e) {
@@ -351,7 +351,12 @@ $(document).ready(function(){
 			contentType : "application/json",
 			type : 'POST',
 			dataType : 'json',
-			timeout : 100000
+			timeout : 100000,
+			success : function(response) {
+				console.log($("#add-cart").text());
+				$("#add-cart").html(Number(response));
+				alert(response);
+			}
 		});
     });
 });
