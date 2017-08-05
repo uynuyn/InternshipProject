@@ -10,12 +10,13 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.minimalism.shop.cmn.base.BaseRepositoryImpl;
 import com.minimalism.shop.cmn.base.Common;
 import com.minimalism.shop.cmn.repository.CategoryRepository;
 import com.minimalism.shop.entities.Category;
 
 @Repository
-public class CategoryRepositoryImpl implements CategoryRepository{
+public class CategoryRepositoryImpl extends BaseRepositoryImpl<Category, Integer> implements CategoryRepository{
 	
 	@Autowired
 	private SessionFactory SessionFactory;
@@ -26,6 +27,9 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 		Session session = SessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Category.class);
 		List<Category> list = criteria.list();
+		for (Category category : list) {
+			Hibernate.initialize(category.getDepartment());
+		}
 		session.close();
 		if(Common.checkListNullandBlank(list)){
 			return null;
@@ -36,7 +40,7 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 	@Override
 	public Category findCategorybyId(int id) {
 		Session session = SessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Category.class).add(Restrictions.eq("id", id));
+		Criteria criteria = session.createCriteria(Category.class).add(Restrictions.idEq(id));
 		Category category = (Category) criteria.uniqueResult();
 		session.close();
 		if(Common.checkNullandBlank(category)){
@@ -68,6 +72,25 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 		}
 		session.close();
 		return category;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Category> findCategoryDepartment(int department) {
+		// TODO Auto-generated method stub
+		Session session = SessionFactory.openSession();
+		try {
+			Criteria criteria = session.createCriteria(Category.class)
+					.add(Restrictions.eq("department.id", department));
+			List<Category> categories = criteria.list();
+			for (Category category : categories) {
+				Hibernate.initialize(category.getDepartment());
+			}
+			return categories;
+		} finally {
+			// TODO: handle finally clause
+			session.close();
+		}
 	}
 
 }

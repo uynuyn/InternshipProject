@@ -5,19 +5,19 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.minimalism.shop.cmn.base.BaseRepositoryImpl;
 import com.minimalism.shop.cmn.base.Common;
 import com.minimalism.shop.cmn.repository.ProductRepository;
 import com.minimalism.shop.entities.GroupProduct;
 import com.minimalism.shop.entities.Product;
 
 @Repository
-public class ProductRepositoryImpl implements ProductRepository {
+public class ProductRepositoryImpl extends BaseRepositoryImpl<Product, Integer> implements ProductRepository {
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -81,28 +81,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 		List<Product> products = criteria.list();
 		session.close();
 		return products;
-	}
-
-	@Override
-	public boolean updateProduct(Product product) {
-		// TODO Auto-generated method stub
-		if(Common.checkNullandBlank(product)){
-			return false;
-		}
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		try {
-			session.update(product);
-			tx.commit();
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			tx.rollback();
-		} finally {
-			session.close();
-		}
-		return false;
-		
 	}
 
 }

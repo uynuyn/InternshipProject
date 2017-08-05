@@ -31,7 +31,7 @@ public class HomeController {
 	public void homeController(){
 	}
 	
-	private void getAllListProduct(HttpSession session){
+	public void getAllListProduct(HttpSession session){
 		
 		List<Department> listDepartment = departmentService.findAllList();
 		if(!Common.checkListNullandBlank(listDepartment)){
@@ -45,7 +45,7 @@ public class HomeController {
 		model.addAttribute("products", list);
 	}
 	
-	@RequestMapping(value = {"/home",""}, method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
 		getProductTop(model);
 		getAllListProduct(session);

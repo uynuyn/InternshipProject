@@ -15,7 +15,5 @@ public interface GroupProductRepository {
 	
 	public List<GroupProduct> findListProductbyCode(String categoryCode);
 	
-	public List<GroupProduct> findListProductTop();
-	
-	public boolean updateGroupProduct(GroupProduct groupProduct);
+	public List<GroupProduct> findListProductTop();	
 }

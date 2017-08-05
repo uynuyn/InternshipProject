@@ -9,4 +9,6 @@ public interface CategoryService {
 	public Category findCategorybyId(int id);
 	public Category findCategorybyName(String name);
 	public Category findProductbyCodeofCategory(String code);
+	public List<Category> findCategoryDepartment(int department);
+
 }

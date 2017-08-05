@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.minimalism.shop.cmn.base.BaseServiceImpl;
 import com.minimalism.shop.cmn.repository.impl.GroupProductRepositoryImpl;
 import com.minimalism.shop.cmn.service.GroupProductService;
 import com.minimalism.shop.entities.GroupProduct;
 
 @Service
-public class GroupProductServiceImpl implements GroupProductService {
+public class GroupProductServiceImpl extends BaseServiceImpl<GroupProduct, Integer> implements GroupProductService {
 
 	@Autowired
 	private GroupProductRepositoryImpl groupProductRepository;
@@ -48,12 +49,6 @@ public class GroupProductServiceImpl implements GroupProductService {
 	public List<GroupProduct> findListProductTop() {
 		// TODO Auto-generated method stub
 		return groupProductRepository.findListProductTop();
-	}
-
-	@Override
-	public boolean updateGroupProduct(GroupProduct groupProduct) {
-		// TODO Auto-generated method stub
-		return groupProductRepository.updateGroupProduct(groupProduct);
 	}
 	
 }

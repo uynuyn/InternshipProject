@@ -598,7 +598,7 @@ width: 10px;
 .single-sidebar {
     margin-bottom: 50px;
 }
-input[type="text"], input[type="password"], input[type="email"], textarea {
+input[type="text"], input[type="password"], input[type="email"],input[type="number"], textarea {
     border: 1px solid #ddd;
     padding: 10px;
 }
@@ -921,10 +921,11 @@ div.cart-collaterals ul.products li.product .price ins {
     display: block;
     margin: 0 0 5px;
 }
-#customer_details input[type="text"], #customer_details textarea, .shipping_calculator input[type=text] {
+#customer_details input[type="text"],input[type="number"],input[type="file"], #customer_details textarea, .shipping_calculator input[type=text],input[type=number],input[type="file"] {
     margin-bottom: 10px;
     width: 100%;
 }
+
 #customer_details h3 {
     color: #1abc9c;
     font-size: 20px;

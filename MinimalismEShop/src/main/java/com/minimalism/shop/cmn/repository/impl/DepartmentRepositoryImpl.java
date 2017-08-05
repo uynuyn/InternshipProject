@@ -10,11 +10,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.minimalism.shop.cmn.base.BaseRepositoryImpl;
 import com.minimalism.shop.cmn.repository.DepartmentRepository;
 import com.minimalism.shop.entities.Department;
 
 @Repository
-public class DepartmentRepositoryImpl implements DepartmentRepository{
+public class DepartmentRepositoryImpl extends BaseRepositoryImpl<Department, Integer> implements DepartmentRepository{
 
 	@Autowired
 	private SessionFactory sessionFactory;   

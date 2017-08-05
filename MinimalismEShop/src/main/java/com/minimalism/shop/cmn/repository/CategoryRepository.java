@@ -9,5 +9,6 @@ public interface CategoryRepository {
 	public Category findCategorybyId(int id);
 	public Category findCategorybyName(String name);	
 	public Category findProductbyCodeofCategory(String code);
+	public List<Category> findCategoryDepartment(int department);
 
 }

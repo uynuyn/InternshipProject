@@ -7,6 +7,22 @@
 	<div class="row" style="height: 300pt">
 		<div class="col-md-5 col-md-offset-3">
 			<!-- Modal Login -->
+			<c:set value="${fail }" var="f" />
+			<c:if test="${f }">
+			<script type="text/javascript">
+					$(document).ready(function() {
+							$("#modalInfor").modal("show");
+					});
+					</script>
+			</c:if>
+			<c:set value="${success }" var="s"/>
+			<c:if test="${s }">
+			<script type="text/javascript">
+					$(document).ready(function() {
+							$("#modalInforR").modal("show");
+					});
+					</script>
+			</c:if>
 			<div class="modal-content">
 				<div class="modal-header">
 					<h2 class="form-signin-heading">Please sign in</h2>
@@ -45,3 +61,40 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade myModal" id="modalInfor" role="dialog">
+		<div class="modal-dialog modal-sm" style="width: 500px">
+			<div class="modal-content">
+				<div class="modal-header">
+						<i class="fa fa-hand-paper-o" aria-hidden="true" style="color: red;"></i>
+						<h2 class="form-signin-heading">Error</h2>
+				</div>
+				<form action="">
+				<div class="modal-body" >
+					<h3>Login incorrect</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+<div class="modal fade myModal" id="modalInforR" role="dialog">
+		<div class="modal-dialog modal-sm" style="width: 500px">
+			<div class="modal-content">
+				<div class="modal-header">
+						<i class="fa fa-hand-paper-o" aria-hidden="true" style="color: red;"></i>
+						<h2 class="form-signin-heading">Register success</h2>
+				</div>
+				<form action="">
+				<div class="modal-body" >
+					<h3>Please login</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>

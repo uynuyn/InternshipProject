@@ -8,12 +8,13 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
 				<li class="text-center">
-                    <img src="assets/img/find_user.png" class="user-image img-responsive"/>
+                    <img src="<c:url value ='/resources/img/2.jpg' />" class="user-image img-responsive"/>
 					</li>
 				
 					
                     <li>
-                        <a class="active-menu"  href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    <spring:url value="/admin" var="admin"></spring:url>
+                        <a class="active-menu"  href="${admin }"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>
                      <li>
                         <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>

@@ -21,7 +21,9 @@
 									<li><a href="${r }" id="registerlink" class="registerlink"><i class="fa fa-user"></i> Register</a></li>                            	
                             	</c:when>
                             	<c:otherwise>
-                          			<li><a href="#" class="loginlink"><i class="fa fa-user"></i> Hello ${u.username }</a></li>		
+                          			<li><a href="#" class="loginlink"><i class="fa fa-user"></i> Hello ${u.username }</a></li>
+                          			<spring:url value="/logout" var="out"/>
+		                            <li><a href="${out }"  class="loginlink"><i class="fa fa-sign-out"></i> Logout</a></li>	
                             	</c:otherwise>
                             </c:choose>
                             

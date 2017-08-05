@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="product-big-title-area">
         <div class="container">
@@ -224,7 +225,9 @@
 
                                             <tr class="cart-subtotal">
                                                 <th>Cart Subtotal</th>
-                                                <td><span class="amount">${sessionScope.viewCart.amount }</span>
+                                                <td><span class="amount">
+                                                <fmt:formatNumber value="${sessionScope.viewCart.amount }" type="currency" />
+                                                </span>
                                                 </td>
                                             </tr>
 
@@ -240,7 +243,7 @@
 
                                             <tr class="order-total">
                                                 <th>Order Total</th>
-                                                <td><strong><span class="amount">${sessionScope.viewCart.amount }</span></strong> </td>
+                                                <td><strong><span class="amount"><fmt:formatNumber value="${sessionScope.viewCart.amount }" type="currency" /></span></strong> </td>
                                             </tr>
 
                                         </tfoot>

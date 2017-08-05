@@ -1,0 +1,74 @@
+package com.minimalism.shop.dto;
+
+public class AddGroupProductDto {
+	private int id;
+	private String name;
+	private String description;
+	private Integer size;
+	private Integer qty;
+	private String image;
+	private Integer price;
+	private Integer idCategory;
+	private String isSpecial;
+	private String isLastest;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Integer getSize() {
+		return size;
+	}
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+	public Integer getQty() {
+		return qty;
+	}
+	public void setQty(Integer qty) {
+		this.qty = qty;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+	public Integer getIdCategory() {
+		return idCategory;
+	}
+	public void setIdCategory(Integer idCategory) {
+		this.idCategory = idCategory;
+	}
+	public String getIsSpecial() {
+		return isSpecial;
+	}
+	public void setIsSpecial(String isSpecial) {
+		this.isSpecial = isSpecial;
+	}
+	public String getIsLastest() {
+		return isLastest;
+	}
+	public void setIsLastest(String isLastest) {
+		this.isLastest = isLastest;
+	}
+}

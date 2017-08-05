@@ -14,6 +14,4 @@ public interface ProductRepository {
 	
 	public List<Product> findProductbyGroupProductandflag(GroupProduct groupProduct, boolean flag);
 	
-	public boolean updateProduct(Product product);
-
 }

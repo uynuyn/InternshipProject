@@ -59,12 +59,13 @@
             $("#departments").click(function(event){
         		event.preventDefault();
             	$.ajax({
-        			url : "/shop/cart/department",
+        			url : "/shop/menu/listDepartment",
         			contentType : "application/json",
-        			type : 'GET',
+        			type : 'POST',
         			dataType : 'json',
         			timeout : 100000
         		});
             });
         });
+        
         </script>

@@ -14,6 +14,4 @@ public interface ProductService {
 
 	public List<Product> findProductbyGroupProductandflag(GroupProduct groupProduct, boolean flag);
 
-	public boolean updateProduct(Product product);
-
 }

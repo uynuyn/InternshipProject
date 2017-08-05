@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/minimalism/shop/cmn/repository/impl/GroupProductRepositoryImpl.java=UTF-8
 encoding//src/main/java/com/minimalism/shop/controller/CartController.java=UTF-8
+encoding//src/main/java/com/minimalism/shop/controller/UploadCommonController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/checkout.jsp=UTF-8

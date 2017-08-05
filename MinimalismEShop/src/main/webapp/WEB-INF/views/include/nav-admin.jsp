@@ -13,12 +13,19 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html">Binary admin</a>
+			<spring:url value="/home" var="home"></spring:url>
+				<a class="navbar-brand" href="${home }">MinimalismShop</a>
 		</div>
 		<div
 			style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
-			Last access : 30 May 2014 &nbsp; <a href="#"
+			Today : <span id="date"></span> &nbsp; 
+			<spring:url value="/logout" var="logout"/>
+			<a href="${logout }"
 				class="btn btn-danger square-btn-adjust">Logout</a>
 		</div>
 	</nav>
 </div>
+<script>
+var d = new Date();
+document.getElementById("date").innerHTML = d.toDateString();
+</script>

@@ -1,9 +1,10 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
    <div class="product-big-title-area">
         <div class="container">
             <div class="row">
@@ -124,7 +125,9 @@
 
                                             <td class="product-price">
                                                 <input hidden="" disabled="disabled" class="amount" value="${c.value.price }" id="b${i.index }"/> 
-                                                <span class="amount">${c.value.price }</span>
+                                                <span class="amount">
+                                                <fmt:formatNumber value="${c.value.price }" type="number"/>
+                                                </span>
                                             </td>
 
                                             <td class="product-quantity">
@@ -136,7 +139,7 @@
                                             </td>
 
                                             <td class="product-subtotal">
-                                                <span class="amount" id="d${c.value.id }">${c.value.total }</span> 
+                                                <span class="amount" id="d${c.value.id }"><fmt:formatNumber value="${c.value.total }" type="currency" minFractionDigits="0"/></span> 
                                             </td>
                                         </tr>
                                         </c:forEach>
@@ -194,7 +197,9 @@
                                     <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount" >${sessionScope.viewCart.amount }</span></td>
+                                            <td><span class="amount" >
+                                            <fmt:formatNumber value="${sessionScope.viewCart.amount }" type="currency" ></fmt:formatNumber>
+                                            </span></td>
                                         </tr>
 
                                         <tr class="shipping">
@@ -204,7 +209,9 @@
 
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">${sessionScope.viewCart.amount }</span></strong> </td>
+                                            <td><strong><span class="amount">
+                                            <fmt:formatNumber value="${sessionScope.viewCart.amount }" type="currency" />
+                                            </span></strong> </td>
                                         </tr>
                                     </tbody>
                                 </table>

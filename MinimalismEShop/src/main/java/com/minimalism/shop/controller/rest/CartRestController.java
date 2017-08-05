@@ -1,4 +1,4 @@
-package com.minimalism.shop.controller;
+package com.minimalism.shop.controller.rest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,8 @@ public class CartRestController {
 
 	@Autowired	private GroupProductServiceImpl groupProductService;
 	
-	@Autowired private ProductServiceImpl productService; 
+	@Autowired private ProductServiceImpl productService;
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/addCart/{id}/{qty}", method = RequestMethod.POST)
 	public @ResponseBody Integer addCart(Model model, HttpSession session, 

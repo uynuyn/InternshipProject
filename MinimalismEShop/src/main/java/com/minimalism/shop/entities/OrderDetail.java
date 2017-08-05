@@ -28,6 +28,7 @@ public class OrderDetail implements java.io.Serializable {
 	private Product product;
 	private int price;
 	private int discount;
+	private Boolean status;
 
 	public OrderDetail() {
 	}
@@ -89,4 +90,12 @@ public class OrderDetail implements java.io.Serializable {
 		this.discount = discount;
 	}
 
+	@Column(name = "status")
+	public Boolean getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 }

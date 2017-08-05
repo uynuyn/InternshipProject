@@ -25,6 +25,12 @@ public class CheckoutServiceImpl implements CheckoutService{
 		// TODO Auto-generated method stub
 		return checkoutRepository.orderProductNew(detail);
 	}
+
+	@Override
+	public Order findOrderofUserinDate(Order order) {
+		// TODO Auto-generated method stub
+		return checkoutRepository.findOrderofUserinDate(order);
+	}
 	
 
 }

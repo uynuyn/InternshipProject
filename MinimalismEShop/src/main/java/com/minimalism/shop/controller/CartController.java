@@ -66,7 +66,13 @@ public class CartController {
 		Order order = new Order();
 		order.setUser(user);
 		order.setAddress(checkoutDto.getAddressStreet() +" " + checkoutDto.getAddressSuite() + " "+ checkoutDto.getAddressCity());
-		order = checkoutService.orderInforNew(order);
+//		Order order2 = checkoutService.findOrderofUserinDate(order);
+//		if(Common.checkNullandBlank(order2)){
+			order = checkoutService.orderInforNew(order);
+//		}else {
+//			order = order2;
+//		}
+		
 		Map<Integer, ProductDto> mapItem = (Map<Integer, ProductDto>) session.getAttribute("cart");
 		for (ProductDto productDto : mapItem.values()) {
 			GroupProduct groupProduct = groupProductService.findProductbyId(productDto.getId());
@@ -79,7 +85,7 @@ public class CartController {
 				orderDetail.setOrder(order);
 				checkoutService.orderProductNew(orderDetail);
 				products.get(i).setFlag(false);
-				productService.updateProduct(products.get(i));
+				productService.update(products.get(i));
 				
 //				goi mail cho admin thong bao dat hang
 				StringBuilder message = new StringBuilder();
@@ -101,8 +107,10 @@ public class CartController {
 			int countCheckStock = productService.countProductbyGroupProductandflag(groupProduct, true);
 			if(countCheckStock <= 0){
 				groupProduct.setEndProduct(false);
-				groupProductService.updateGroupProduct(groupProduct);
+				groupProductService.update(groupProduct);
 			}
+			session.removeAttribute("cart");
+			session.removeAttribute("viewCart");
 			
 		}
 		return "redirect:/home";

@@ -7,17 +7,16 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.minimalism.shop.cmn.base.Common;
+import com.minimalism.shop.cmn.base.BaseRepositoryImpl;
 import com.minimalism.shop.cmn.repository.GroupProductRepository;
 import com.minimalism.shop.entities.GroupProduct;
 
 @Repository
-public class GroupProductRepositoryImpl implements GroupProductRepository{
+public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct, Integer> implements GroupProductRepository{
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -74,28 +73,4 @@ public class GroupProductRepositoryImpl implements GroupProductRepository{
 		session.close();
 		return list;
 	}
-
-	@Override
-	public boolean updateGroupProduct(GroupProduct groupProduct) {
-		// TODO Auto-generated method stub
-		if(Common.checkNullandBlank(groupProduct)){
-			return false;
-		}
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		try {
-			session.update(groupProduct);
-			tx.commit();
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			tx.rollback();
-		} finally {
-			session.close();
-		}
-		return false;
-		
-	}
-
-
 }

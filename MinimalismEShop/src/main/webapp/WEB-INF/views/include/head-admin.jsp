@@ -16,3 +16,6 @@
     <link href="<c:url value = '/resources/css/custom.css'/>" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   
+   <link rel="stylesheet" href="<c:url value = '/resources/styadmin.css'/>">
+   

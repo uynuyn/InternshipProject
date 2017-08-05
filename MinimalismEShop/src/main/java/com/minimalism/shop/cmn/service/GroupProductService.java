@@ -17,6 +17,4 @@ public interface GroupProductService {
 	
 	public List<GroupProduct> findListProductTop();
 	
-	public boolean updateGroupProduct(GroupProduct groupProduct);
-
 }

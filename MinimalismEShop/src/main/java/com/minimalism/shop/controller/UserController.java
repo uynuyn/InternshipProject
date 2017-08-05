@@ -46,12 +46,13 @@ public class UserController {
 		users.setSalt(salt);
 		String pass = users.getPassword();
 		users.setPassword(Common.passEncode(users.getPassword(),users.getSalt()));
-		oldUser = userServiceImpl.findUserbyUsername(users.getUsername(), users.getEmail());
+		oldUser = userServiceImpl.findUserbyUsernameEmail(users.getUsername(), users.getEmail());
 		if(Common.checkNullandBlank(oldUser)){
 			users = userServiceImpl.save(users);
 			users.setPassword(pass);
 			if(users!=null){
-				return "redirect:/login";
+				model.addAttribute("success", true);
+				return "/home";
 			}
 		}
 		users.setPassword("");
@@ -76,7 +77,6 @@ public class UserController {
 		
 		User results = userServiceImpl.loginUser(users);
 		if (!Common.checkNullandBlank(results)) {
-			model.addAttribute("result", "thanh cong");
 			session.setAttribute("users", results);
 			String check = (String) session.getAttribute("checkout");
 			if("yes".equals(check)){
@@ -85,9 +85,16 @@ public class UserController {
 			return "redirect:/home";
 		}
 		
-		
-		return "common/login";
+		model.addAttribute("fail", true);
+		return "login";
 	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(Model model,HttpSession session) {
+		session.removeAttribute("users");
+		return "redirect:/home";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model){
 		model.addAttribute("userFormLogin" , new User());
@@ -100,8 +107,5 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminHome() {		
-		return "admin/home";
-	}
+	
 }
