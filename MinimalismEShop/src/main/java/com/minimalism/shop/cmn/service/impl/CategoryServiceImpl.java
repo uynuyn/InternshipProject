@@ -5,9 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.minimalism.shop.cmn.base.BaseRepositoryImpl;
-import com.minimalism.shop.cmn.base.BaseServiceImpl;
-import com.minimalism.shop.cmn.repository.CategoryRepository;
 import com.minimalism.shop.cmn.repository.impl.CategoryRepositoryImpl;
 import com.minimalism.shop.cmn.service.CategoryService;
 import com.minimalism.shop.entities.Category;
