@@ -1,16 +1,27 @@
 package com.minimalism.shop.dto;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class AddGroupProductDto {
 	private int id;
 	private String name;
 	private String description;
 	private Integer size;
 	private Integer qty;
-	private String image;
+	private CommonsMultipartFile[] image;
 	private Integer price;
 	private Integer idCategory;
 	private String isSpecial;
 	private String isLastest;
+	private Integer department;
+	private boolean edit = true;
+	
+	public Integer getDepartment() {
+		return department;
+	}
+	public void setDepartment(Integer department) {
+		this.department = department;
+	}
 	public int getId() {
 		return id;
 	}
@@ -41,10 +52,10 @@ public class AddGroupProductDto {
 	public void setQty(Integer qty) {
 		this.qty = qty;
 	}
-	public String getImage() {
+	public CommonsMultipartFile[] getImage() {
 		return image;
 	}
-	public void setImage(String image) {
+	public void setImage(CommonsMultipartFile[] image) {
 		this.image = image;
 	}
 	public Integer getPrice() {
@@ -70,5 +81,11 @@ public class AddGroupProductDto {
 	}
 	public void setIsLastest(String isLastest) {
 		this.isLastest = isLastest;
+	}
+	public boolean isEdit() {
+		return edit;
+	}
+	public void setEdit(boolean edit) {
+		this.edit = edit;
 	}
 }

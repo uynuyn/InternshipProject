@@ -42,12 +42,7 @@ public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct,
 		session.close();
 		return list;
 	}
-
-	@Override
-	public GroupProduct findProductbyName(String name) {
-		return null;
-	}
-
+	
 	@Override
 	public GroupProduct findProductbyId(int id) {
 		Session session = sessionFactory.openSession();
@@ -58,10 +53,20 @@ public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct,
 		return groupProduct;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public GroupProduct findProductbyCategory(String category) {
+	public List<GroupProduct> findProductbyCategory(Integer category) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.openSession();
+		try {
+			Criteria criteria = session.createCriteria(GroupProduct.class)
+					.add(Restrictions.eq("category.id", category));
+			return criteria.list();
+			
+		} finally {
+			// TODO: handle finally clause
+			session.close();
+		}
 	}
 
 	@SuppressWarnings("unchecked")

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,7 @@ import com.minimalism.shop.cmn.service.impl.CheckoutServiceImpl;
 import com.minimalism.shop.cmn.service.impl.GroupProductServiceImpl;
 import com.minimalism.shop.cmn.service.impl.ProductServiceImpl;
 import com.minimalism.shop.cmn.service.impl.UserServiceImpl;
+import com.minimalism.shop.cmn.validator.CheckoutValidator;
 import com.minimalism.shop.dto.CheckoutDto;
 import com.minimalism.shop.dto.ProductDto;
 import com.minimalism.shop.entities.GroupProduct;
@@ -38,6 +41,13 @@ public class CartController {
 	
 	@Autowired private GroupProductServiceImpl groupProductService;
 	
+	@Autowired private CheckoutValidator checkoutValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.setValidator(checkoutValidator);
+	}
+	
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String checkout(Model model) {
 		model.addAttribute("checkoutForm" , new CheckoutDto());
@@ -51,7 +61,7 @@ public class CartController {
 			final BindingResult result,
 			Model model,HttpSession session) {
 		if (result.hasErrors()) {
-			model.addAttribute("checkoutForm" , new CheckoutDto());
+			return "common/checkout";
 	    }
 		User user = (User) session.getAttribute("users");
 		user.setFirstname(checkoutDto.getFirstname());
@@ -76,7 +86,7 @@ public class CartController {
 		Map<Integer, ProductDto> mapItem = (Map<Integer, ProductDto>) session.getAttribute("cart");
 		for (ProductDto productDto : mapItem.values()) {
 			GroupProduct groupProduct = groupProductService.findProductbyId(productDto.getId());
-			List<Product> products = productService.findProductbyGroupProductandflag(groupProduct, true);
+			List<Product> products = productService.findProductbyGroupProductandflag(groupProduct.getId(), true);
 			for (int i = 0; i < productDto.getQuantity(); i++ ) {
 				OrderDetail orderDetail = new OrderDetail();
 				

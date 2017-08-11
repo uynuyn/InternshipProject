@@ -40,4 +40,19 @@ public class Common {
 		return false;
 	}
 
+	public static int tinhGiaithua(int n) {
+
+		int ketqua = 1;
+		int i;
+		for (i = 2; i <= n; i++) {
+			ketqua *= i;
+		}
+		return ketqua;
+	}
+
+	public static int tinhTohop(int k, int n) {
+
+		return tinhGiaithua(n) / (tinhGiaithua(k) * tinhGiaithua(n - k));
+
+	}
 }

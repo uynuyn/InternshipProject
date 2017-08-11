@@ -116,8 +116,12 @@
 	</beans:bean>
 	<beans:bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
-		<beans:property name="basename">
-			<beans:value>validation</beans:value>
+		<beans:property name="basenames">
+			<beans:list>
+				<beans:value>message-common-user</beans:value>
+				<beans:value>message-checkout-product</beans:value>
+				<beans:value>message-admin-product</beans:value>
+			</beans:list>
 		</beans:property>
 	</beans:bean>
 

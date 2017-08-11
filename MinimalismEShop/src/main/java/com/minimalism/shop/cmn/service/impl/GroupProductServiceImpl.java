@@ -28,27 +28,21 @@ public class GroupProductServiceImpl extends BaseServiceImpl<GroupProduct, Integ
 	}
 
 	@Override
-	public GroupProduct findProductbyName(String name) {
-		// TODO Auto-generated method stub
-		return groupProductRepository.findProductbyName(name);
-	}
-
-	@Override
 	public GroupProduct findProductbyId(int id) {
 		// TODO Auto-generated method stub
 		return groupProductRepository.findProductbyId(id);
 	}
 
 	@Override
-	public GroupProduct findProductbyCategory(String category) {
-		// TODO Auto-generated method stub
-		return groupProductRepository.findProductbyCategory(category);
-	}
-
-	@Override
 	public List<GroupProduct> findListProductTop() {
 		// TODO Auto-generated method stub
 		return groupProductRepository.findListProductTop();
+	}
+
+	@Override
+	public List<GroupProduct> findProductbyCategory(Integer category) {
+		// TODO Auto-generated method stub
+		return groupProductRepository.findProductbyCategory(category);
 	}
 	
 }

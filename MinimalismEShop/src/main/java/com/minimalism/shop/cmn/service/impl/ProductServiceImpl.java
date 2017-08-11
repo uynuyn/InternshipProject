@@ -39,9 +39,9 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Integer> implem
 	}
 
 	@Override
-	public List<Product> findProductbyGroupProductandflag(GroupProduct groupProduct, boolean flag) {
+	public List<Product> findProductbyGroupProductandflag(Integer idGroupProduct, boolean flag) {
 		// TODO Auto-generated method stub
-		return productRepository.findProductbyGroupProductandflag(groupProduct, flag);
+		return productRepository.findProductbyGroupProductandflag(idGroupProduct, flag);
 	}
 
 

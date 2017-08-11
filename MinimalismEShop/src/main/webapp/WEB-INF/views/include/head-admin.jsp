@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Free Bootstrap Admin Template : Binary Admin</title>
+    <title>MinimalismShop Manager</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<c:url value = '/resources/css/bootstrap.css'/>" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -16,6 +16,4 @@
     <link href="<c:url value = '/resources/css/custom.css'/>" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-   
    <link rel="stylesheet" href="<c:url value = '/resources/styadmin.css'/>">
-   

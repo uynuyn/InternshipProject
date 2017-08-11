@@ -52,11 +52,7 @@
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Recent Posts</h2>
                         <ul>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -143,21 +139,23 @@
                         <div class="related-products-wrapper">
                             <h2 class="related-products-title">Related Products</h2>
                             <div class="related-products-carousel">
+                            <c:forEach items="${relatedProduct }" var="r">
                                 <div class="single-product">
                                     <div class="product-f-image">
-                                        <img src="<c:url value ='${p.imge }'/>" alt="">
+                                        <img src="<c:url value ='${r.imge }'/>" alt="">
                                         <div class="product-hover">
                                             <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                             <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                         </div>
                                     </div>
 
-                                    <h2><a href="">${p.name }</a></h2>
+                                    <h2><a href="">${r.name }</a></h2>
 
                                     <div class="product-carousel-price">
-                                		<i>${p.price }</i>
+                                		<i>${r.price }</i>
                                     </div> 
                                 </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>                    

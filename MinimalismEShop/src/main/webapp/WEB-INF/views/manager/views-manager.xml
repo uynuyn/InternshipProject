@@ -13,6 +13,16 @@
 			value="/WEB-INF/views/manager/index.jsp" />
 	</definition>
 	
+	<definition name="view-product" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/include/nav-admin.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/products.jsp" />
+	</definition>
+	
 	<definition name="add-product" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
@@ -21,6 +31,16 @@
 		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/add-product.jsp" />
+	</definition>
+
+	<definition name="add-product-old" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/include/nav-admin.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/add-productold.jsp" />
 	</definition>
 	
 	<definition name="listview" extends="base.definition">

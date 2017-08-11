@@ -65,7 +65,7 @@ public class Product implements Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idGroupProduct", nullable = false)
 	public GroupProduct getGroupProduct() {
 		return this.groupProduct;

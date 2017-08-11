@@ -69,14 +69,12 @@ public class ProductRepositoryImpl extends BaseRepositoryImpl<Product, Integer> 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Product> findProductbyGroupProductandflag(GroupProduct groupProduct, boolean flag) {
+	public List<Product> findProductbyGroupProductandflag(Integer idGroupProject, boolean flag) {
 		// TODO Auto-generated method stub
-		if(Common.checkNullandBlank(groupProduct)){
-			return null;
-		}
+		
 		Session session = sessionFactory.openSession();
 		Criteria criteria= session.createCriteria(Product.class)
-				.add(Restrictions.eq("groupProduct", groupProduct))
+				.add(Restrictions.eq("groupProduct.id", idGroupProject))
 				.add(Restrictions.eq("flag", flag));
 		List<Product> products = criteria.list();
 		session.close();
