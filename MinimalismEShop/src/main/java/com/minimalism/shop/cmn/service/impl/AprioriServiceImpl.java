@@ -25,14 +25,14 @@ import com.minimalism.shop.entities.Involve;
 public class AprioriServiceImpl extends BaseServiceImpl<AprioriList, Integer>{
 
 	@Autowired
-	private AprioriRepositoryImpl aprioriRepositoryImpl;
+	private AprioriRepositoryImpl aprioriRepository;
 
 	private List<AprioriList> result = new ArrayList<>();
 	List<Tuple> c;
 	Set<Tuple> l;
 	List<Tuple> all;
 	int d[][];// dữ liệu giao dịch
-	int min_support;
+	int min_support=2;
 	
 	public List<AprioriList> aprioriLists(){
 		return result;
@@ -47,7 +47,6 @@ public class AprioriServiceImpl extends BaseServiceImpl<AprioriList, Integer>{
 		all = new ArrayList<Tuple>();
 		// chứa tất cả thỏa min sup
 		int i, j;
-		min_support = 2;
 		Set<Integer> candidate_set = new HashSet<Integer>();
 		// không có gia tri  lập lại
 		for (i = 0; i < d.length; i++) {
@@ -310,7 +309,7 @@ public class AprioriServiceImpl extends BaseServiceImpl<AprioriList, Integer>{
 
 
 	private int[][] getDatabase() {
-		List<Involve> involves = aprioriRepositoryImpl.findAllList();
+		List<Involve> involves = aprioriRepository.findAllList();
 		Map<Integer, List<Integer>> maps = new HashMap<Integer, List<Integer>>();
 		List<Integer> temp;
 		for (Involve involve : involves) {
