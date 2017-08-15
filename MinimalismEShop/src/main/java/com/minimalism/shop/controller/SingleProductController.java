@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.minimalism.shop.cmn.base.Common;
 import com.minimalism.shop.cmn.service.impl.AprioriServiceImpl;
 import com.minimalism.shop.cmn.service.impl.GroupProductServiceImpl;
 import com.minimalism.shop.dto.AprioriList;
@@ -30,7 +33,8 @@ public class SingleProductController {
 	private AprioriServiceImpl aprioriService;
 
 	@RequestMapping(value = "/single/{id}", method = RequestMethod.GET)
-	public String product(Model model, @PathVariable("id") int id) {
+	public String product(Model model, @PathVariable("id") int id, HttpSession session) {
+		session.removeAttribute("seen");
 		GroupProduct groupProduct = groupProductService.findProductbyId(id);
 		Set<GroupProduct> seen = new HashSet<>();
 		if (!choose.contains(id)) {
@@ -82,13 +86,15 @@ public class SingleProductController {
 		Iterator<Integer> iterator = integers.iterator();
 		while (iterator.hasNext()) {
 			int i = iterator.next();
-			GroupProduct groupProducta = groupProductService.findProductbyId(i);
-			groupProducts.add(groupProducta);
+			if(id!=i){
+				GroupProduct groupProducta = groupProductService.findProductbyId(i);
+				groupProducts.add(groupProducta);				
+			}
 		}
 
 		model.addAttribute("relatedProduct", groupProducts);
-		
-		model.addAttribute("seen", seen);
+		groupProduct.setName(Common.removeAccent(groupProduct.getName()));
+		session.setAttribute("seen", seen);
 		model.addAttribute("groupProduct", groupProduct);
 		return "common/products/single";
 	}

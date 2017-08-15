@@ -1,7 +1,9 @@
 package com.minimalism.shop.cmn.base;
 
 import java.security.MessageDigest;
+import java.text.Normalizer;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -39,8 +41,15 @@ public class Common {
 		}
 		return false;
 	}
+	
+	public static String removeAccent(String s) {
+		  
+		  String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+		  Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+		  return pattern.matcher(temp).replaceAll("");
+		 }
 
-	public static int tinhGiaithua(int n) {
+	private static int tinhGiaithua(int n) {
 
 		int ketqua = 1;
 		int i;
@@ -51,8 +60,6 @@ public class Common {
 	}
 
 	public static int tinhTohop(int k, int n) {
-
 		return tinhGiaithua(n) / (tinhGiaithua(k) * tinhGiaithua(n - k));
-
 	}
 }

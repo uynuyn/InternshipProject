@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
     <div class="slider-area">
         <div class="zigzag-bottom"></div>
         <div id="slide-list" class="carousel carousel-fade slide" data-ride="carousel">
@@ -14,7 +16,6 @@
                             <ol class="carousel-indicators slide-indicators">
                                 <li data-target="#slide-list" data-slide-to="0" class="active"></li>
                                 <li data-target="#slide-list" data-slide-to="1"></li>
-                                <li data-target="#slide-list" data-slide-to="2"></li>
                             </ol>                            
                         </div>
                     </div>
@@ -26,7 +27,7 @@
                     <div class="single-slide">
                         <div class="slide-bg slide-one"></div>
                         <div class="slide-text-wrapper">
-                            <div class="slide-text">
+                            <!-- <div class="slide-text">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6 col-md-offset-6">
@@ -39,7 +40,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -47,7 +48,7 @@
                     <div class="single-slide">
                         <div class="slide-bg slide-two"></div>
                         <div class="slide-text-wrapper">
-                            <div class="slide-text">
+                            <!-- <div class="slide-text">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6 col-md-offset-6">
@@ -59,31 +60,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="single-slide">
-                        <div class="slide-bg slide-three"></div>
-                        <div class="slide-text-wrapper">
-                            <div class="slide-text">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-offset-6">
-                                            <div class="slide-content">
-                                                <h2>We are superb</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eius?</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptates necessitatibus dicta recusandae quae amet nobis sapiente explicabo voluptatibus rerum nihil quas saepe, tempore error odio quam obcaecati suscipit sequi.</p>
-                                                <a href="" class="readmore">Learn more</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
         </div>        
@@ -135,14 +116,14 @@
                                     <img src="<c:url value = '${p.imge }'/>" alt="" style="width:200pt;height:220pt;">
                                     <div class="product-hover">
                                         <a href="#" class="add-to-cart-link" id="${p.id }"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        <a href="<spring:url value='/product/single/${p.id }'/>" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>
                                 
-                                <h2><a href="single-product.html">${p.name }</a></h2>
+                                <h2><a href="<spring:url value='/product/single/${p.id }'/>">${p.name }</a></h2>
                                 
                                 <div class="product-carousel-price">
-                                    <i>${p.price }</i>
+                                    <i><fmt:formatNumber value="${p.price }" type="currency" minFractionDigits="0" /></i>
                                 </div> 
                             </div>
                             </c:forEach>
@@ -176,175 +157,30 @@
         </div>
     </div> <!-- End brands area -->
     
-<!--     <div class="product-widget-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="single-product-widget">
-                        <h2 class="product-wid-title">Top Sellers</h2>
-                        <a href="" class="wid-view-more">View All</a>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Apple new mac book 2015</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Apple new i phone 6</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-product-widget">
-                        <h2 class="product-wid-title">Recently Viewed</h2>
-                        <a href="#" class="wid-view-more">View All</a>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Sony Smart Air Condtion</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-product-widget">
-                        <h2 class="product-wid-title">Top New</h2>
-                        <a href="#" class="wid-view-more">View All</a>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Apple new i phone 6</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                        <div class="single-wid-product">
-                            <a href="single-product.html"><img src="/shop/resources/img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                            <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
-                            <div class="product-wid-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product-wid-price">
-                                    <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div> End product widget area -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(document).on('click', '#loginlink', function(e) {
-			$("#modalLogin").modal("show");
-		});
-		$(document).on('click', '#registerlink', function(e) {
-			$("#modalRegister").modal("show");
-		});
-		$(document).on('click', '#confirmationlink', function(e) {
-			$("#modalConfirm").modal("show");
-		});
-	});
-</script>
+
+<div class="modal fade myModal" id="modalInfor" role="dialog">
+		<div class="modal-dialog modal-sm" style="width: 500px">
+			<div class="modal-content">
+				<div class="modal-header">
+						<i class="fa fa-hand-paper-o" aria-hidden="true" style="color: red;"></i>
+						<h2 class="form-signin-heading"><i class="fa fa-shopping-cart" style="color: red"></i>MinimalismShop<i class="fa fa-shopping-cart" style="color: red"></i></h2>
+				</div>
+				<form action="">
+				<div class="modal-body" >
+				    <spring:url value="/cart" var="cart"></spring:url>
+					<h3><a href="${cart }">Go to cart</a></h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
 <script>
 $(document).ready(function(){
     $(".add-to-cart-link").click(function(event){
 		var id = $(this).attr('id');
-		alert(id);
 		event.preventDefault();
     	$.ajax({
 			url : "/shop/cart/addCart/"+ id +"/"+1,
@@ -355,7 +191,7 @@ $(document).ready(function(){
 			success : function(response) {
 				console.log($("#add-cart").text());
 				$("#add-cart").html(Number(response));
-				alert(response);
+				$("#modalInfor").modal("show");
 			}
 		});
     });

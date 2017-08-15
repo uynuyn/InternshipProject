@@ -37,6 +37,7 @@ public class GroupProduct implements Serializable {
 	private int price;
 	private Boolean isSpecial;
 	private Boolean isLastest;
+	private String code;
 	@Transient
 	private List<PromotionDetail> promotionDetails = new ArrayList<>();
 	@Transient
@@ -141,6 +142,15 @@ public class GroupProduct implements Serializable {
 		this.isLastest = isLastest;
 	}
 
+	@Column(name = "code")
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groupProduct")
 	public List<PromotionDetail> getPromotionDetails() {
 		return this.promotionDetails;

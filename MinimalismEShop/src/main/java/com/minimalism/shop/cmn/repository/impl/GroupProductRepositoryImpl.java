@@ -78,4 +78,16 @@ public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct,
 		session.close();
 		return list;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<GroupProduct> searchProduct(String name) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria =  session.createCriteria(GroupProduct.class);
+		criteria.add(Restrictions.like("code", "%"+name+"%"));
+		List<GroupProduct> groupProducts = criteria.list();
+		session.close();
+		
+		return groupProducts;
+	}
 }

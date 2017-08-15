@@ -14,4 +14,7 @@ public interface GroupProductRepository {
 	public List<GroupProduct> findListProductbyCode(String categoryCode);
 	
 	public List<GroupProduct> findListProductTop();	
+	
+	public List<GroupProduct> searchProduct(String name);
+
 }

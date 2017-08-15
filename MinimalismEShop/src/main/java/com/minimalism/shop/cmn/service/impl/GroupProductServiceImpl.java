@@ -44,5 +44,11 @@ public class GroupProductServiceImpl extends BaseServiceImpl<GroupProduct, Integ
 		// TODO Auto-generated method stub
 		return groupProductRepository.findProductbyCategory(category);
 	}
+
+	@Override
+	public List<GroupProduct> searchProduct(String name) {
+		// TODO Auto-generated method stub
+		return groupProductRepository.searchProduct(name);
+	}
 	
 }

@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <c:set value="${groupProduct }" var="p" />
 
 <div class="product-big-title-area">
@@ -34,9 +36,12 @@
 			<div class="col-md-4">
 				<div class="single-sidebar">
 					<h2 class="sidebar-title">Search Products</h2>
-					<form action="">
-						<input type="text" placeholder="Search products..."> <input
-							type="submit" value="Search">
+					<spring:url value="/products/list/search" var="search"></spring:url>
+					<form action="${search }" >
+					
+						<input name="keyword" type="text" placeholder="Search products..."/>
+					
+						<input type="submit" value="Search">
 					</form>
 				</div>
 
@@ -45,26 +50,27 @@
 					<div class="thubmnail-recent">
 						<img src="<c:url value='${p.imge }'/>" class="recent-thumb" alt="">
 						<h2>
-							<a href="">${p.name }</a>
+							<span>${p.name }</span>
 						</h2>
 						<div class="product-sidebar-price">
-							<i>${p.price }</i>
+							<i><fmt:formatNumber value="${p.price }" type="currency" minFractionDigits="0" /></i>
 						</div>
 					</div>
 				</div>
 
 				<div class="single-sidebar">
 					<h2 class="sidebar-title">Recent Searches</h2>
-					<c:forEach items="${seen }" var="s">
-					<div class="thubmnail-recent">
-						<img src="<c:url value='${s.imge }'/>" class="recent-thumb" alt="">
-						<h2>
-							<a href="">${s.name }</a>
-						</h2>
-						<div class="product-sidebar-price">
-							<i>${s.price }</i>
+					<c:forEach items="${sessionScope.seen }" var="s">
+						<div class="thubmnail-recent">
+							<img src="<c:url value='${s.imge }'/>" class="recent-thumb"
+								alt="" style="width:40pt;height:50pt;">
+							<h2>
+								<a href="<spring:url value='/product/single/${s.id }'/>">${s.name }</a>
+							</h2>
+							<div class="product-sidebar-price">
+								<i><fmt:formatNumber value="${s.price }" type="currency" minFractionDigits="0" /></i>
+							</div>
 						</div>
-					</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -82,12 +88,7 @@
 											<img src="<c:url value='${p.imge }'/>" alt="">
 										</div>
 
-										<!-- <div class="product-gallery">
-                                        <img src="img/product-thumb-1.jpg" alt="">
-                                        <img src="img/product-thumb-2.jpg" alt="">
-                                        <img src="img/product-thumb-3.jpg" alt="">
-                                        <img src="img/product-thumb-4.jpg" alt="">
-                                    </div> -->
+										
 									</div>
 								</div>
 
@@ -95,22 +96,37 @@
 									<div class="product-inner">
 										<h2 class="product-name">${p.name }</h2>
 										<div class="product-inner-price">
-											<i>${p.price }</i>
+											<i><fmt:formatNumber value="${p.price }" type="currency" minFractionDigits="0" /></i>
 										</div>
 
 										<form action="" class="cart">
+										<c:choose>
+											<c:when test="${p.endProduct }">
 											<div class="quantity">
 												<input type="number" size="4" class="input-text qty text"
-													title="Qty" value="1" name="quantity" min="1" step="1">
+													title="Qty" value="1" name="quantity" min="1" step="1" disabled="disabled">
 											</div>
-											<button class="add_to_cart_button" type="submit">Add
+											
+											<button class="add_to_cart_button addProduct" type="submit" id="${p.id }">Add
+												to cart</button>
+											</c:when>
+											<c:otherwise>
+												<button class="add_to_cart_button" type="button">Sorry</button>
+											</c:otherwise>
+										</c:choose>
+											<div class="quantity">
+												<input type="number" size="4" class="input-text qty text"
+													title="Qty" value="1" name="quantity" min="1" step="1" disabled="disabled">
+											</div>
+											
+											<button class="add_to_cart_button addProduct" type="submit" id="${p.id }">Add
 												to cart</button>
 										</form>
 
 										<div class="product-inner-category">
 											<p>
-												Category: <a href="">Ba lô</a>. Tags: <a href="">awesome</a>,
-												<a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>.
+												Category: <a href="${productUrl }">${p.category.name }</a>. 
+												Tags: <a href="${search }?keyword=${p.code }">${p.name }</a>.
 											</p>
 										</div>
 
@@ -171,10 +187,13 @@
 							<c:forEach items="${relatedProduct }" var="r" varStatus="i">
 								<div class="single-product">
 									<div class="product-f-image">
-										<img src="<c:url value ='${r.imge }'/>" alt="">
+										<img src="<c:url value ='${r.imge }'/>" alt=""
+											style="width: 200pt; height: 250pt;">
 										<div class="product-hover">
 											<a href="" class="add-to-cart-link"><i
-												class="fa fa-shopping-cart"></i> Add to cart</a> <a href=""
+												class="fa fa-shopping-cart"></i> Add to cart</a> 
+												<a
+												href="<spring:url value='/product/single/${r.id }'/>"
 												class="view-details-link"><i class="fa fa-link"></i> See
 												details</a>
 										</div>
@@ -185,7 +204,7 @@
 									</h2>
 
 									<div class="product-carousel-price">
-										<i>${r.price }</i>
+										<i><fmt:formatNumber value="${r.price }" type="currency" minFractionDigits="0" /></i>
 									</div>
 								</div>
 							</c:forEach>
@@ -196,3 +215,42 @@
 		</div>
 	</div>
 </div>
+    <div class="modal fade myModal" id="modalInfor" role="dialog">
+		<div class="modal-dialog modal-sm" style="width: 500px">
+			<div class="modal-content">
+				<div class="modal-header">
+						<i class="fa fa-hand-paper-o" aria-hidden="true" style="color: red;"></i>
+						<h2 class="form-signin-heading"><i class="fa fa-shopping-cart" style="color: red"></i>MinimalismShop<i class="fa fa-shopping-cart" style="color: red"></i></h2>
+				</div>
+				<form action="">
+				<div class="modal-body" >
+				    <spring:url value="/cart" var="cart"></spring:url>
+					<h3><a href="${cart }">Go to cart</a></h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+    <script>
+$(document).ready(function(){
+    $(".addProduct").click(function(event){
+		var id = $(this).attr('id');
+		event.preventDefault();
+    	$.ajax({
+			url : "/shop/cart/addCart/"+ id +"/"+1,
+			contentType : "application/json",
+			type : 'POST',
+			dataType : 'json',
+			timeout : 100000,
+			success : function(response) {
+				console.log($("#add-cart").text());
+				$("#add-cart").html(Number(response));
+				$("#modalInfor").modal("show");
+			}
+		});
+    });
+});
+</script>

@@ -15,4 +15,6 @@ public interface GroupProductService {
 	
 	public List<GroupProduct> findListProductTop();
 	
+	public List<GroupProduct> searchProduct(String name);
+	
 }

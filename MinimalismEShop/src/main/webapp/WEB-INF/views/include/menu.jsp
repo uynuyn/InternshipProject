@@ -36,12 +36,12 @@
 											</ul>
 									</div>
 								</c:forEach>
-									<div class="col-sm-3">
+									<!-- <div class="col-sm-3">
 										<div class="w3ls_products_pos">
 											<h4>50%<i>Off/-</i></h4>
 											<img src="" alt=" " class="img-responsive" />
 										</div>
-									</div>
+									</div> -->
 									<div class="clearfix"></div>
 								</div>
 								</li>
