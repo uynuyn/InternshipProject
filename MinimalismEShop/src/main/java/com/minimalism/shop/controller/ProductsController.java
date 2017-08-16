@@ -35,8 +35,10 @@ public class ProductsController {
 	@RequestMapping(value = "/list/{departmentCode}", method = RequestMethod.GET)
 	public String getAllListProduct(Model model, @PathVariable("departmentCode") String departmentCode) {
 		List<Category> listCategory = departmentService.findProductbyCode(departmentCode).getCategories();
+		if(listCategory!=null){
 			model.addAttribute("listCategory", listCategory);
-			model.addAttribute("breadcrumb" ,listCategory.get(0));			
+			model.addAttribute("breadcrumb" ,listCategory.get(0));						
+		}
 		return "common/products/lists";
 	}
 	
@@ -47,8 +49,10 @@ public class ProductsController {
 		if(categoryCode!=null){
 			listProduct = categoryService.findProductbyCodeofCategory(categoryCode).getGroupProducts();			
 		}
+		if(!Common.checkListNullandBlank(listProduct)){
 			model.addAttribute("breadcrumb" ,listProduct.get(0));
-			model.addAttribute("listProduct", listProduct);
+			model.addAttribute("listProduct", listProduct);			
+		}
 		return "common/products/list";
 	}
 	
@@ -71,7 +75,9 @@ public class ProductsController {
 			
 		}
 		model.addAttribute("f", true);
-		model.addAttribute("listProduct", listProduct);
+		if(!Common.checkListNullandBlank(listProduct)){
+			model.addAttribute("listProduct", listProduct);			
+		}
 		return "common/products/list";
 	}
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.minimalism.shop.cmn.base.Common;
+import com.minimalism.shop.cmn.service.impl.AprioriServiceImpl;
 import com.minimalism.shop.cmn.service.impl.CheckoutServiceImpl;
 import com.minimalism.shop.cmn.service.impl.GroupProductServiceImpl;
 import com.minimalism.shop.cmn.service.impl.ProductServiceImpl;
@@ -25,6 +27,7 @@ import com.minimalism.shop.cmn.validator.CheckoutValidator;
 import com.minimalism.shop.dto.CheckoutDto;
 import com.minimalism.shop.dto.ProductDto;
 import com.minimalism.shop.entities.GroupProduct;
+import com.minimalism.shop.entities.Involve;
 import com.minimalism.shop.entities.Order;
 import com.minimalism.shop.entities.OrderDetail;
 import com.minimalism.shop.entities.Product;
@@ -42,6 +45,8 @@ public class CartController {
 	@Autowired private GroupProductServiceImpl groupProductService;
 	
 	@Autowired private CheckoutValidator checkoutValidator;
+	
+	@Autowired private AprioriServiceImpl aprioriService;
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -84,6 +89,7 @@ public class CartController {
 //		}
 		
 		Map<Integer, ProductDto> mapItem = (Map<Integer, ProductDto>) session.getAttribute("cart");
+		int size = mapItem.keySet().size();
 		for (ProductDto productDto : mapItem.values()) {
 			GroupProduct groupProduct = groupProductService.findProductbyId(productDto.getId());
 			List<Product> products = productService.findProductbyGroupProductandflag(groupProduct.getId(), true);
@@ -97,7 +103,7 @@ public class CartController {
 				products.get(i).setFlag(false);
 				productService.update(products.get(i));
 				
-//				goi mail cho admin thong bao dat hang
+//				goi mail cho khách hàng thong bao dat hang
 				StringBuilder message = new StringBuilder();
 				message.append("Xin chào bạn "+ user.getFirstname()+ " " + user.getFirstname()+". \n");
 				message.append("\n");
@@ -110,9 +116,27 @@ public class CartController {
 				message.append("\n");
 				message.append("\n");
 				message.append("Minimalism Shop xin chân thành cảm ơn");
-				userService.sendMail(user, message.toString());
+				userService.sendMail(user.getEmail(), message.toString());
+//				goi mail cho admin thong bao dat hang
+				StringBuilder messageAdmin = new StringBuilder();
+				messageAdmin.append("Hệ thống đã tiếp nhận đơn hàng của bạn "+ user.getFirstname()+ " " + user.getFirstname()+". \n");
+				messageAdmin.append("\n");
+				messageAdmin.append("Vui lòng vào hệ thống kiểm tra hàng. \n");
+				messageAdmin.append("\n");
+				messageAdmin.append("\n");
+				messageAdmin.append("\n");
+				messageAdmin.append("------------------------------------------\n");
+				messageAdmin.append("\n");
+				messageAdmin.append("\n");
+				messageAdmin.append("Minimalism Shop xin chân thành cảm ơn");
+				userService.sendMail(Common.mailAdmin, messageAdmin.toString());
 			}
-			
+			if(size>1){
+				Involve involve = new Involve();
+				involve.setIdType(order.getId());
+				involve.setIdInvolve(groupProduct.getId());
+				aprioriService.save(involve);
+			}
 			//kiểm tra sản phẩm còn không nếu không bật cờ 
 			int countCheckStock = productService.countProductbyGroupProductandflag(groupProduct, true);
 			if(countCheckStock <= 0){

@@ -31,6 +31,16 @@
 				<spring:url value="/products/list/${c.department.code }/${c.code }" var="productUrl" />
 					<a class="section-title" href="${productUrl }" style="text-decoration: none;">${c.name }</a>
 					<div class="product-carousel">
+					<c:if test="${c.groupProducts eq null || empty c.groupProducts}">
+					<div class="product-bit-title text-center">
+						
+						<h4>Product is not found</h4>
+						<spring:url value="/home" var="home"></spring:url>
+						<h4>
+							<a class="button alt wc-forward" href="${home }">Home</a>
+						</h4>
+					</div>
+					</c:if>
 						<c:forEach items="${c.groupProducts }" var="p">
 							<div class="single-product">
 								<div class="product-f-image">

@@ -7,19 +7,10 @@ public class AprioriList {
 	/**
 	 * 
 	 */
-	private Integer id;
 	private List<Integer> vetrai;
 	private List<Integer> vephai;
 
 	public AprioriList() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public List<Integer> getVetrai() {

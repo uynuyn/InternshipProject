@@ -9,7 +9,6 @@
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
@@ -19,7 +18,6 @@
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/500.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
@@ -29,7 +27,6 @@
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/cart.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
@@ -39,7 +36,6 @@
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/listProduct.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
@@ -50,8 +46,6 @@
 			value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/listProducts.jsp" />
-		<put-attribute name="footertop"
-			value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
@@ -61,7 +55,6 @@
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/singleProduct.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
@@ -71,7 +64,6 @@
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/checkout.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
@@ -81,7 +73,6 @@
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/register.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
 	
@@ -91,17 +82,7 @@
 		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
 	</definition>
-	
-		<definition name="blank" extends="base.definition">
-		<put-attribute name="head" value="/WEB-INF/views/include/header.jsp"></put-attribute>
-		<put-attribute name="nav-bar" value="/WEB-INF/views/include/nav.jsp" />
-		<put-attribute name="logo" value="/WEB-INF/views/include/logoandcart.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/menu.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/blank.jsp" />
-		<put-attribute name="footertop" value="/WEB-INF/views/include/footertop.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
-	</definition>
+
 </tiles-definitions>

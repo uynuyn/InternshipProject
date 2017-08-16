@@ -7,7 +7,7 @@ public interface UserService {
 //	public User save(User user);
 	public User loginUser(User user);
 	public User updateUser(User user);
-	public void sendMail(User user, String message);
+	public void sendMail(String mail, String message);
 	public User findUserbyUsername(String username);
 	
 

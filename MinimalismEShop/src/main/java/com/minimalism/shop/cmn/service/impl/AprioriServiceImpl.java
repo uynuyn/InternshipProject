@@ -22,7 +22,7 @@ import com.minimalism.shop.dto.ValueNode;
 import com.minimalism.shop.entities.Involve;
 
 @Service
-public class AprioriServiceImpl extends BaseServiceImpl<AprioriList, Integer>{
+public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 
 	@Autowired
 	private AprioriRepositoryImpl aprioriRepository;
@@ -32,7 +32,8 @@ public class AprioriServiceImpl extends BaseServiceImpl<AprioriList, Integer>{
 	Set<Tuple> l;
 	List<Tuple> all;
 	int d[][];// dữ liệu giao dịch
-	int min_support=2;
+	int min_support=1;
+	float min_conf= (float) 0.1;
 	
 	public List<AprioriList> aprioriLists(){
 		return result;
@@ -158,7 +159,7 @@ public class AprioriServiceImpl extends BaseServiceImpl<AprioriList, Integer>{
 			}
 			
 			float bt = FindConf(tuple2) / FindConf(tuple);
-			if (bt < 0.5) {
+			if (bt < min_conf) {
 				continue;
 			}
 			aprioriList.setVetrai(lvetrai);

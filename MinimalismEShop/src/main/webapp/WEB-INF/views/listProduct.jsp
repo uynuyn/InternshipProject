@@ -7,13 +7,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set value="${breadcrumb }" var="b"/>
+<c:set value="${listProduct }" var="l"></c:set>
  <div class="product-big-title-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title">
+                    <c:if test="${l ne null }">
                     <c:choose>
-                    	<c:when test="${f eq null || empty f }">
+                    	<c:when test="${f eq null || empty f}">
                     	<div class="product-breadcroumb">
                             <a href="">Home</a>
                             <spring:url value="/products/list/${b.category.department.code }" var="departmentUrl" />
@@ -28,7 +30,7 @@
                         </div>
                     	</c:otherwise>
                     </c:choose>
-                         
+                         </c:if>
                         
                     </div>
                 </div>
@@ -41,6 +43,18 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
+            <c:if test="${l eq null }">
+           <div class="col-md-12">
+					<div class="product-bit-title text-center">
+						
+						<h2>Product is not found</h2>
+						<spring:url value="/home" var="home"></spring:url>
+						<h2>
+							<a class="button alt wc-forward" href="${home }">Home</a>
+						</h2>
+					</div>
+				</div>
+            </c:if>
             <c:forEach items="${listProduct }" var="p">
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">

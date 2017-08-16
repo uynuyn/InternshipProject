@@ -36,10 +36,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	}
 
 	@Override
-	public void sendMail(User user, String message) {
+	public void sendMail(String mail, String message) {
 		// TODO Auto-generated method stub
 		SimpleMailMessage messages = new SimpleMailMessage();
-		messages.setTo(user.getEmail());
+		messages.setTo(mail);
 		messages.setText(message);
 		
 		javaMailSender.send(messages);

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import javax.xml.bind.DatatypeConverter;
 
 public class Common {
+	public static String mailAdmin = "tranthucuyen0508@gmail.com";
 	public static String passEncode(String password, int salt){
 		password += salt;
 		password = getMD5(password);

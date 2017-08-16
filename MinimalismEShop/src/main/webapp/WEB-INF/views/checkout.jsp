@@ -24,106 +24,36 @@
 			<div class="col-md-4">
 				<div class="single-sidebar">
 					<h2 class="sidebar-title">Search Products</h2>
-					<form action="">
-						<input type="text" placeholder="Search products..."> <input
-							type="submit" value="Search">
+					<spring:url value="/products/list/search" var="search"></spring:url>
+					<form action="${search }" >
+					
+						<input name="keyword" type="text" placeholder="Search products..."/>
+					
+						<input type="submit" value="Search">
 					</form>
 				</div>
 
 				<div class="single-sidebar">
 					<h2 class="sidebar-title">Products</h2>
-					<!-- <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
+					<c:forEach items="${cart }" var="c">
+					<div class="thubmnail-recent">
+                            <img src="<c:url value='${c.value.imgPath }'/>" class="recent-thumb" alt="" style="width:40pt;height:50pt;">
+                            <h2><a href="#">${c.value.name }</a></h2>
                             <div class="product-sidebar-price">
-                                <i>$700.00</i> <strong>$800.00</strong>
+                                <i>Quantity: ${c.value.quantity }-</i> <strong> Price: <fmt:formatNumber
+														value="${c.value.price }" type="currency" minFractionDigits="0"/></strong>
                             </div>                             
                         </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                             
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                             
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <i>$700.00</i> <strong>$800.00</strong>
-                            </div>                             
-                        </div> -->
+                        </c:forEach>
 				</div>
 
-				<div class="single-sidebar">
-					<h2 class="sidebar-title">Recent Posts</h2>
-					<!--  <ul>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                            <li><a href="single-product.html">Sony Smart TV - 2015</a></li>
-                        </ul> -->
-				</div>
+				
 			</div>
 
 			<div class="col-md-8">
 				<div class="product-content-right">
 					<div class="woocommerce">
-						<!-- <div class="woocommerce-info">Returning customer? <a class="showlogin" data-toggle="collapse" href="#login-form-wrap" aria-expanded="false" aria-controls="login-form-wrap">Click here to login</a>
-                            </div>
-
-                            <form id="login-form-wrap" class="login collapse" method="post">
-
-
-                                <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing &amp; Shipping section.</p>
-
-                                <p class="form-row form-row-first">
-                                    <label for="username">Username or email <span class="required">*</span>
-                                    </label>
-                                    <input type="text" id="username" name="username" class="input-text">
-                                </p>
-                                <p class="form-row form-row-last">
-                                    <label for="password">Password <span class="required">*</span>
-                                    </label>
-                                    <input type="password" id="password" name="password" class="input-text">
-                                </p>
-                                <div class="clear"></div>
-
-
-                                <p class="form-row">
-                                    <input type="submit" value="Login" name="login" class="button">
-                                    <label class="inline" for="rememberme"><input type="checkbox" value="forever" id="rememberme" name="rememberme"> Remember me </label>
-                                </p>
-                                <p class="lost_password">
-                                    <a href="#">Lost your password?</a>
-                                </p>
-
-                                <div class="clear"></div>
-                            </form>
-
-                            <div class="woocommerce-info">Have a coupon? <a class="showcoupon" data-toggle="collapse" href="#coupon-collapse-wrap" aria-expanded="false" aria-controls="coupon-collapse-wrap">Click here to enter your code</a>
-                            </div>
-
-                            <form id="coupon-collapse-wrap" method="post" class="checkout_coupon collapse">
-
-                                <p class="form-row form-row-first">
-                                    <input type="text" value="" id="coupon_code" placeholder="Coupon code" class="input-text" name="coupon_code">
-                                </p>
-
-                                <p class="form-row form-row-last">
-                                    <input type="submit" value="Apply Coupon" name="apply_coupon" class="button">
-                                </p>
-
-                                <div class="clear"></div>
-                            </form> -->
+					
 						<spring:url value="/checkout" var="checkout"></spring:url>
 						<form:form action="${checkout }" class="checkout" method="POST"
 							name="checkout" modelAttribute="checkoutForm">

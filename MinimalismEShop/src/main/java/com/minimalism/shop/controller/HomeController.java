@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.minimalism.shop.cmn.base.Common;
+import com.minimalism.shop.cmn.service.impl.AprioriServiceImpl;
 import com.minimalism.shop.cmn.service.impl.DepartmentServiceImpl;
 import com.minimalism.shop.cmn.service.impl.GroupProductServiceImpl;
 import com.minimalism.shop.entities.Department;
@@ -21,11 +22,11 @@ import com.minimalism.shop.entities.GroupProduct;
 public class HomeController {
 	
 	
-	@Autowired
-	private GroupProductServiceImpl groupProductService;
+	@Autowired private GroupProductServiceImpl groupProductService;
 		
-	@Autowired
-	private DepartmentServiceImpl departmentService;
+	@Autowired private DepartmentServiceImpl departmentService;
+	
+	@Autowired private AprioriServiceImpl aprioriService;
 	
 	@PostConstruct
 	public void homeController(){
@@ -49,6 +50,7 @@ public class HomeController {
 	public String home(Model model, HttpSession session) {
 		getProductTop(model);
 		getAllListProduct(session);
+		aprioriService.findAllList();
 		return "common/home";
 	}
 	

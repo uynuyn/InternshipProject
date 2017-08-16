@@ -48,7 +48,7 @@
 				<div class="single-sidebar">
 					<h2 class="sidebar-title">Products</h2>
 					<div class="thubmnail-recent">
-						<img src="<c:url value='${p.imge }'/>" class="recent-thumb" alt="">
+						<img src="<c:url value='${p.imge }'/>" class="recent-thumb" alt="" style="width:40pt;height:50pt;">
 						<h2>
 							<span>${p.name }</span>
 						</h2>
@@ -85,7 +85,7 @@
 								<div class="col-sm-6">
 									<div class="product-images">
 										<div class="product-main-img">
-											<img src="<c:url value='${p.imge }'/>" alt="">
+											<img src="<c:url value='${p.imge }'/>" alt="" style="width: 300pt; height: 350pt;">
 										</div>
 
 										
@@ -114,13 +114,7 @@
 												<button class="add_to_cart_button" type="button">Sorry</button>
 											</c:otherwise>
 										</c:choose>
-											<div class="quantity">
-												<input type="number" size="4" class="input-text qty text"
-													title="Qty" value="1" name="quantity" min="1" step="1" disabled="disabled">
-											</div>
 											
-											<button class="add_to_cart_button addProduct" type="submit" id="${p.id }">Add
-												to cart</button>
 										</form>
 
 										<div class="product-inner-category">

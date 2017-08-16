@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright">
-                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by <a href="http://wpexpand.com" target="_blank">WP Expand</a></p>
+                        <p>&copy; Học viện công nghệ bưu chính viễn thông <i class="fa fa-heart"></i> by <a href="#" target="_blank">Trần Thục Uyên</a></p>
                     </div>
                 </div>
                 

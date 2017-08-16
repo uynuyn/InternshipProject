@@ -10,11 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.minimalism.shop.cmn.base.BaseRepositoryImpl;
 import com.minimalism.shop.cmn.repository.AprioriRepository;
-import com.minimalism.shop.dto.AprioriList;
 import com.minimalism.shop.entities.Involve;
 
 @Repository
-public class AprioriRepositoryImpl extends BaseRepositoryImpl<AprioriList, Integer> implements AprioriRepository{
+public class AprioriRepositoryImpl extends BaseRepositoryImpl<Involve, Integer> implements AprioriRepository{
 
 	@Autowired private SessionFactory sessionFactory;
 
