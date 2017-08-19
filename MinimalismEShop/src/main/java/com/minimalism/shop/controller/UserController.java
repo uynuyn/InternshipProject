@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.minimalism.shop.cmn.base.Common;
 import com.minimalism.shop.cmn.service.impl.UserServiceImpl;
@@ -24,7 +25,7 @@ import com.minimalism.shop.entities.User;
 @Controller
 public class UserController {
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserServiceImpl userService;
 	
 	@Autowired private UserValidator userValidator;
 	
@@ -34,7 +35,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(HttpServletRequest request,
+	public String register(HttpSession session,
 			@ModelAttribute("userFormRegister") @Validated  User users,
 			final BindingResult result,
 			Model model){
@@ -42,22 +43,57 @@ public class UserController {
 			return "register";
 	    }
 		User oldUser = new User();
-		int salt = new Random().nextInt(100000);
-		users.setSalt(salt);
-		String pass = users.getPassword();
-		users.setPassword(Common.passEncode(users.getPassword(),users.getSalt()));
-		oldUser = userServiceImpl.findUserbyUsernameEmail(users.getUsername(), users.getEmail());
-		if(Common.checkNullandBlank(oldUser)){
-			users = userServiceImpl.save(users);
-			users.setPassword(pass);
-			if(users!=null){
-				model.addAttribute("success", true);
-				return "/home";
-			}
+		
+		oldUser = userService.findUserbyUsernameEmail(users.getUsername(), users.getEmail());
+		if(Common.checkNullandBlank(oldUser)){// if check = true allow save user
+			session.setAttribute("verify", users);
+			
+			return "redirect:/verify";
 		}
 		users.setPassword("");
 		model.addAttribute("result", "fail");
 		return "register";
+	}
+	
+	@RequestMapping(value = "/verify", method = RequestMethod.GET)
+	public String verify(HttpSession session) {
+		int rand = new Random().nextInt(100000);
+		User user = (User) session.getAttribute("verify");
+		StringBuilder message = new StringBuilder();
+		message.append("Xin chào bạn "+ user.getUsername()+". \n");
+		message.append("\n");
+		message.append("Cảm ơn bạn đã quan tâm đến cửa hàng của chúng tôi. \n");
+		message.append("Mã xác nhận tài khoản của bạn là : " + rand + " . \n");
+		message.append("\n");
+		message.append("\n");
+		message.append("\n");
+		message.append("------------------------------------------\n");
+		message.append("\n");
+		message.append("\n");
+		message.append("Minimalism Shop xin chân thành cảm ơn");
+		userService.sendMail(user.getEmail(), message.toString());
+		user.setSalt(rand);
+		session.setAttribute("verify", user);
+		return "verify";
+	}
+	@RequestMapping(value = "/verify", method = RequestMethod.POST)
+	public String verify(HttpSession session,Model model, @RequestParam("verify") String verify) {
+		
+		User user = (User) session.getAttribute("verify");
+		session.removeAttribute("verify");
+		if(verify.trim().equals(String.valueOf(user.getSalt()))){
+			int salt = new Random().nextInt(100000);
+			user.setSalt(salt);
+			user.setPassword(Common.passEncode(user.getPassword(),user.getSalt()));
+			user = userService.save(user);
+			if(user!=null){
+				session.setAttribute("users", user);
+				model.addAttribute("thanhcong", false);
+				return "redirect:/home";
+			}
+		}
+		model.addAttribute("fail", true);
+		return "verify";
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
@@ -75,12 +111,17 @@ public class UserController {
 			model.addAttribute("userFormLogin" , new User());
 	    }
 		
-		User results = userServiceImpl.loginUser(users);
+		User results = userService.loginUser(users);
 		if (!Common.checkNullandBlank(results)) {
 			session.setAttribute("users", results);
 			String check = (String) session.getAttribute("checkout");
 			if("yes".equals(check)){
 				return "redirect:/checkout";
+			}else {
+				String isadmin = (String) session.getAttribute("admin");
+				if("isadmin".equals(isadmin)){
+					return "redirect:/admin";
+				}
 			}
 			return "redirect:/home";
 		}

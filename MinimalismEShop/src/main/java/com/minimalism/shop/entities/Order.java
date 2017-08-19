@@ -32,7 +32,7 @@ public class Order implements Serializable {
 	private User user;
 	private Date orderDate;
 	private Date deliveryDate;
-	private int amount;
+	private Boolean delivery;
 	private Boolean status;
 	private String note;
 	private String address;
@@ -42,20 +42,20 @@ public class Order implements Serializable {
 	public Order() {
 	}
 
-	public Order(User user, Date orderDate, int amount,
+	public Order(User user, Date orderDate, Boolean delivery,
 			String address) {
 		this.user = user;
 		this.orderDate = orderDate;
-		this.amount = amount;
+		this.delivery = delivery;
 		this.address = address;
 	}
 
-	public Order(User user, Date orderDate, Date deliveryDate, int amount, Boolean status,
+	public Order(User user, Date orderDate, Date deliveryDate, Boolean delivery, Boolean status,
 			String note, String address, List<OrderDetail> orderDetails) {
 		this.user = user;
 		this.orderDate = orderDate;
 		this.deliveryDate = deliveryDate;
-		this.amount = amount;
+		this.delivery = delivery;
 		this.status = status;
 		this.note = note;
 		this.address = address;
@@ -102,13 +102,13 @@ public class Order implements Serializable {
 		this.deliveryDate = deliveryDate;
 	}
 
-	@Column(name = "amount", nullable = false)
-	public int getAmount() {
-		return this.amount;
+	@Column(name = "delivery")
+	public Boolean getDelivery() {
+		return this.delivery;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setDelivery(Boolean delivery) {
+		this.delivery = delivery;
 	}
 
 	@Column(name = "status")

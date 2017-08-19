@@ -23,6 +23,26 @@
 			value="/WEB-INF/views/manager/products.jsp" />
 	</definition>
 	
+	<definition name="view-single-product" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/include/nav-admin.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/view-single-product.jsp" />
+	</definition>
+	
+	<definition name="view-product-order" extends="base.definition">
+		<put-attribute name="head"
+			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
+		<put-attribute name="nav-bar"
+			value="/WEB-INF/views/include/nav-admin.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/manager/view-product-order.jsp" />
+	</definition>
+	
 	<definition name="add-product" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>

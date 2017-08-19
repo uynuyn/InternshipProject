@@ -8,6 +8,8 @@ public class ProductDto {
 	private Integer id;
 
 	private String name;
+	
+	private String category;
 
 	private int quantity;
 
@@ -68,6 +70,14 @@ public class ProductDto {
 	@JsonView(Views.Public.class)
 	public Double getTotal(){
 		return (double) (price*quantity); 
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }

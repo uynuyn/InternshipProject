@@ -74,7 +74,7 @@
                         	</c:when>
                         	<c:otherwise>
 		                        <div class="product-option-shop">
-		                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#" id="${p.id }">Sorry</a>
+		                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#" id="${p.id }">Out of stock</a>
 		                        </div>                     	
                         	</c:otherwise>
                         </c:choose>
@@ -100,7 +100,7 @@
 					<h3><a href="${cart }">Go to cart</a></h3>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Continue shopping</button>
 				</div>
 				</form>
 			</div>

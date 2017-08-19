@@ -100,8 +100,7 @@
 															height="145" alt="poster_1_up" class="shop_thumbnail"
 															src="<c:url value = '${c.value.imgPath }'/>"></a></td>
 
-													<td class="product-name"><a href="single-product.html">Ship
-															Your Idea</a></td>
+													<td class="product-name"><a target="_blank" href="<spring:url value='/product/single/${c.value.id }'/>">${c.value.name }</a></td>
 
 													<td class="product-price"><input hidden=""
 														disabled="disabled" class="amount"
@@ -149,7 +148,7 @@
 								<div class="cart-collaterals">
 
 
-									<%--                             <div class="cross-sells">
+		<%-- 							                          <div class="cross-sells">
                                 <h2>You may be interested in...</h2>
                                 <ul class="products">
                                     <li class="product">
@@ -173,7 +172,7 @@
                                     </li>
                                 </ul>
                             </div>
- --%>
+  --%>
 
 									<div class="cart_totals " id="cart_totalsid">
 										<h2>Cart Totals</h2>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.minimalism.shop.cmn.base.BaseRepositoryImpl;
 import com.minimalism.shop.cmn.repository.DepartmentRepository;
+import com.minimalism.shop.entities.Category;
 import com.minimalism.shop.entities.Department;
 
 @Repository
@@ -28,6 +29,9 @@ public class DepartmentRepositoryImpl extends BaseRepositoryImpl<Department, Int
 		List<Department> listDepartment = criteria.list();
 		for (Department department : listDepartment) {
 			Hibernate.initialize(department.getCategories());
+			for (Category category: department.getCategories()) {
+				Hibernate.initialize(category.getGroupProducts());
+			}
 		}
 		session.close();
 		return listDepartment;

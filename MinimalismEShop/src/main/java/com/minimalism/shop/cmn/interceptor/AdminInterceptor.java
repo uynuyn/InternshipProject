@@ -18,6 +18,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter{
 
 		if(url.contains("admin")){
 			if(session.getAttribute("users") == null){
+				session.setAttribute("admin", "isadmin");
 				response.sendRedirect("/shop/login");
 				return false;
 			}

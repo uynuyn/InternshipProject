@@ -15,6 +15,25 @@
 				</h1>
 			</div>
 		</div>
+		<c:set value="${notification }" var="n" />
+
+		<c:choose>
+			<c:when test="${n eq 'delivery' }">
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$("#modalInforDelivery").modal("show");
+					});
+				</script>
+			</c:when>
+			<c:when test="${n eq 'ship' }">
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$("#modalInforShip").modal("show");
+					});
+				</script>
+			</c:when>
+		</c:choose>
+		
 
 		<!-- content are available here -->
 		<div class="row">
@@ -23,10 +42,19 @@
 					<div class="col-sm-2">
 						<label class="control-label">Select Date</label>
 					</div>
-					<spring:url value="/admins/list-order" var="date"></spring:url>
+					<c:choose>
+						<c:when test="${delivery eq 'delivery' }">
+							<spring:url value="/${delivery }/list-order" var="date"></spring:url>
+
+						</c:when>
+						<c:otherwise>
+							<spring:url value="/admins/list-order" var="date"></spring:url>
+
+						</c:otherwise>
+					</c:choose>
 					<form action="${date }">
 						<div class="col-sm-3">
-							<input type="date" name="dateOrder" class="form-control"/>
+							<input type="date" name="dateOrder" class="form-control" />
 						</div>
 						<div class="col-sm-1">
 							<button type="submit" class="btn btn-info pull-right">View</button>
@@ -45,31 +73,31 @@
 								<th>Code Order</th>
 								<th>Customer Name</th>
 								<th>Date Order</th>
-								<th>Amount (USD)</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${listOrder }" var="order" varStatus="stt">
+								<c:choose>
+									<c:when test="${delivery eq 'delivery' }">
+										<spring:url value="/${delivery }/view-product-order/${order.id }" var="o"></spring:url>
+									</c:when>
+									<c:otherwise>
+										<spring:url value="/view-product-order/${order.id }" var="o"></spring:url>
+									</c:otherwise>
+								</c:choose>
+
 								<tr>
-									<td>${stt.index +1 }</td>
-									<td>${order.user.username }</td>
-									<td>${order.user.firstname }${order.user.lastname }</td>
-									<td><fmt:formatDate value="${order.orderDate }"
-											type="date" /></td>
-									<td>${order.amount }</td>
+									<td><a href="${o }" style="color: black; font-size: 15pt;">${order.id }</a></td>
+									<td><a href="${o }" style="color: black; font-size: 15pt;">${order.user.username }</a></td>
+									<td><a href="${o }" style="color: black; font-size: 15pt;">${order.user.firstname }${order.user.lastname }</a></td>
+									<td><a href="${o }" style="color: black; font-size: 15pt;"><fmt:formatDate
+												value="${order.orderDate }" type="date" /></a></td>
 
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<div class="col-md-3"></div>
-							<button type="submit" class="btn btn-primary btn-lg col-md-3">UPDATE</button>
-							<a href="/example/admin/" class="btn btn-default btn-lg col-md-3">CANCEL</a>
-							<div class="col-md-3"></div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 
@@ -77,6 +105,41 @@
 
 	</div>
 </div>
+
+<!-- Modal notification  -->
+
+<div class="modal fade myModal" id="modalInforDelivery" role="dialog">
+	<div class="modal-dialog modal-sm" style="width: 500px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<i class="fa fa-hand-paper-o" aria-hidden="true" style="color: red;"></i>
+				<h2 class="form-signin-heading">Delivery successful</h2>
+			</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-lg btn-default"
+						data-dismiss="modal">Done</button>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade myModal" id="modalInforShip" role="dialog">
+	<div class="modal-dialog modal-sm" style="width: 500px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<i class="fa fa-hand-paper-o" aria-hidden="true" style="color: red;"></i>
+				<h2 class="form-signin-heading">Transfer successful</h2>
+			</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-lg btn-default"
+						data-dismiss="modal">Done</button>
+				</div>
+		</div>
+	</div>
+</div>
+
+
 <!-- end content -->
 <script>
 	$(document).ready(function() {

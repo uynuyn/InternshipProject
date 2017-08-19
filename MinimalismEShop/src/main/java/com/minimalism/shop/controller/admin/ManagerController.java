@@ -8,7 +8,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import com.minimalism.shop.cmn.base.Common;
 import com.minimalism.shop.cmn.service.impl.CategoryServiceImpl;
 import com.minimalism.shop.cmn.service.impl.CheckinServiceImpl;
 import com.minimalism.shop.cmn.service.impl.DepartmentServiceImpl;
@@ -34,6 +38,7 @@ import com.minimalism.shop.cmn.service.impl.GroupProductServiceImpl;
 import com.minimalism.shop.cmn.service.impl.ProductServiceImpl;
 import com.minimalism.shop.cmn.validator.ProductValidator;
 import com.minimalism.shop.dto.AddGroupProductDto;
+import com.minimalism.shop.dto.AprioriList;
 import com.minimalism.shop.entities.Category;
 import com.minimalism.shop.entities.GroupProduct;
 import com.minimalism.shop.entities.Order;
@@ -73,17 +78,19 @@ public class ManagerController {
 		}
 	}
 	
+	
 	@RequestMapping(value = "/list-order", method = RequestMethod.GET)
 	public String listOrder(Model model, HttpServletRequest request) {
 		String date = request.getParameter("dateOrder");
 		List<Order> listOrder = new ArrayList<>();
 		if(date==null || date.equals("")){
-			listOrder = checkinService.findOrderbyStatusDay();
+			// ngày less equals hiện tại
+			listOrder = checkinService.findOrderbyStatusDay(false);
 		}else {
 			Date date2 = null;
 			try {
 				date2 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-				listOrder = checkinService.findOrderbyDate(date2);
+				listOrder = checkinService.findOrderbyDate(date2,false);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -172,6 +179,9 @@ public class ManagerController {
 		groupProduct.setImge("/resources/image/"+ name);
 		groupProduct.setPrice(addGroupProduct.getPrice());
 		
+		String code = Common.removeAccent(groupProduct.getName()).replaceAll(" ", "");
+		groupProduct.setCode(code);
+		
 		groupProduct = groupProductService.save(groupProduct);
 		
 		
@@ -184,7 +194,7 @@ public class ManagerController {
 			productService.save(product);
 		}
 		
-		return "resadmin";
+		return "redirect:/admin";
 	}
 	
 	@RequestMapping(value = "/productOld", method = RequestMethod.POST)

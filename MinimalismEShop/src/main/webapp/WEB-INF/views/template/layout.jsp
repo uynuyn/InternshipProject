@@ -20,6 +20,9 @@
 	<!-- insert body -->
 	<tiles:insertAttribute name="body" />
 	
+	<!-- insert footer top-->
+	<tiles:insertAttribute name="footertop" />
+	
 	<!-- insert footer -->
 	<tiles:insertAttribute name="footer" />
 </body>

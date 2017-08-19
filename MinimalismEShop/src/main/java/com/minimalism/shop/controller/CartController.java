@@ -54,8 +54,9 @@ public class CartController {
 	}
 	
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
-	public String checkout(Model model) {
+	public String checkout(Model model, HttpSession session) {
 		model.addAttribute("checkoutForm" , new CheckoutDto());
+		session.removeAttribute("checkout");
 		return "common/checkout";
 	}
 	
@@ -81,6 +82,7 @@ public class CartController {
 		Order order = new Order();
 		order.setUser(user);
 		order.setAddress(checkoutDto.getAddressStreet() +" " + checkoutDto.getAddressSuite() + " "+ checkoutDto.getAddressCity());
+		order.setStatus(false);
 //		Order order2 = checkoutService.findOrderofUserinDate(order);
 //		if(Common.checkNullandBlank(order2)){
 			order = checkoutService.orderInforNew(order);
@@ -103,34 +105,37 @@ public class CartController {
 				products.get(i).setFlag(false);
 				productService.update(products.get(i));
 				
-//				goi mail cho khách hàng thong bao dat hang
-				StringBuilder message = new StringBuilder();
-				message.append("Xin chào bạn "+ user.getFirstname()+ " " + user.getFirstname()+". \n");
-				message.append("\n");
-				message.append("Cảm ơn bạn đã quan tâm đến cửa hàng của chúng tôi. \n");
-				message.append("Chúng tôi sẽ giải quyết đơn hàng của bạn và giao đến ban sớm nhất. \n");
-				message.append("\n");
-				message.append("\n");
-				message.append("\n");
-				message.append("------------------------------------------\n");
-				message.append("\n");
-				message.append("\n");
-				message.append("Minimalism Shop xin chân thành cảm ơn");
-				userService.sendMail(user.getEmail(), message.toString());
-//				goi mail cho admin thong bao dat hang
-				StringBuilder messageAdmin = new StringBuilder();
-				messageAdmin.append("Hệ thống đã tiếp nhận đơn hàng của bạn "+ user.getFirstname()+ " " + user.getFirstname()+". \n");
-				messageAdmin.append("\n");
-				messageAdmin.append("Vui lòng vào hệ thống kiểm tra hàng. \n");
-				messageAdmin.append("\n");
-				messageAdmin.append("\n");
-				messageAdmin.append("\n");
-				messageAdmin.append("------------------------------------------\n");
-				messageAdmin.append("\n");
-				messageAdmin.append("\n");
-				messageAdmin.append("Minimalism Shop xin chân thành cảm ơn");
-				userService.sendMail(Common.mailAdmin, messageAdmin.toString());
+
 			}
+			
+//			goi mail cho khách hàng thong bao dat hang
+			StringBuilder message = new StringBuilder();
+			message.append("Xin chào bạn "+ user.getFirstname()+ " " + user.getFirstname()+". \n");
+			message.append("\n");
+			message.append("Cảm ơn bạn đã quan tâm đến cửa hàng của chúng tôi. \n");
+			message.append("Chúng tôi sẽ giải quyết đơn hàng của bạn và giao đến ban sớm nhất. \n");
+			message.append("\n");
+			message.append("\n");
+			message.append("\n");
+			message.append("------------------------------------------\n");
+			message.append("\n");
+			message.append("\n");
+			message.append("Minimalism Shop xin chân thành cảm ơn");
+			userService.sendMail(user.getEmail(), message.toString());
+//			goi mail cho admin thong bao dat hang
+			StringBuilder messageAdmin = new StringBuilder();
+			messageAdmin.append("Hệ thống đã tiếp nhận đơn hàng của bạn "+ user.getFirstname()+ " " + user.getFirstname()+". \n");
+			messageAdmin.append("\n");
+			messageAdmin.append("Vui lòng vào hệ thống kiểm tra hàng. \n");
+			messageAdmin.append("\n");
+			messageAdmin.append("\n");
+			messageAdmin.append("\n");
+			messageAdmin.append("------------------------------------------\n");
+			messageAdmin.append("\n");
+			messageAdmin.append("\n");
+			messageAdmin.append("Minimalism Shop xin chân thành cảm ơn");
+			userService.sendMail(Common.mailAdmin, messageAdmin.toString());
+			
 			if(size>1){
 				Involve involve = new Involve();
 				involve.setIdType(order.getId());

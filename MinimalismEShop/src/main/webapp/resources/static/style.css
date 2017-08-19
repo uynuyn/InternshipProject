@@ -600,8 +600,9 @@ body {
 }
 
 .footer-wid-title {
+	
 	font-family: raleway;
-	font-size: 30px;
+	font-size: 22pt;
 	font-weight: 100;
 	color: #fff
 }
@@ -617,6 +618,7 @@ body {
 }
 
 .footer-menu ul li {
+	font-size:15pt;
 	border-bottom: 1px dashed #555;
 	padding: 5px 0;
 }

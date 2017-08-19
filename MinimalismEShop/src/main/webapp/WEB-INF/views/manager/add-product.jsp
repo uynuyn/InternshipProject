@@ -61,19 +61,7 @@
 							</div>
 						</spring:bind>
 
-						<spring:bind path="size">
-							<p id="billing_size_field"
-								class="form-row form-row-last validate-required validate-size">
-								<label class="" for="billing_size">Size </label>
-								<form:select path="size">
-									<form:option value="0">No thing</form:option>
-									<form:option value="1">Small</form:option>
-									<form:option value="2">Medium</form:option>
-									<form:option value="3">Large</form:option>
-								</form:select>
-								<form:errors path="size" class="control-label" />
-							</p>
-						</spring:bind>
+						
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -102,7 +90,20 @@
 								</p>
 							</div>
 						</spring:bind>
-						<spring:bind path="isSpecial">
+						<spring:bind path="size">
+							<p id="billing_size_field"
+								class="form-row form-row-last validate-required validate-size">
+								<label class="" for="billing_size">Size </label>
+								<form:select path="size">
+									<form:option value="0">No thing</form:option>
+									<form:option value="1">Small</form:option>
+									<form:option value="2">Medium</form:option>
+									<form:option value="3">Large</form:option>
+								</form:select>
+								<form:errors path="size" class="control-label" />
+							</p>
+						</spring:bind>
+						<%-- <spring:bind path="isSpecial">
 							<div class="form-group ${status.error ? 'has-error' : ''}">
 								<p id="billing_isSpecial_field"
 									class="form-row form-row-wide address-field validate-required">
@@ -130,7 +131,7 @@
 									<form:errors path="isLastest" class="control-label" />
 								</p>
 							</div>
-						</spring:bind>
+						</spring:bind> --%>
 
 					</div>
 				</div>

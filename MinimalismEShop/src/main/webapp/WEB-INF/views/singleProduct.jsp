@@ -222,7 +222,7 @@
 					<h3><a href="${cart }">Go to cart</a></h3>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Continue shopping</button>
 				</div>
 				</form>
 			</div>

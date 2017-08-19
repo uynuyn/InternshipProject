@@ -49,6 +49,7 @@ public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct,
 		Criteria criteria = session.createCriteria(GroupProduct.class).add(Restrictions.eq("id", id));
 		GroupProduct groupProduct = (GroupProduct) criteria.uniqueResult();
 		Hibernate.initialize(groupProduct.getCategory().getDepartment());
+		Hibernate.initialize(groupProduct.getProducts());
 		session.close();
 		return groupProduct;
 	}

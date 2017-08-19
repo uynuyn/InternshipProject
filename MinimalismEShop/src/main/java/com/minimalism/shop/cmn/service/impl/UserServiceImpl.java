@@ -39,6 +39,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	public void sendMail(String mail, String message) {
 		// TODO Auto-generated method stub
 		SimpleMailMessage messages = new SimpleMailMessage();
+		messages.setSubject("Minimalism Shop");
 		messages.setTo(mail);
 		messages.setText(message);
 		

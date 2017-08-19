@@ -56,6 +56,8 @@ public class SingleProductController {
 		List<GroupProduct> groupProducts = new ArrayList<GroupProduct>();
 		List<AprioriList> list = aprioriService.aprioriLists();
 		Set<Integer> integers = new HashSet<>();
+		
+		
 		for (AprioriList aprioriList : list) {
 			int count = 0;
 			boolean containsElement = false;
@@ -79,17 +81,24 @@ public class SingleProductController {
 
 			}
 		}
+		
+		int k=1;
+		while(k<choose.size()){
 		if (integers.isEmpty() || integers.size() == 0) {
 			for (AprioriList aprioriList : list) {
 				if (aprioriList.getVetrai().size() == 1) {
 
-					if (aprioriList.getVetrai().get(0).equals(choose.get(choose.size() - 1))) {
+					if (aprioriList.getVetrai().get(0).equals(choose.get(choose.size() - k))) {
 						for (int i = 0; i < aprioriList.getVephai().size(); i++) {
 							integers.add(aprioriList.getVephai().get(i));
 						}
 					}
 				}
 			}
+		}else{
+			break;
+		}
+		k++;
 		}
 		Iterator<Integer> iterator = integers.iterator();
 		while (iterator.hasNext()) {
@@ -115,7 +124,7 @@ public class SingleProductController {
 
 	}
 
-	public void relatedProduct(List<Integer> id, Model model) {
+	public void relatedProduct(Model model) {
 
 	}
 

@@ -12,12 +12,13 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.minimalism.shop.cmn.base.BaseRepositoryImpl;
 import com.minimalism.shop.cmn.repository.CheckinRepository;
 import com.minimalism.shop.entities.Order;
 import com.minimalism.shop.entities.OrderDetail;
 
 @Repository
-public class CheckinRepositoryImpl implements CheckinRepository{
+public class CheckinRepositoryImpl extends BaseRepositoryImpl<Order, Integer> implements CheckinRepository {
 
 	@Autowired private SessionFactory sessionFactory;
 	
@@ -28,7 +29,11 @@ public class CheckinRepositoryImpl implements CheckinRepository{
 		Session session = sessionFactory.openSession();
 		try {
 			Criteria criteria = session.createCriteria(Order.class);
-			criteria.add(Restrictions.or(Restrictions.isNull("status"),Restrictions.eq("status", false)));
+			if(!status){
+				criteria.add(Restrictions.and(Restrictions.or(Restrictions.isNull("status"),Restrictions.eq("status", status)),Restrictions.eq("delivery", false)));				
+			}else {
+				criteria.add(Restrictions.and(Restrictions.eq("status", status),Restrictions.eq("delivery", false)));
+			}
 			criteria.add(Restrictions.le("orderDate", date));
 			List<Order> list = criteria.list();
 			for (Order order : list) {
@@ -39,22 +44,6 @@ public class CheckinRepositoryImpl implements CheckinRepository{
 			// TODO: handle finally clause
 			session.close();
 		}
-	}
-
-	@Override
-	public void updateOrder(Order order) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		try {
-			session.update(order);
-			tx.commit();
-		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-			session.close();
-		}
-		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -92,12 +81,16 @@ public class CheckinRepositoryImpl implements CheckinRepository{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Order> findOrderbyDate(Date date) {
+	public List<Order> findOrderbyDate(Date date, boolean status) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		try {
 			Criteria criteria = session.createCriteria(Order.class);
-			criteria.add(Restrictions.or(Restrictions.isNull("status"),Restrictions.eq("status", false)));
+			if(!status){
+				criteria.add(Restrictions.or(Restrictions.isNull("status"),Restrictions.eq("status", status)));				
+			}else {
+				criteria.add(Restrictions.eq("status", status));
+			}
 			criteria.add(Restrictions.eq("orderDate", date));
 			List<Order> list = criteria.list();
 			for (Order order : list) {
@@ -110,6 +103,42 @@ public class CheckinRepositoryImpl implements CheckinRepository{
 		}
 	}
 
+	@Override
+	public Order findOrderbyId(int id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		try {
+			Criteria criteria = session.createCriteria(Order.class)
+					.add(Restrictions.idEq(id));
+			Order order = (Order) criteria.uniqueResult();
+			Hibernate.initialize(order.getUser());
+			Hibernate.initialize(order.getOrderDetails());
+			
+			return order;
+		} finally {
+			session.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrderDetail> findOrderDetailbyOrder(Order order) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		try {
+			Criteria criteria = session.createCriteria(OrderDetail.class)
+					.add(Restrictions.eq("order.id", order.getId()));
+			List<OrderDetail> detail =  criteria.list();
+			for (OrderDetail orderDetail : detail) {
+				Hibernate.initialize(orderDetail.getProduct().getGroupProduct().getCategory());
+				Hibernate.initialize(orderDetail.getProduct().getOrderDetails());
+			}
+			return detail;
+		} finally {
+			session.close();
+		}
+	}
+	
 	@Override
 	public List<Order> findAllListOrder() {
 		// TODO Auto-generated method stub

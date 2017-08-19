@@ -34,7 +34,7 @@
 		</beans:property>
 	</beans:bean>
 
-	 <!-- <security:http auto-config="true" >
+	<!--  <security:http auto-config="true" >
         <security:intercept-url pattern="/" access="permitAll" />
         <security:intercept-url pattern="/home" access="permitAll" />
         <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
@@ -50,9 +50,9 @@
     </security:authentication-manager>
       
     <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-    
-    <beans:bean id="customUserDetailsService" class="com.minimalism.shop.cmn.service.impl.MyUserDetailsService" /> -->
-     
+  
+    <beans:bean id="customUserDetailsService" class="com.minimalism.shop.cmn.service.impl.MyUserDetailsService" />
+      -->
 	
 
 	<!-- Tiles -->
@@ -135,6 +135,13 @@
 		<!-- setting maximum upload size -->
 		<beans:property name="maxUploadSize" value="2098000" />
 	</beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/verify" />
+			<exclude-mapping path="/home"/>
+			<beans:bean class="com.minimalism.shop.cmn.interceptor.VerificationInterceptor" />
+		</interceptor>
+	</interceptors>
 	<interceptors>
 		<interceptor>
 			<mapping path="/checkout" />

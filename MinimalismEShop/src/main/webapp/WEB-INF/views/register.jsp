@@ -76,11 +76,11 @@
 			<div class="modal-content">
 				<div class="modal-header">
 						<i class="fa fa-hand-paper-o" aria-hidden="true" style="color: red;"></i>
-						<h2 class="form-signin-heading">Error</h2>
+						<h2 class="form-signin-heading">Try another?</h2>
 				</div>
 				<form action="">
 				<div class="modal-body" >
-					<h3>Register fail </h3>
+					<h3 style="color: #FF5959;">Someone already has that username. Note that we ignore periods and capitalization in usernames. </h3>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>

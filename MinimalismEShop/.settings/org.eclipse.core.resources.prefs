@@ -5,5 +5,8 @@ encoding//src/main/java/com/minimalism/shop/cmn/validator/CheckoutValidator.java
 encoding//src/main/java/com/minimalism/shop/controller/CartController.java=UTF-8
 encoding//src/main/java/com/minimalism/shop/controller/SingleProductController.java=UTF-8
 encoding//src/main/java/com/minimalism/shop/controller/UploadCommonController.java=UTF-8
+encoding//src/main/java/com/minimalism/shop/controller/UserController.java=UTF-8
+encoding//src/main/java/com/minimalism/shop/controller/admin/CheckinController.java=UTF-8
+encoding//src/main/java/com/minimalism/shop/controller/admin/DeliveryController.java=UTF-8
 encoding//src/main/java/com/minimalism/shop/controller/admin/ManagerController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/checkout.jsp=UTF-8

@@ -83,7 +83,7 @@
 								</p>
 							</div>
 						</spring:bind>
-						<spring:bind path="isSpecial">
+						<%-- <spring:bind path="isSpecial">
 							<div class="form-group ${status.error ? 'has-error' : ''}">
 								<p id="billing_isSpecial_field"
 									class="form-row form-row-wide address-field validate-required">
@@ -97,7 +97,7 @@
 									<form:errors path="isSpecial" class="control-label" />
 								</p>
 							</div>
-						</spring:bind>
+						</spring:bind> --%>
 					</div>
 				</div>
 				<div class="col-lg-12">

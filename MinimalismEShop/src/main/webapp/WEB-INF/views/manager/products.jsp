@@ -24,9 +24,13 @@
 					
 							<div class="product-option-shop">
 							<spring:url value="/admins/add-product-old/${p.id }" var="edit"></spring:url>
-								<a class="add_to_cart_button addProduct" data-quantity="1"
+								<a class="add_to_cart_button" data-quantity="1"
 									data-product_sku="" data-product_id="70" rel="nofollow"
 									href="${edit }" id="${p.id }">Edit</a>
+								<a class="add_to_cart_button" data-quantity="1"
+									data-product_sku="" data-product_id="70" rel="nofollow"
+									href="<spring:url value='/admins/view/product/single/${p.id }'/>" id="${p.id }">View</a>
+									
 							</div>
 
 				</div>

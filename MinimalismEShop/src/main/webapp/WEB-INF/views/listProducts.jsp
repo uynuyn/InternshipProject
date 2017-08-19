@@ -53,7 +53,7 @@
 										</c:when>
 										<c:otherwise>
 											<a href="#" class="add-to-cart-link" id="${p.id }">
-												<i class="fa fa-times"></i> Sorry</a>
+												<i class="fa fa-times"></i> Out of stock</a>
 										</c:otherwise>
 									</c:choose>
 										<a href="<spring:url value='/product/single/${p.id }'/>" class="view-details-link">
@@ -90,7 +90,7 @@
 					<h3><a href="${cart }">Go to cart</a></h3>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-lg btn-default" data-dismiss="modal">Continue shopping</button>
 				</div>
 				</form>
 			</div>
