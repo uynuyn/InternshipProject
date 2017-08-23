@@ -60,3 +60,57 @@ java.io.IOException: C:\Users\thucu\Desktop\Working\InternshipProject\.metadata\
 	at org.jboss.tools.central.internal.CentralHelper.getCentralUrl(CentralHelper.java:60)
 	at org.jboss.tools.central.editors.GettingStartedHtmlPage$5.run(GettingStartedHtmlPage.java:252)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.wst.server.discovery 1 0 2017-08-23 22:43:10.719
+!MESSAGE already installed: org.eclipse.jst.server.generic.jonas4
+
+!ENTRY org.eclipse.jst.j2ee 4 0 2017-08-23 22:48:13.838
+!MESSAGE C:\Users\thucu\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.51\bcprov-jdk15on-1.51.jar
+!STACK 0
+org.eclipse.jst.jee.archive.ArchiveOpenFailureException: C:\Users\thucu\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.51\bcprov-jdk15on-1.51.jar
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:53)
+	at org.eclipse.jst.j2ee.internal.archive.JavaEEArchiveUtilities.openBinaryArchive(JavaEEArchiveUtilities.java:250)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper$ArchiveCache.openArchive(JavaEEBinaryComponentHelper.java:612)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.openArchive(JavaEEBinaryComponentHelper.java:470)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getUniqueArchive(JavaEEBinaryComponentHelper.java:422)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getArchive(JavaEEBinaryComponentHelper.java:415)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentHelper.getJavaEEQuickPeek(JavaEEBinaryComponentHelper.java:98)
+	at org.eclipse.jst.j2ee.project.JavaEEProjectUtilities.getJ2EEComponentType(JavaEEProjectUtilities.java:273)
+	at org.eclipse.jst.j2ee.internal.common.exportmodel.JEEHeirarchyExportParticipant.isChildModule(JEEHeirarchyExportParticipant.java:42)
+	at org.eclipse.wst.common.componentcore.internal.flat.GlobalHeirarchyParticipant.isChildModule(GlobalHeirarchyParticipant.java:41)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.isChildModule(FlatVirtualComponent.java:367)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.addUsedReferences(FlatVirtualComponent.java:305)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.treeWalk(FlatVirtualComponent.java:235)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.cacheResources(FlatVirtualComponent.java:188)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.getChildModules(FlatVirtualComponent.java:160)
+	at org.eclipse.wst.web.internal.deployables.FlatComponentDeployable.getExportModelChildren(FlatComponentDeployable.java:252)
+	at org.eclipse.wst.web.internal.deployables.FlatComponentDeployable.getModules(FlatComponentDeployable.java:263)
+	at org.eclipse.jst.server.tomcat.core.internal.TomcatServer.getChildModules(TomcatServer.java:386)
+	at org.eclipse.wst.server.core.internal.Server.getChildModules(Server.java:2637)
+	at org.eclipse.wst.server.core.internal.ServerWorkingCopy.resetState(ServerWorkingCopy.java:622)
+	at org.eclipse.wst.server.core.internal.ServerWorkingCopy.modifyModules(ServerWorkingCopy.java:564)
+	at org.eclipse.wst.server.ui.internal.wizard.WizardTaskUtil.modifyModules(WizardTaskUtil.java:226)
+	at org.eclipse.wst.server.ui.internal.wizard.fragment.ModifyModulesWizardFragment.performFinish(ModifyModulesWizardFragment.java:141)
+	at org.eclipse.wst.server.ui.internal.wizard.TaskWizard.executeTask(TaskWizard.java:268)
+	at org.eclipse.wst.server.ui.internal.wizard.TaskWizard$2.run(TaskWizard.java:215)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2240)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2262)
+	at org.eclipse.wst.server.ui.internal.wizard.page.WorkspaceRunnableAdapter.run(WorkspaceRunnableAdapter.java:35)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Caused by: java.util.zip.ZipException: invalid CEN header (bad signature)
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:219)
+	at java.util.zip.ZipFile.<init>(ZipFile.java:149)
+	at org.eclipse.jst.common.internal.modulecore.util.ManifestUtilities$1.<init>(ManifestUtilities.java:259)
+	at org.eclipse.jst.common.internal.modulecore.util.ManifestUtilities.newZipFile(ManifestUtilities.java:259)
+	at org.eclipse.jst.jee.archive.internal.ArchiveUtil.newZipFile(ArchiveUtil.java:248)
+	at org.eclipse.jst.jee.archive.internal.ArchiveUtil.newZipFile(ArchiveUtil.java:234)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.resetZipFile(JavaEEBinaryComponentLoadAdapter.java:67)
+	at org.eclipse.jst.j2ee.internal.componentcore.JavaEEBinaryComponentLoadAdapter.<init>(JavaEEBinaryComponentLoadAdapter.java:51)
+	... 28 more
+
+!ENTRY org.eclipse.jdt.core 4 0 2017-08-23 22:48:15.244
+!MESSAGE Invalid ZIP archive: C:\Users\thucu\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.51\bcprov-jdk15on-1.51.jar
+
+!ENTRY org.eclipse.jst.jsp.core 2 2 2017-08-23 22:48:17.381
+!MESSAGE Taglib Index ZipException: C:/Users/thucu/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.51/bcprov-jdk15on-1.51.jar invalid CEN header (bad signature)
