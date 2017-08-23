@@ -71,10 +71,16 @@ public class CheckinServiceImpl extends BaseServiceImpl<Order, Integer> implemen
 		List<ProductDto> listProductDto = new ArrayList<>();
 		orderProduct.setId(order.getId());
 		orderProduct.setName(order.getUser().getEmail());
-		orderProduct.setPhone(order.getUser().getPhone());
 		orderProduct.setDelivery(order.getStatus());
 		orderProduct.setAddress(order.getAddress());
 		orderProduct.setDate(order.getOrderDate());
+		if(null == order.getNote()|| "null".equals(order.getNote())){
+			orderProduct.setNote("");
+		}else {
+			orderProduct.setNote(order.getNote());
+		}
+		orderProduct.setPhone(order.getUser().getPhone());
+		
 		Double subtotal=0.0;
 		int qty =0;
 		boolean flag = true;

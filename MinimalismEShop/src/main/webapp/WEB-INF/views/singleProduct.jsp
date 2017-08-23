@@ -111,7 +111,7 @@
 												to cart</button>
 											</c:when>
 											<c:otherwise>
-												<button class="add_to_cart_button" type="button">Sorry</button>
+												<button class="add_to_cart_button" type="button">Out of stock</button>
 											</c:otherwise>
 										</c:choose>
 											

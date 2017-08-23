@@ -11,7 +11,7 @@
 <div id="page-wrapper">
 	<div class="container-fluid">
 		<c:set value="${order }" var="o" />
-		
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
@@ -26,7 +26,7 @@
 				<spring:url value="/delivery/view-product-order/${o.id }" var="add"></spring:url>
 			</c:when>
 			<c:otherwise>
-				<spring:url value="/view-product-order/${o.id }" var="add"></spring:url>
+				<spring:url value="/admins/view-product-order/${o.id }" var="add"></spring:url>
 			</c:otherwise>
 		</c:choose>
 
@@ -67,7 +67,13 @@
 								id="billing_customeraddress" name="customeraddress"
 								class="input-text " disabled="disabled" />
 						</p>
-
+						<p id="billing_name_field"
+							class="form-row form-row-first validate-required validate-name">
+							<label class="" for="billing_name">Note </label> <input
+								type="text" value="${o.note }" placeholder=""
+								id="billing_customeraddress" name="customeraddress"
+								class="input-text " disabled="disabled" />
+						</p>
 
 					</div>
 				</div>
@@ -142,12 +148,20 @@
 
 								</c:when>
 								<c:otherwise>
-									<input type="submit" data-value="Shipping" value="Shipping"
-										id="place_order" name="woocommerce_checkout_place_order"
-										class="button alt"
-										style="width: 100%; height: 45pt; font-size: 20pt">
-
-
+									<div class="row">
+										<div class="col-lg-5" style="padding-top: 3%">
+											<spring:url value="/admins/print-order/${order.id }"
+												var="print"></spring:url>
+											<a style="width: 100%; height: 45pt; font-size: 20pt"
+												href="${print }" style="color: black; font-size: 15pt;">REPORT</a>
+										</div>
+										<div class="col-lg-7">
+											<input type="submit" data-value="Shipping" value="Shipping"
+												id="place_order" name="woocommerce_checkout_place_order"
+												class="button alt"
+												style="width: 100%; height: 45pt; font-size: 20pt">
+										</div>
+									</div>
 								</c:otherwise>
 							</c:choose>
 						</div>

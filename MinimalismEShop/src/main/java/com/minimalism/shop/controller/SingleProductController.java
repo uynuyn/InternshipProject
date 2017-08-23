@@ -26,28 +26,33 @@ public class SingleProductController {
 	@Autowired
 	private GroupProductServiceImpl groupProductService;
 
-	List<Integer> choose = new ArrayList<>();
 
 	@Autowired
 	private AprioriServiceImpl aprioriService;
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/single/{id}", method = RequestMethod.GET)
 	public String product(Model model, @PathVariable("id") int id, HttpSession session) {
 		session.removeAttribute("seen");
+		List<Integer> choose = (List<Integer>) session.getAttribute("choose");
 		GroupProduct groupProduct = groupProductService.findProductbyId(id);
 		Set<GroupProduct> seen = new HashSet<>();
-
-		for (int j = 0; j < choose.size(); j++) {
-			if (id == choose.get(j)) {
-				choose.remove(j);
+		if(choose!=null){
+			for (int j = 0; j < choose.size(); j++) {
+				if (id == choose.get(j)) {
+					choose.remove(j);
+				}
+			}			
+			if (choose.size() > 2) {
+				choose.remove(0);
+				
 			}
-		}
-		if (choose.size() > 2) {
-			choose.remove(0);
-
+		}else {
+			choose = new ArrayList<>();
 		}
 
 		choose.add(id);
+		session.setAttribute("choose", choose);
 		for (int i = 0; i < choose.size(); i++) {
 			GroupProduct g = groupProductService.findProductbyId(choose.get(i));
 			seen.add(g);

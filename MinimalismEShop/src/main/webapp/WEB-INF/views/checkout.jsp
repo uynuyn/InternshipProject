@@ -108,6 +108,17 @@
 												</p>
 											</div>
 										</spring:bind>
+										
+										<spring:bind path="note">
+												<p id="billing_note_field"
+													class="form-row form-row-last validate-required validate-note">
+													<label class="" for="billing_note">Note
+													</label>
+													<form:input path="note" type="text" value=""
+														placeholder="" id="billing_note" name="billing_note"
+														class="input-text " />
+												</p>
+										</spring:bind>
 
 										<div class="clear"></div>
 									</div>

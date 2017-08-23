@@ -21,6 +21,7 @@ public class CheckoutDto {
 	
 	private String addressCity;
 
+	private String note;
 	public Integer getId() {
 		return id;
 	}
@@ -91,6 +92,14 @@ public class CheckoutDto {
 
 	public void setAddressCity(String addressCity) {
 		this.addressCity = addressCity;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 }

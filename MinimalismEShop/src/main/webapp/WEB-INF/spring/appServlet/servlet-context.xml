@@ -161,6 +161,8 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/admin" />
+			<mapping path="/admins/**" />
+			<mapping path="/delivery/**" />
 			<exclude-mapping path="/login"/>
 			<beans:bean class="com.minimalism.shop.cmn.interceptor.AdminInterceptor" />
 		</interceptor>

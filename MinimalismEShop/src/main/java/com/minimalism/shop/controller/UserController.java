@@ -3,6 +3,7 @@ package com.minimalism.shop.controller;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,21 +57,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/verify", method = RequestMethod.GET)
-	public String verify(HttpSession session) {
+	public String verify(HttpSession session, HttpServletResponse response){
 		int rand = new Random().nextInt(100000);
 		User user = (User) session.getAttribute("verify");
 		StringBuilder message = new StringBuilder();
-		message.append("Xin chào bạn "+ user.getUsername()+". \n");
-		message.append("\n");
-		message.append("Cảm ơn bạn đã quan tâm đến cửa hàng của chúng tôi. \n");
-		message.append("Mã xác nhận tài khoản của bạn là : " + rand + " . \n");
-		message.append("\n");
-		message.append("\n");
-		message.append("\n");
-		message.append("------------------------------------------\n");
-		message.append("\n");
-		message.append("\n");
+		
+		message.append(
+				"<p style='font-size:36px;'><img src='cid:identifier1234' width='90' height='90'>"
+				+ "Xin chào bạn "+ user.getUsername()+"</p>");
+		message.append("<h2 style='color: #262626'>Cảm ơn bạn đã quan tâm đến cửa hàng của chúng tôi.</h2>");
+		message.append("<h2 style='color: #999999'>Mã xác nhận tài khoản của bạn là : <i style='color: #FF6666;'>" + rand + " </i>.</h2>");
+		message.append("<hr>");
 		message.append("Minimalism Shop xin chân thành cảm ơn");
+		
 		userService.sendMail(user.getEmail(), message.toString());
 		user.setSalt(rand);
 		session.setAttribute("verify", user);
@@ -110,7 +109,6 @@ public class UserController {
 		if (result.hasErrors()) {
 			model.addAttribute("userFormLogin" , new User());
 	    }
-		
 		User results = userService.loginUser(users);
 		if (!Common.checkNullandBlank(results)) {
 			session.setAttribute("users", results);
@@ -119,6 +117,7 @@ public class UserController {
 				return "redirect:/checkout";
 			}else {
 				String isadmin = (String) session.getAttribute("admin");
+
 				if("isadmin".equals(isadmin)){
 					return "redirect:/admin";
 				}

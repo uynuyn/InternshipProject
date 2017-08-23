@@ -67,16 +67,9 @@ public class DeliveryController {
 		checkinService.update(order);
 //		goi mail cho khách hàng thong bao da chuyen hang
 		StringBuilder message = new StringBuilder();
-		message.append("Xin chào bạn "+ order.getUser().getFirstname()+ " " + order.getUser().getFirstname()+". \n");
-		message.append("\n");
-		message.append("Giao hàng thành công . \n");
-		message.append("\n");
-		message.append("Đơn hàng đã giao thành công \n");
-		message.append("\n");
-		message.append("------------------------------------------\n");
-		message.append("\n");
-		message.append("\n");
-		message.append("\n");
+		message.append("<p style='font-size:36px;'><img src='cid:identifier1234' width='90' height='90'> Xin chào bạn "+ order.getUser().getFirstname()+ " " + order.getUser().getFirstname()+". </p><br>");
+		message.append("<h2 style='color: #262626'>Đơn hàng đang được giao thành công. </h2><br>");
+		message.append("<hr>");
 		message.append("Minimalism Shop xin chân thành cảm ơn");
 		userService.sendMail(order.getUser().getEmail(), message.toString());
 		model.addAttribute("notification", "delivery");

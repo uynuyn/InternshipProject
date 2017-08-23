@@ -11,6 +11,7 @@ public class OrderProduct {
 	private String address;
 	private Date date;
 	private Double subtotal;
+	private String note;
 	private List<ProductDto> lstProduct;
 	public int getId() {
 		return id;
@@ -59,6 +60,12 @@ public class OrderProduct {
 	}
 	public void setLstProduct(List<ProductDto> lstProduct) {
 		this.lstProduct = lstProduct;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 	
 

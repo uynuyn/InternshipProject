@@ -10,10 +10,13 @@
 	<div id="page-wrapper">
 		<div id="page-inner">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-9">
 					<h2>Admin Dashboard</h2>
 					<h5>Welcome ${u.username } , Love to see you back.</h5>
 				</div>
+				<c:set value="${delivery }" var="d"/>
+				<c:choose>
+				<c:when test="${d eq 'delivery' }">
 				<div class="col-md-3">
 					<div class="panel panel-back noti-box">
 						<spring:url value="/delivery/list-order" var="listPackage"></spring:url>
@@ -30,6 +33,8 @@
 						</div>
 					</div>
 				</div>
+				</c:when>
+				<c:otherwise>
 				<div class="col-md-3">
 					<div class="panel panel-back noti-box">
 						<spring:url value="/admins/list-order" var="listOrder"></spring:url>
@@ -49,6 +54,10 @@
 
 					</div>
 				</div>
+				</c:otherwise>
+				</c:choose>
+				
+				
 			</div>
 			<!-- /. ROW  -->
 			<hr />
@@ -79,3 +88,4 @@
 </div>
 
 </div>	
+

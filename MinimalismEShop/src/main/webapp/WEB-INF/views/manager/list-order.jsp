@@ -82,7 +82,7 @@
 										<spring:url value="/${delivery }/view-product-order/${order.id }" var="o"></spring:url>
 									</c:when>
 									<c:otherwise>
-										<spring:url value="/view-product-order/${order.id }" var="o"></spring:url>
+										<spring:url value="/admins/view-product-order/${order.id }" var="o"></spring:url>
 									</c:otherwise>
 								</c:choose>
 

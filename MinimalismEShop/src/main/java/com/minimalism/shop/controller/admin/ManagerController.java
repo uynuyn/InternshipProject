@@ -8,10 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,7 +35,6 @@ import com.minimalism.shop.cmn.service.impl.GroupProductServiceImpl;
 import com.minimalism.shop.cmn.service.impl.ProductServiceImpl;
 import com.minimalism.shop.cmn.validator.ProductValidator;
 import com.minimalism.shop.dto.AddGroupProductDto;
-import com.minimalism.shop.dto.AprioriList;
 import com.minimalism.shop.entities.Category;
 import com.minimalism.shop.entities.GroupProduct;
 import com.minimalism.shop.entities.Order;
@@ -59,6 +55,7 @@ public class ManagerController {
 	@Autowired private ProductValidator productValidator;
 	
 	@Autowired private DepartmentServiceImpl departmentService;
+	
 	
 	AddGroupProductDto productDto = new AddGroupProductDto();
 	
