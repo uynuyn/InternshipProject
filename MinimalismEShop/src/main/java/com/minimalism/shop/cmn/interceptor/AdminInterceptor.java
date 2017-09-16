@@ -25,7 +25,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		String url = request.getRequestURI();
 
-		if (url.contains("admin") || url.contains("delivery")) {
+		if (url.contains("admin") || url.contains("del 	ivery")) {
 			session.setAttribute("admin", "isadmin");
 			if (session.getAttribute("users") == null) {
 				response.sendRedirect("/shop/login");
