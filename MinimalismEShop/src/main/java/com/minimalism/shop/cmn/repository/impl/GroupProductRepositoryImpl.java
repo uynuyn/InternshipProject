@@ -46,9 +46,11 @@ public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct,
 	@Override
 	public GroupProduct findProductbyId(int id) {
 		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(GroupProduct.class).add(Restrictions.eq("id", id));
+		Criteria criteria = session.createCriteria(GroupProduct.class).add(Restrictions.idEq(id));
 		GroupProduct groupProduct = (GroupProduct) criteria.uniqueResult();
 		Hibernate.initialize(groupProduct.getCategory().getDepartment());
+		System.out.println("##############################");
+		System.out.println("######" + groupProduct.getCategory().getCode());
 		Hibernate.initialize(groupProduct.getProducts());
 		session.close();
 		return groupProduct;

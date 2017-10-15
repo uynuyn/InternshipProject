@@ -17,6 +17,8 @@
 	rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,100'
 	rel='stylesheet' type='text/css'>
+<link rel="icon" href="<c:url value = '/resources/img/logoSky.png'/>" type="image/gif" sizes="16x16">
+
 
 <!-- Bootstrap -->
 <link rel="stylesheet"
@@ -33,4 +35,6 @@
 <link rel="stylesheet"
 	href="<c:url value = '/resources/css/responsive.css'/>">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
+<meta name="google-signin-scope" content="profile email">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="1038141482935-nsqv4occ1o6ouis42sddik8e3785bipp.apps.googleusercontent.com">

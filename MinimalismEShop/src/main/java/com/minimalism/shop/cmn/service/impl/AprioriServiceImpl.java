@@ -40,16 +40,15 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 	}
 
 	public void findAllList() {
-		getDatabase();
 		c = new ArrayList<Tuple>();
 		// chứa phần tử lập lại bao nhiêu lần của  mảng
 		l = new HashSet<Tuple>();
 		// chứa giá tri sau khi so min sup(biến tạm)
 		all = new ArrayList<Tuple>();
 		// chứa tất cả thỏa min sup
+		getDatabase();
 		int i, j;
 		Set<Integer> candidate_set = new HashSet<Integer>();
-		// không có gia tri  lập lại
 		for (i = 0; i < d.length; i++) {
 			for (j = 0; j < d[i].length; j++) {
 				candidate_set.add(d[i][j]);
@@ -323,7 +322,6 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 			temp.add(object);
 			maps.put(list_no, temp);
 		}
-		// bao nhieu hóa don
 		Set<Integer> keyset = maps.keySet();
 		d = new int[keyset.size()][];
 		Iterator<Integer> iterator = keyset.iterator();

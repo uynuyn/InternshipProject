@@ -126,7 +126,7 @@
 	</beans:bean>
 
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager"  />
 
 	<!-- set max size upload -->
 	<beans:bean id="multipartResolver"

@@ -27,6 +27,9 @@
 				<div class="modal-header">
 					<h2 class="form-signin-heading">Please sign in</h2>
 				</div>
+				<div class="modal-header">
+					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="myP"></div>
+				</div>
 				<spring:url value="/login" var="login"></spring:url>
 				<form:form action="${login }" method="post"
 					modelAttribute="userFormLogin">
@@ -98,3 +101,8 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+      function onSignIn(googleUser) {
+      window.location.href='home';
+      }
+   </script>

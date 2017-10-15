@@ -25,7 +25,8 @@ import com.minimalism.shop.entities.GroupProduct;
 public class SingleProductController {
 	@Autowired
 	private GroupProductServiceImpl groupProductService;
-
+	
+	
 
 	@Autowired
 	private AprioriServiceImpl aprioriService;
@@ -33,16 +34,17 @@ public class SingleProductController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/single/{id}", method = RequestMethod.GET)
 	public String product(Model model, @PathVariable("id") int id, HttpSession session) {
-		session.removeAttribute("seen");
+		boolean flag = false;
 		List<Integer> choose = (List<Integer>) session.getAttribute("choose");
 		GroupProduct groupProduct = groupProductService.findProductbyId(id);
 		Set<GroupProduct> seen = new HashSet<>();
 		if(choose!=null){
 			for (int j = 0; j < choose.size(); j++) {
-				if (id == choose.get(j)) {
-					choose.remove(j);
+				GroupProduct productChoose= groupProductService.findProductbyId(choose.get(j));
+				if (groupProduct.getCategory().getId() == productChoose.getCategory().getId()) {
+					flag = true;
 				}
-			}			
+			}
 			if (choose.size() > 2) {
 				choose.remove(0);
 				
@@ -50,20 +52,20 @@ public class SingleProductController {
 		}else {
 			choose = new ArrayList<>();
 		}
-
 		choose.add(id);
 		session.setAttribute("choose", choose);
 		for (int i = 0; i < choose.size(); i++) {
 			GroupProduct g = groupProductService.findProductbyId(choose.get(i));
 			seen.add(g);
 		}
-
 		List<GroupProduct> groupProducts = new ArrayList<GroupProduct>();
 		List<AprioriList> list = aprioriService.aprioriLists();
 		Set<Integer> integers = new HashSet<>();
-		
-		
-		for (AprioriList aprioriList : list) {
+		if(flag){
+			groupProducts = groupProductService.findProductbyCategory(groupProduct.getCategory().getId());
+		}
+		else{
+			for (AprioriList aprioriList : list) {
 			int count = 0;
 			boolean containsElement = false;
 			for (int integer = 0; integer < choose.size(); integer++) {
@@ -89,21 +91,20 @@ public class SingleProductController {
 		
 		int k=1;
 		while(k<choose.size()){
-		if (integers.isEmpty() || integers.size() == 0) {
-			for (AprioriList aprioriList : list) {
-				if (aprioriList.getVetrai().size() == 1) {
-
-					if (aprioriList.getVetrai().get(0).equals(choose.get(choose.size() - k))) {
-						for (int i = 0; i < aprioriList.getVephai().size(); i++) {
-							integers.add(aprioriList.getVephai().get(i));
+			if (integers.isEmpty() || integers.size() == 0) {
+				for (AprioriList aprioriList : list) {
+					if (aprioriList.getVetrai().size() == 1) {
+						if (aprioriList.getVetrai().get(0).equals(choose.get(choose.size() - k))) {
+							for (int i = 0; i < aprioriList.getVephai().size(); i++) {
+								integers.add(aprioriList.getVephai().get(i));
+							}
 						}
 					}
 				}
+			}else{
+				break;
 			}
-		}else{
-			break;
-		}
-		k++;
+			k++;
 		}
 		Iterator<Integer> iterator = integers.iterator();
 		while (iterator.hasNext()) {
@@ -112,7 +113,7 @@ public class SingleProductController {
 				GroupProduct groupProducta = groupProductService.findProductbyId(i);
 				groupProducts.add(groupProducta);
 			}
-		}
+		}}
 
 		model.addAttribute("relatedProduct", groupProducts);
 		session.setAttribute("seen", seen);
@@ -129,8 +130,8 @@ public class SingleProductController {
 
 	}
 
-	public void relatedProduct(Model model) {
-
-	}
+//	public void relatedProduct(Model model) {
+//
+//	}
 
 }

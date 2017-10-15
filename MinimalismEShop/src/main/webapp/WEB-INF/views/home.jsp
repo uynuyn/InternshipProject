@@ -127,7 +127,11 @@
 										style="width: 200pt; height: 220pt;">
 									<div class="product-hover">
 										<a href="#" class="add-to-cart-link" id="${p.id }"><i
-											class="fa fa-shopping-cart"></i> Add to cart</a> <a
+											class="fa fa-shopping-cart"></i>
+											Add to cart
+										</a> 
+											
+											<a
 											href="<spring:url value='/product/single/${p.id }'/>"
 											class="view-details-link"><i class="fa fa-link"></i> See
 											details</a>
