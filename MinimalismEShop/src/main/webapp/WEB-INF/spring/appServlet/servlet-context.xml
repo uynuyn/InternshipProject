@@ -2,10 +2,18 @@
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -33,26 +41,28 @@
 			<beans:value>1048576</beans:value>
 		</beans:property>
 	</beans:bean>
+	
+	<!-- <beans:bean	class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+ 		<beans:property name="loginFormUrl" value="/oauthlogin.jsp"/>
+	</beans:bean>
 
-	<!--  <security:http auto-config="true" >
-        <security:intercept-url pattern="/" access="permitAll" />
-        <security:intercept-url pattern="/home" access="permitAll" />
-        <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
-        <security:form-login  login-page="/login"
-                     username-parameter="username"
-                     password-parameter="password"
-                     authentication-failure-url="/home" />
-        <security:csrf/>
-    </security:http>
-  
-    <security:authentication-manager >
-        <security:authentication-provider user-service-ref="userDetailsService"/>
-    </security:authentication-manager>
-      
-    <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-  
-    <beans:bean id="customUserDetailsService" class="com.minimalism.shop.cmn.service.impl.MyUserDetailsService" />
-      -->
+	<beans:bean id="springSocialSecurityRememberMeServices"
+		class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+		<beans:property name="userDetailsService" ref="springSocialSecurityUserDetailsService" />
+		<beans:property name="tokenRepository" ref="tokenRepository" />
+		<beans:property name="key" value="springSocialSecurity" />
+		<beans:property name="alwaysRemember" value="true" />
+		<beans:property name="tokenValiditySeconds" value="3600" />
+	</beans:bean>
+ -->
+
+<!-- 	<beans:bean id="tokenRepository"
+		class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+		<beans:property name="createTableOnStartup" value="true" />
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean> -->
+	
+	
 	
 
 	<!-- Tiles -->
@@ -150,7 +160,7 @@
 			<beans:bean class="com.minimalism.shop.cmn.interceptor.AuthenticateInterceptor" />
 		</interceptor>
 	</interceptors>
-	<interceptors>
+<!-- 	<interceptors>
 		<interceptor>
 			<mapping path="/login" />
 			<mapping path="/register"/>
@@ -166,7 +176,7 @@
 			<exclude-mapping path="/login"/>
 			<beans:bean class="com.minimalism.shop.cmn.interceptor.AdminInterceptor" />
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 	<!-- Production implementation of the JavaMailSender interface, supporting 
 		both JavaMail MimeMessages and Spring SimpleMailMessages -->
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

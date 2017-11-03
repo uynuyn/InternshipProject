@@ -9,8 +9,19 @@
 		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>/WEB-INF/spring/root-context.xml
+		/WEB-INF/spring/appServlet/security-config.xml
+		</param-value>
 	</context-param>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy	</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -31,11 +42,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- <filter> <filter-name>springSecurityFilterChain</filter-name> <filter-class> 
-		org.springframework.web.filter.DelegatingFilterProxy </filter-class> </filter> 
-		<filter-mapping> <filter-name>springSecurityFilterChain</filter-name> <url-pattern>/*</url-pattern> 
-		</filter-mapping> -->
-
 	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/500.jsp</location>
@@ -45,20 +51,5 @@
 	<session-config>
 		<session-timeout>3600</session-timeout>
 	</session-config>
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	
 </web-app> 

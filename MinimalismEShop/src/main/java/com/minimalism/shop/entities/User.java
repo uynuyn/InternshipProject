@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -44,7 +46,7 @@ public class User implements Serializable {
 
 	private Integer point;
 
-	private Integer salt;
+	private Role idRole;
 
 	private String addressStreet;
 
@@ -135,13 +137,14 @@ public class User implements Serializable {
 	public void setPoint(Integer point) {
 		this.point = point;
 	}
-
-	public Integer getSalt() {
-		return salt;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idRole")
+	public Role getIdRole() {
+		return idRole;
 	}
 
-	public void setSalt(Integer salt) {
-		this.salt = salt;
+	public void setIdRole(Role idRole) {
+		this.idRole = idRole;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

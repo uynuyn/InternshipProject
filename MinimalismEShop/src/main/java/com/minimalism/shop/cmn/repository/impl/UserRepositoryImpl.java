@@ -1,8 +1,9 @@
 package com.minimalism.shop.cmn.repository.impl;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,15 +22,19 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, Integer> implem
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public User findUserbyUsernameEmail(String username, String email) {
+	public boolean findUserbyUsernameEmail(String username, String email) {
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from User user where user.username = :username or user.email = :email");
-		query.setParameter("username", username);
-		query.setParameter("email", email);
-		User user =  (User) query.uniqueResult();
+		Criteria criteria = session.createCriteria(User.class)
+				.add(Restrictions.or(Restrictions.eq("username", username),Restrictions.eq("email", email)));
+		List<User> user =  criteria.list();
+		System.out.println(user.size());
 		session.close();
-		return user;
+		if(user.size()>0){
+			return true;
+		}
+		return false;
 	}
 
 	/*@Override
@@ -54,7 +59,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, Integer> implem
 				.add(Restrictions.eq("username", user.getUsername()));
 		User users = (User) criteria.uniqueResult();
 		if(!Common.checkNullandBlank(users)){
-			user.setPassword(Common.passEncode(user.getPassword(), users.getSalt()));
+			//user.setPassword(Common.passEncode(user.getPassword(), users.getSalt()));
 			if(user.getPassword().equals(users.getPassword())){
 				return users;
 			}

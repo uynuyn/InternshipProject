@@ -51,10 +51,21 @@ public class HomeController {
 		getProductTop(model);
 		getAllListProduct(session);
 		aprioriService.findAllList();
+		
 		return "common/home";
 	}
 	
+	@RequestMapping(value = "/login/google", method = RequestMethod.GET)
+	public String loginGoogle() {
+		return "login/google";
+	}
 	
+	@RequestMapping(value = "/login/google", method = RequestMethod.POST)
+	public String loginGoogle(Model model, HttpSession session) {
+		String user = (String) session.getAttribute("gogo");
+		System.out.println(user);
+		return "common/home";
+	}
 	
 
 }

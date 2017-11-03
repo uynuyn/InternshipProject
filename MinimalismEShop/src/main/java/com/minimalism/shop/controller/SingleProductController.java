@@ -129,9 +129,4 @@ public class SingleProductController {
 		return arrList;
 
 	}
-
-//	public void relatedProduct(Model model) {
-//
-//	}
-
 }

@@ -5,8 +5,12 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +32,9 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
+	
 	@Autowired private UserValidator userValidator;
 	
 	@InitBinder
@@ -43,10 +50,9 @@ public class UserController {
 		if (result.hasErrors()) {
 			return "register";
 	    }
-		User oldUser = new User();
 		
-		oldUser = userService.findUserbyUsernameEmail(users.getUsername(), users.getEmail());
-		if(Common.checkNullandBlank(oldUser)){// if check = true allow save user
+		boolean oldUser = userService.findUserbyUsernameEmail(users.getUsername(), users.getEmail());
+		if(!oldUser){// if check = true allow save user
 			session.setAttribute("verify", users);
 			
 			return "redirect:/verify";
@@ -71,19 +77,24 @@ public class UserController {
 		message.append("Minimalism Shop xin chân thành cảm ơn");
 		
 		userService.sendMail(user.getEmail(), message.toString());
-		user.setSalt(rand);
+		user.setPoint(rand);
 		session.setAttribute("verify", user);
 		return "verify";
 	}
+	/**
+	 * @param session
+	 * @param model
+	 * @param verify
+	 * @return
+	 */
+	
 	@RequestMapping(value = "/verify", method = RequestMethod.POST)
 	public String verify(HttpSession session,Model model, @RequestParam("verify") String verify) {
 		
 		User user = (User) session.getAttribute("verify");
 		session.removeAttribute("verify");
-		if(verify.trim().equals(String.valueOf(user.getSalt()))){
-			int salt = new Random().nextInt(100000);
-			user.setSalt(salt);
-			user.setPassword(Common.passEncode(user.getPassword(),user.getSalt()));
+		if(verify.trim().equals(String.valueOf(user.getPoint()))){
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			user = userService.save(user);
 			if(user!=null){
 				session.setAttribute("users", user);
@@ -100,7 +111,7 @@ public class UserController {
 		return "register";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request,
 			@ModelAttribute("userFormLogin") @Validated  User users,
 			final BindingResult result,
@@ -127,17 +138,30 @@ public class UserController {
 		
 		model.addAttribute("fail", true);
 		return "login";
-	}
+	}*/
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Model model,HttpSession session) {
-		session.removeAttribute("users");
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
 		return "redirect:/home";
 	}
+	public String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+ 
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model){
-		model.addAttribute("userFormLogin" , new User());
 		return "login";
 	}
 	

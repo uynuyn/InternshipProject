@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.minimalism.shop.cmn.base.BaseServiceImpl;
@@ -23,9 +24,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 
 	@Autowired
 	private JavaMailSenderImpl javaMailSender;
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
 	@Override
-	public User findUserbyUsernameEmail(String username, String email) {
+	public boolean findUserbyUsernameEmail(String username, String email) {
 		// TODO Auto-generated method stub
 		return userRepository.findUserbyUsernameEmail(username, email);
 	}
@@ -39,6 +43,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	@Override
 	public User updateUser(User user) {
 		// TODO Auto-generated method stub
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.updateUser(user);
 	}
 
