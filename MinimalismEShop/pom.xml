@@ -45,7 +45,7 @@
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -80,6 +80,12 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.23.0</version>
+		</dependency>
 
 		<!-- Spring Security -->
 		<dependency>
