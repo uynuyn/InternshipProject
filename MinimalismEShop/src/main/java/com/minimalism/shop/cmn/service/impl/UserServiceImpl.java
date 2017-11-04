@@ -1,14 +1,11 @@
 package com.minimalism.shop.cmn.service.impl;
 
-import java.io.File;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.minimalism.shop.cmn.base.BaseServiceImpl;
@@ -25,8 +22,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	@Autowired
 	private JavaMailSenderImpl javaMailSender;
 	
-	@Autowired
-    private PasswordEncoder passwordEncoder;
 
 	@Override
 	public boolean findUserbyUsernameEmail(String username, String email) {
@@ -43,7 +38,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	@Override
 	public User updateUser(User user) {
 		// TODO Auto-generated method stub
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.updateUser(user);
 	}
 
@@ -57,7 +51,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 			helper.setSubject("Minimalism Shop");
 			helper.setTo(mail);
 			helper.setText(message, true);
-			helper.addInline("identifier1234", new File("C:/Users/thucu/Desktop/Working/InternshipProject/logoSky.png"));
 
 			javaMailSender.send(messages);
 		

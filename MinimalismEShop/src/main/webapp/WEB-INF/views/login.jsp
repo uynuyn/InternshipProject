@@ -42,12 +42,12 @@
 						<div class="form-group ${status.error ? 'has-error' : ''}">
 							<label class="sr-only" for="inputUserName">User name</label>
 							<input type="text" placeholder="User name"
-								name="username" class="form-control setfontinput"
+								name="inputUserName" class="form-control setfontinput"
 								id="inputUserName" /> 
 						</div>				
 						<div class="form-group ${status.error ? 'has-error' : ''}">
 							<label class="sr-only" for="inputPassword">Password</label>
-							<input type="password" name="password" placeholder="Password"
+							<input type="password" name="inputPassword" placeholder="Password"
 								class="form-control setfontinput" id="inputPassword" />
 						</div>
 						<input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />

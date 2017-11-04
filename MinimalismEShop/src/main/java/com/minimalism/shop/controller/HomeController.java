@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,10 @@ import com.minimalism.shop.cmn.base.Common;
 import com.minimalism.shop.cmn.service.impl.AprioriServiceImpl;
 import com.minimalism.shop.cmn.service.impl.DepartmentServiceImpl;
 import com.minimalism.shop.cmn.service.impl.GroupProductServiceImpl;
+import com.minimalism.shop.cmn.service.impl.UserServiceImpl;
 import com.minimalism.shop.entities.Department;
 import com.minimalism.shop.entities.GroupProduct;
+import com.minimalism.shop.entities.User;
 
 @Controller
 public class HomeController {
@@ -27,6 +30,8 @@ public class HomeController {
 	@Autowired private DepartmentServiceImpl departmentService;
 	
 	@Autowired private AprioriServiceImpl aprioriService;
+	
+	@Autowired private UserServiceImpl userService;
 	
 	@PostConstruct
 	public void homeController(){
@@ -51,7 +56,14 @@ public class HomeController {
 		getProductTop(model);
 		getAllListProduct(session);
 		aprioriService.findAllList();
-		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof org.springframework.security.core.userdetails.User) {
+			org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) principal;
+			String name = user.getUsername(); // get logged in username
+			User user2 = new User();
+			user2 = userService.findUserbyUsername(name);
+			session.setAttribute("users", user2);
+		}
 		return "common/home";
 	}
 	
