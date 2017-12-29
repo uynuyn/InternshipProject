@@ -11,15 +11,6 @@
                         <p>&copy; Học viện công nghệ bưu chính viễn thông <i class="fa fa-heart"></i> by <a href="#" target="_blank">Trần Thục Uyên</a></p>
                     </div>
                 </div>
-                
-                <div class="col-md-4">
-                    <div class="footer-card-icon">
-                        <i class="fa fa-cc-discover"></i>
-                        <i class="fa fa-cc-mastercard"></i>
-                        <i class="fa fa-cc-paypal"></i>
-                        <i class="fa fa-cc-visa"></i>
-                    </div>
-                </div>
             </div>
         </div>
     </div> <!-- End footer bottom area -->

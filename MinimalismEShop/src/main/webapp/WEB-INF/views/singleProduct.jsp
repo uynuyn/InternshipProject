@@ -204,6 +204,35 @@
 							</c:forEach>
 						</div>
 					</div>
+					<div class="related-products-wrapper">
+						<h2 class="related-products-title">Sponsored products related to this item</h2>
+						<div class="related-products-carousel">
+							<c:forEach items="${sponsoredRelatedProduct }" var="sr" varStatus="i">
+								<div class="single-product">
+									<div class="product-f-image">
+										<img src="<c:url value ='${sr.imge }'/>" alt=""
+											style="width: 200pt; height: 250pt;">
+										<div class="product-hover">
+											<a href="" class="add-to-cart-link"><i
+												class="fa fa-shopping-cart"></i> Add to cart</a> 
+												<a
+												href="<spring:url value='/product/single/${sr.id }'/>"
+												class="view-details-link"><i class="fa fa-link"></i> See
+												details</a>
+										</div>
+									</div>
+
+									<h2>
+										<a href="">${sr.name } ${i.index }</a>
+									</h2>
+
+									<div class="product-carousel-price">
+										<i><fmt:formatNumber value="${sr.price }" type="currency" minFractionDigits="0" /></i>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -229,6 +258,7 @@
 		</div>
 	</div>
     <script>
+    document.title = '<c:out value ="${p.name }"/>';
 $(document).ready(function(){
     $(".addProduct").click(function(event){
 		var id = $(this).attr('id');

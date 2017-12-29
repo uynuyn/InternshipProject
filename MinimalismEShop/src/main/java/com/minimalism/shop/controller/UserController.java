@@ -93,6 +93,7 @@ public class UserController {
 		session.removeAttribute("verify");
 		if (verify.trim().equals(String.valueOf(user.getPoint()))) {
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			user.setPoint(0);
 			user = userService.save(user);
 			if (user != null) {
 				session.setAttribute("users", user);
@@ -139,8 +140,8 @@ public class UserController {
 		return "redirect:/home";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model, HttpSession session) {
+	@RequestMapping(value = "/login", method =  RequestMethod.GET)
+	public String login() {
 		
 		return "login";
 	}

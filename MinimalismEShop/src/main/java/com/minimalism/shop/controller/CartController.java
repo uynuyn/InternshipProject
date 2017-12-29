@@ -1,5 +1,7 @@
-package com.minimalism.shop.controller;
+ package com.minimalism.shop.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +58,12 @@ public class CartController {
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String checkout(Model model, HttpSession session) {
 		model.addAttribute("checkoutForm" , new CheckoutDto());
+		List<Integer> years = new ArrayList<>();
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		for (int i = year-5; i>= year - 100; i--){
+			years.add(i);
+		}
+		model.addAttribute("years", years);
 		session.removeAttribute("checkout");
 		return "common/checkout";
 	}
@@ -76,6 +84,7 @@ public class CartController {
 		user.setAddressStreet(checkoutDto.getAddressStreet());
 		user.setAddressSuite(checkoutDto.getAddressSuite());
 		user.setAddressCity(checkoutDto.getAddressCity());
+		user.setYears(1993);
 		userService.updateUser(user);
 		
 		
@@ -105,29 +114,29 @@ public class CartController {
 
 			}
 			
-//			goi mail cho khách hàng thong bao dat hang
-			StringBuilder message = new StringBuilder();
-			message.append("<p style='font-size:36px;'><img src='cid:identifier1234' width='90' height='90'> Xin chào bạn "+ user.getFirstname()+ " " + user.getFirstname()+".</p><br>");
-			message.append("<h2 style='color: #999999'>Cảm ơn bạn đã quan tâm đến cửa hàng của chúng tôi. </h2><br>");
-			message.append("<h2 style='color: #262626'>Chúng tôi sẽ giải quyết đơn hàng của bạn và giao đến ban sớm nhất. </h2><br>");
-			message.append("<hr>");
-			message.append("Minimalism Shop xin chân thành cảm ơn");
-			userService.sendMail(user.getEmail(), message.toString());
-//			goi mail cho admin thong bao dat hang
-			StringBuilder messageAdmin = new StringBuilder();
-			messageAdmin.append("Hệ thống đã tiếp nhận đơn hàng của bạn "+ user.getFirstname()+ " " + user.getFirstname()+". <br>");
-			messageAdmin.append("Vui lòng vào hệ thống kiểm tra hàng. <br>");
-			messageAdmin.append("<br>");
-			messageAdmin.append("<br>");
-			messageAdmin.append("<hr>");
-			messageAdmin.append("<br>");
-			messageAdmin.append("Minimalism Shop xin chân thành cảm ơn");
-			userService.sendMail(Common.mailAdmin, messageAdmin.toString());
+////			goi mail cho khách hàng thong bao dat hang
+//			StringBuilder message = new StringBuilder();
+//			message.append("<p style='font-size:36px;'><img src='cid:identifier1234' width='90' height='90'> Xin chào bạn "+ user.getFirstname()+ " " + user.getFirstname()+".</p><br>");
+//			message.append("<h2 style='color: #999999'>Cảm ơn bạn đã quan tâm đến cửa hàng của chúng tôi. </h2><br>");
+//			message.append("<h2 style='color: #262626'>Chúng tôi sẽ giải quyết đơn hàng của bạn và giao đến ban sớm nhất. </h2><br>");
+//			message.append("<hr>");
+//			message.append("Minimalism Shop xin chân thành cảm ơn");
+//			userService.sendMail(user.getEmail(), message.toString());
+////			goi mail cho admin thong bao dat hang
+//			StringBuilder messageAdmin = new StringBuilder();
+//			messageAdmin.append("Hệ thống đã tiếp nhận đơn hàng của bạn "+ user.getFirstname()+ " " + user.getFirstname()+". <br>");
+//			messageAdmin.append("Vui lòng vào hệ thống kiểm tra hàng. <br>");
+//			messageAdmin.append("<br>");
+//			messageAdmin.append("<br>");
+//			messageAdmin.append("<hr>");
+//			messageAdmin.append("<br>");
+//			messageAdmin.append("Minimalism Shop xin chân thành cảm ơn");
+//			userService.sendMail(Common.mailAdmin, messageAdmin.toString());
 			
 			if(size>1){
 				Involve involve = new Involve();
-				involve.setIdType(order.getId());
-				involve.setIdInvolve(groupProduct.getId());
+				involve.setOrder(order);
+				involve.setGroupProduct(groupProduct);
 				aprioriService.save(involve);
 			}
 			//kiểm tra sản phẩm còn không nếu không bật cờ 

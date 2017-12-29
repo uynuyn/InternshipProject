@@ -25,8 +25,6 @@ import com.minimalism.shop.entities.GroupProduct;
 public class SingleProductController {
 	@Autowired
 	private GroupProductServiceImpl groupProductService;
-	
-	
 
 	@Autowired
 	private AprioriServiceImpl aprioriService;
@@ -34,89 +32,98 @@ public class SingleProductController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/single/{id}", method = RequestMethod.GET)
 	public String product(Model model, @PathVariable("id") int id, HttpSession session) {
-		boolean flag = false;
+//		boolean flag = false;
 		List<Integer> choose = (List<Integer>) session.getAttribute("choose");
+//		List<GroupProduct> habitProduct = (List<GroupProduct>) session.getAttribute("habitProduct");;
 		GroupProduct groupProduct = groupProductService.findProductbyId(id);
 		Set<GroupProduct> seen = new HashSet<>();
-		if(choose!=null){
-			for (int j = 0; j < choose.size(); j++) {
-				GroupProduct productChoose= groupProductService.findProductbyId(choose.get(j));
-				if (groupProduct.getCategory().getId() == productChoose.getCategory().getId()) {
-					flag = true;
-				}
-			}
+		if (choose != null) {
+//			for (int j = 0; j < choose.size(); j++) {
+//				GroupProduct productChoose = groupProductService.findProductbyId(choose.get(j));
+//				if (groupProduct.getCategory().getId() == productChoose.getCategory().getId()) {
+//					flag = true;
+//				}
+//			}
 			if (choose.size() > 2) {
 				choose.remove(0);
-				
+
 			}
-		}else {
+		} else {
 			choose = new ArrayList<>();
 		}
-		choose.add(id);
-		session.setAttribute("choose", choose);
+		if (!choose.contains(id)) {
+			choose.add(id);
+			session.setAttribute("choose", choose);
+		}
 		for (int i = 0; i < choose.size(); i++) {
 			GroupProduct g = groupProductService.findProductbyId(choose.get(i));
 			seen.add(g);
 		}
 		List<GroupProduct> groupProducts = new ArrayList<GroupProduct>();
+		List<GroupProduct> sponsoredRelatedProduct = new ArrayList<GroupProduct>();
+
+		sponsoredRelatedProduct = groupProductService.findrRelatedProduct(groupProduct);
 		List<AprioriList> list = aprioriService.aprioriLists();
 		Set<Integer> integers = new HashSet<>();
-		if(flag){
-			groupProducts = groupProductService.findProductbyCategory(groupProduct.getCategory().getId());
-		}
-		else{
-			for (AprioriList aprioriList : list) {
-			int count = 0;
-			boolean containsElement = false;
-			for (int integer = 0; integer < choose.size(); integer++) {
-				for (int i = 0; i < aprioriList.getVetrai().size(); i++) {
-					if (aprioriList.getVetrai().get(i).equals(choose.get(integer))) {
-						containsElement = true;
-						count++;
-						break;
-					}
-				}
-				if (!containsElement) {
-					break;
-				}
-
-			}
-			if (count == choose.size()) {
-				for (int i = 0; i < aprioriList.getVephai().size(); i++) {
-					integers.add(aprioriList.getVephai().get(i));
-				}
-
-			}
-		}
-		
-		int k=1;
-		while(k<choose.size()){
-			if (integers.isEmpty() || integers.size() == 0) {
+//		if (flag) {
+//				groupProducts = groupProductService.findProductbyCategory(groupProduct.getCategory().getId());
+//				
+//		} else {
 				for (AprioriList aprioriList : list) {
-					if (aprioriList.getVetrai().size() == 1) {
-						if (aprioriList.getVetrai().get(0).equals(choose.get(choose.size() - k))) {
-							for (int i = 0; i < aprioriList.getVephai().size(); i++) {
-								integers.add(aprioriList.getVephai().get(i));
+					int count = 0;
+					boolean containsElement = false;
+					for (int integer = 0; integer < choose.size(); integer++) {
+						for (int i = 0; i < aprioriList.getVetrai().size(); i++) {
+							if (aprioriList.getVetrai().get(i).equals(choose.get(integer))) {
+								containsElement = true;
+								count++;
+								break;
 							}
 						}
+						if (!containsElement) {
+							break;
+						}
+
+					}
+					if (count == choose.size()) {
+						for (int i = 0; i < aprioriList.getVephai().size(); i++) {
+							integers.add(aprioriList.getVephai().get(i));
+						}
+
 					}
 				}
-			}else{
-				break;
-			}
-			k++;
-		}
-		Iterator<Integer> iterator = integers.iterator();
-		while (iterator.hasNext()) {
-			int i = iterator.next();
-			if (id != i) {
-				GroupProduct groupProducta = groupProductService.findProductbyId(i);
-				groupProducts.add(groupProducta);
-			}
-		}}
+
+					if (integers.isEmpty() || integers.size() == 0) {
+//						while (k < choose.size()) {
+//						for (AprioriList aprioriList : list) {
+//							if (aprioriList.getVetrai().size() == 1) {
+//								if (aprioriList.getVetrai().get(0).equals(choose.get(choose.size() - k))) {
+//									for (int i = 0; i < aprioriList.getVephai().size(); i++) {
+//										integers.add(aprioriList.getVephai().get(i));
+//									}
+//								}
+//							}
+//						}
+//						k++;
+//						}
+						for (Integer integer : choose) {
+							GroupProduct groupProducta = groupProductService.findProductbyId(integer);
+							groupProducts.add(groupProducta);
+						}
+					} 
+				Iterator<Integer> iterator = integers.iterator();
+				while (iterator.hasNext()) {
+					int i = iterator.next();
+						GroupProduct groupProducta = groupProductService.findProductbyId(i);
+						groupProducts.add(groupProducta);
+					
+				}
+//			}
 
 		model.addAttribute("relatedProduct", groupProducts);
+		model.addAttribute("sponsoredRelatedProduct", sponsoredRelatedProduct);
 		session.setAttribute("seen", seen);
+//		session.setAttribute("habitProduct", habitProduct);
 		model.addAttribute("groupProduct", groupProduct);
 		return "common/products/single";
 	}

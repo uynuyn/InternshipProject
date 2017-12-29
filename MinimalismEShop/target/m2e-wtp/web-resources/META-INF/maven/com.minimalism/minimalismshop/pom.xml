@@ -45,7 +45,7 @@
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -80,6 +80,12 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.23.0</version>
+		</dependency>
 
 		<!-- Spring Security -->
 		<dependency>
@@ -112,9 +118,6 @@
 			<artifactId>spring-security-acl</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
-
-
-
 
 		<!-- String JDBC -->
 		<dependency>
@@ -246,7 +249,56 @@
 			<version>2.3</version>
 		</dependency>
 
-
+<!-- http://mvnrepository.com/artifact/org.springframework.social/spring-social-config -->
+       <dependency>
+           <groupId>org.springframework.social</groupId>
+           <artifactId>spring-social-config</artifactId>
+           <version>1.1.4.RELEASE</version>
+       </dependency>
+ 
+       <!-- http://mvnrepository.com/artifact/org.springframework.social/spring-social-core -->
+       <dependency>
+           <groupId>org.springframework.social</groupId>
+           <artifactId>spring-social-core</artifactId>
+           <version>1.1.4.RELEASE</version>
+       </dependency>
+ 
+       <!-- http://mvnrepository.com/artifact/org.springframework.social/spring-social-security -->
+       <dependency>
+           <groupId>org.springframework.social</groupId>
+           <artifactId>spring-social-security</artifactId>
+           <version>1.1.4.RELEASE</version>
+       </dependency>
+ 
+       <!-- http://mvnrepository.com/artifact/org.springframework.social/spring-social-web -->
+       <dependency>
+           <groupId>org.springframework.social</groupId>
+           <artifactId>spring-social-web</artifactId>
+           <version>1.1.4.RELEASE</version>
+       </dependency>
+       
+       <dependency>
+           <groupId>org.springframework.social</groupId>
+           <artifactId>spring-social-facebook</artifactId>
+           <version>2.0.3.RELEASE</version>
+           <exclusions>
+               <exclusion>
+                   <artifactId>spring-social-core</artifactId>
+                   <groupId>org.springframework.social</groupId>
+               </exclusion>
+               <exclusion>
+                   <artifactId>spring-social-config</artifactId>
+                   <groupId>org.springframework.social</groupId>
+               </exclusion>
+           </exclusions>
+       </dependency>
+       
+       <dependency>
+           <groupId>org.springframework.social</groupId>
+           <artifactId>spring-social-google</artifactId>
+           <version>1.0.0.RELEASE</version>
+       </dependency>
+       
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

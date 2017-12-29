@@ -9,6 +9,7 @@ public class AprioriList {
 	 */
 	private List<Integer> vetrai;
 	private List<Integer> vephai;
+	private float support;
 
 	public AprioriList() {
 	}
@@ -28,5 +29,14 @@ public class AprioriList {
 	public void setVephai(List<Integer> vephai) {
 		this.vephai = vephai;
 	}
+
+	public float getSupport() {
+		return support;
+	}
+
+	public void setSupport(float support) {
+		this.support = support;
+	}
+	
 	
 }

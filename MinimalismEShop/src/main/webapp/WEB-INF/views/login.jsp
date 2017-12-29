@@ -27,7 +27,7 @@
 					<h2 class="form-signin-heading">Please sign in</h2>
 				</div>
 				<spring:url value="/login" var="login"></spring:url>
-				<form action="${login }" method="post">
+				<form action="${login }" method="POST">
 				 <c:if test="${param.error != null}">
                                 <div class="alert alert-danger">
                                     <p>Invalid username and password.</p>
@@ -43,19 +43,19 @@
 							<label class="sr-only" for="inputUserName">User name</label>
 							<input type="text" placeholder="User name"
 								name="inputUserName" class="form-control setfontinput"
-								id="inputUserName" /> 
+								id="inputUserName" autofocus/> 
 						</div>				
 						<div class="form-group ${status.error ? 'has-error' : ''}">
 							<label class="sr-only" for="inputPassword">Password</label>
 							<input type="password" name="inputPassword" placeholder="Password"
 								class="form-control setfontinput" id="inputPassword" />
 						</div>
-						<input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</div>
 					<div class="modal-footer">
 						<spring:url value="/login/google" var="google"></spring:url>
 						<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
-						<a href="${google }" class="btn btn-lg btn-primary">Google</a>
+						<%-- <a href="${google }" class="btn btn-lg btn-primary">Google</a> --%>
 						<button type="button" class="btn btn-lg btn-default"
 							data-dismiss="modal">Cancel</button>
 					</div>
@@ -102,4 +102,6 @@
 			</div>
 		</div>
 	</div>
-	
+	<script>
+	document.title = 'Login';
+	</script>

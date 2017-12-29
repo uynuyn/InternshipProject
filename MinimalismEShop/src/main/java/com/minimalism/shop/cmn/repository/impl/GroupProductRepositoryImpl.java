@@ -1,6 +1,7 @@
 package com.minimalism.shop.cmn.repository.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -49,8 +50,6 @@ public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct,
 		Criteria criteria = session.createCriteria(GroupProduct.class).add(Restrictions.idEq(id));
 		GroupProduct groupProduct = (GroupProduct) criteria.uniqueResult();
 		Hibernate.initialize(groupProduct.getCategory().getDepartment());
-		System.out.println("##############################");
-		System.out.println("######" + groupProduct.getCategory().getCode());
 		Hibernate.initialize(groupProduct.getProducts());
 		session.close();
 		return groupProduct;
@@ -74,9 +73,10 @@ public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<GroupProduct> findListProductTop() {
+	public List<GroupProduct> findListProductTop(Date date) {
 		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(GroupProduct.class).add(Restrictions.eq("endProduct", true)).setFirstResult(0).setMaxResults(9);
+		
+		Criteria criteria = session.createCriteria(GroupProduct.class).add(Restrictions.and(Restrictions.eq("endProduct", true),Restrictions.ge("lastest", date))).setFirstResult(0).setMaxResults(9);
 		List<GroupProduct> list = criteria.list();
 		session.close();
 		return list;
@@ -91,6 +91,37 @@ public class GroupProductRepositoryImpl extends BaseRepositoryImpl<GroupProduct,
 		List<GroupProduct> groupProducts = criteria.list();
 		session.close();
 		
+		return groupProducts;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<GroupProduct> findrRelatedProduct(GroupProduct groupProduct) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		
+		Criteria criteria =  session.createCriteria(GroupProduct.class);
+		criteria.add(Restrictions.eq("category.id", groupProduct.getCategory().getId()));
+		List<GroupProduct> groupProducts = criteria.list();
+		session.close();
+		return groupProducts;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<GroupProduct> findHabitProduct(List<String> list) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(GroupProduct.class);
+		List<GroupProduct> groupProducts = new ArrayList<>();
+		for (String string : list) {
+			criteria.add(Restrictions.like("code", "%"+string+"%"));
+			List<GroupProduct> groupProducts2 = criteria.list();
+			for (GroupProduct groupProduct : groupProducts2){
+				groupProducts.add(groupProduct);
+			}
+		}
+		session.close();
 		return groupProducts;
 	}
 }

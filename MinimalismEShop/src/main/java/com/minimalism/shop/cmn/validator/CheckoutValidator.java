@@ -22,7 +22,8 @@ public class CheckoutValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"username", "NotEmpty.user.username");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"email", "NotEmpty.user.email");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"phone", "NotEmpty.user.phone");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"firstname", "NotEmpty.user.firstname");
+/*		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"years", "NotEmpty.user.year");
+*/		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"firstname", "NotEmpty.user.firstname");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"lastname", "NotEmpty.user.lastname");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"addressStreet", "NotEmpty.user.addressStreet");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"addressSuite", "NotEmpty.user.addressSuite");

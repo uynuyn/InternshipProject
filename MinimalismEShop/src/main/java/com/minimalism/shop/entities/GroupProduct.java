@@ -2,6 +2,7 @@ package com.minimalism.shop.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,8 +37,9 @@ public class GroupProduct implements Serializable {
 	private String imge;
 	private int price;
 	private Boolean isSpecial;
-	private Boolean isLastest;
+	private Date lastest;
 	private String code;
+	private Integer point;
 	@Transient
 	private List<PromotionDetail> promotionDetails = new ArrayList<>();
 	@Transient
@@ -133,13 +135,13 @@ public class GroupProduct implements Serializable {
 		this.isSpecial = isSpecial;
 	}
 
-	@Column(name = "isLastest")
-	public Boolean getIsLastest() {
-		return this.isLastest;
+	@Column(name = "lastest")
+	public Date getLastest() {
+		return this.lastest;
 	}
 
-	public void setIsLastest(Boolean isLastest) {
-		this.isLastest = isLastest;
+	public void setLastest(Date lastest) {
+		this.lastest = lastest;
 	}
 
 	@Column(name = "code")
@@ -149,6 +151,15 @@ public class GroupProduct implements Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+	
+	@Column(name = "point")
+	public Integer getPoint() {
+		return this.point;
+	}
+
+	public void setPoint(Integer point) {
+		this.point = point;
 	}
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groupProduct")

@@ -1,13 +1,13 @@
 package com.minimalism.shop.dto;
 
 public class ValueNode {
-	private int item;
+	private Integer item;
 	private int value;
 	
-	public int getItem() {
+	public Integer getItem() {
 		return item;
 	}
-	public void setItem(int item) {
+	public void setItem(Integer item) {
 		this.item = item;
 	}
 	public int getValue() {

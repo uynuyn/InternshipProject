@@ -1,5 +1,6 @@
 package com.minimalism.shop.cmn.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class GroupProductServiceImpl extends BaseServiceImpl<GroupProduct, Integ
 	}
 
 	@Override
-	public List<GroupProduct> findListProductTop() {
+	public List<GroupProduct> findListProductTop(Date date) {
 		// TODO Auto-generated method stub
-		return groupProductRepository.findListProductTop();
+		return groupProductRepository.findListProductTop(date);
 	}
 
 	@Override
@@ -49,6 +50,18 @@ public class GroupProductServiceImpl extends BaseServiceImpl<GroupProduct, Integ
 	public List<GroupProduct> searchProduct(String name) {
 		// TODO Auto-generated method stub
 		return groupProductRepository.searchProduct(name);
+	}
+
+	@Override
+	public List<GroupProduct> findrRelatedProduct(GroupProduct groupProduct) {
+		// TODO Auto-generated method stub
+		return groupProductRepository.findrRelatedProduct(groupProduct);
+	}
+	
+	@Override
+	public List<GroupProduct> findHabitProduct(List<String> list) {
+		// TODO Auto-generated method stub
+		return groupProductRepository.findHabitProduct(list);
 	}
 	
 }

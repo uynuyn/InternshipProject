@@ -215,7 +215,7 @@ body {
 }
 
 .slide-text-wrapper {
-	height: 700px;
+	height: 300px;
 }
 
 .slide-text-wrapper {
@@ -236,7 +236,7 @@ body {
 	position: absolute;
 	transform: rotate(3deg);
 	width: 108%;
-	z-index: 9;
+	z-index: 100;
 }
 
 .slide-bg {
@@ -317,7 +317,7 @@ body {
 .promo-area {
 	background: none repeat scroll 0 0 #1abc9c;
 	color: #fff;
-	padding: 77px 0 200px;
+	padding: 77px 0 50px;
 }
 
 .brands-area {
@@ -333,8 +333,8 @@ body {
 .single-promo {
 	border: 1px solid #17a78b;
 	font-size: 25px;
-	font-weight: 200;
-	padding: 20px 10px;
+	font-weight: 20;
+	padding: 2px 5px;
 	text-align: center;
 }
 
@@ -600,7 +600,6 @@ body {
 }
 
 .footer-wid-title {
-	
 	font-family: raleway;
 	font-size: 22pt;
 	font-weight: 100;
@@ -618,7 +617,7 @@ body {
 }
 
 .footer-menu ul li {
-	font-size:15pt;
+	font-size: 15pt;
 	border-bottom: 1px dashed #555;
 	padding: 5px 0;
 }
@@ -692,6 +691,11 @@ a:hover, a:focus {
 	background: none repeat scroll 0 0 #000;
 	color: #fff;
 	padding-bottom: 40px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	 z-index: 1;
 }
 
 .slide-bulletz {

@@ -52,7 +52,7 @@
 							</li>
 						</ul></li>
 				</ul>
-				<!-- Logout google	  -->
+				<%-- <!-- Logout google	  -->
 				<button onclick="myFunction()">Sign Out</button>
 				<script>
 					function myFunction() {
@@ -62,7 +62,7 @@
 						<c:remove var="gogo"/>
 						<script>
 					}
-				</script>
+				</script> --%>
 			</div>
 		</div>
 	</div>

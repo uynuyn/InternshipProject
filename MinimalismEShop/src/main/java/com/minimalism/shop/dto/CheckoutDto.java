@@ -20,7 +20,9 @@ public class CheckoutDto {
 	private String addressSuite;
 	
 	private String addressCity;
-
+	
+	private Integer years;
+	
 	private String note;
 	public Integer getId() {
 		return id;
@@ -102,4 +104,11 @@ public class CheckoutDto {
 		this.note = note;
 	}
 
+	public Integer getYears() {
+		return years;
+	}
+
+	public void setYears(Integer years) {
+		this.years = years;
+	}
 }

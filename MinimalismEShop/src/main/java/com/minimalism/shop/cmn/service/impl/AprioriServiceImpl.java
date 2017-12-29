@@ -1,6 +1,7 @@
 package com.minimalism.shop.cmn.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.minimalism.shop.cmn.base.BaseServiceImpl;
 import com.minimalism.shop.cmn.base.Common;
+import com.minimalism.shop.cmn.base.SupportComparator;
 import com.minimalism.shop.cmn.repository.impl.AprioriRepositoryImpl;
 import com.minimalism.shop.dto.AprioriList;
 import com.minimalism.shop.dto.Luat;
@@ -28,17 +30,23 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 	private AprioriRepositoryImpl aprioriRepository;
 
 	private List<AprioriList> result = new ArrayList<>();
+	private Set<Tuple> resultCount = new HashSet<>();
 	List<Tuple> c;
 	Set<Tuple> l;
 	List<Tuple> all;
 	int d[][];// dữ liệu giao dịch
-	int min_support=1;
+	int min_support=2;
 	float min_conf= (float) 0.1;
 	
 	public List<AprioriList> aprioriLists(){
+		Collections.sort(result, new SupportComparator());
 		return result;
 	}
-
+	
+	public Set<Tuple> countItem(){
+		return resultCount;
+	}
+	
 	public void findAllList() {
 		c = new ArrayList<Tuple>();
 		// chứa phần tử lập lại bao nhiêu lần của  mảng
@@ -46,8 +54,10 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 		// chứa giá tri sau khi so min sup(biến tạm)
 		all = new ArrayList<Tuple>();
 		// chứa tất cả thỏa min sup
+//		lấy ra d[][] mảng những sản phẩm trong cùng hóa đơn
 		getDatabase();
 		int i, j;
+//		gán vào những sản phẩm đã mua có trong hóa đơn
 		Set<Integer> candidate_set = new HashSet<Integer>();
 		for (i = 0; i < d.length; i++) {
 			for (j = 0; j < d[i].length; j++) {
@@ -61,12 +71,16 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 			s.add(iterator.next());
 			Tuple t = new Tuple(s, count(s));
 			c.add(t);
+//			có list c những sản phẩm lập lai bao nhieu lần
 		}
 
+//		kiểm tra xem sản phẩm nào thỏa min_sup
 		prune();
 		generateFrequentItemsets();
 		List<Luat> luats = TimluatKetHop(all);
 		LuatKetHop(luats);
+		System.out.println(resultCount.size());
+		
 
 	}
 
@@ -134,16 +148,17 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 
 	}
 
+	@SuppressWarnings("unused")
 	private void LuatKetHop(List<Luat> luats) {
 
 		for (Luat luat : luats) {
 			AprioriList aprioriList = new AprioriList();
-			String vetrai = "";
-			String vephai = "";
 			Tuple tuple = new Tuple();
 			Tuple tuple2 = new Tuple();
 			List<Integer> lvetrai= new ArrayList<>();
 			List<Integer> lvephai = new ArrayList<>();
+			String vephai = "";
+			String vetrai = "";
 			for (ValueNode valueNode : luat.getNodes()) {
 				if (valueNode.getValue() == 0) {
 					vetrai += String.valueOf(valueNode.getItem())+" ";
@@ -163,11 +178,14 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 			}
 			aprioriList.setVetrai(lvetrai);
 			aprioriList.setVephai(lvephai);
+			aprioriList.setSupport(bt);
 			result.add(aprioriList);
+			for (AprioriList integer : result) {
+				System.out.println(integer.getVetrai() + " : " + integer.getVephai()+ " support :"+ integer.getSupport());
+			}
 
 			
 			
-			System.out.println(vetrai + "->" + vephai + " Support : " + bt);
 		}
 	}
 
@@ -224,7 +242,8 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 		return support;
 	}
 
-	/**kiểm tra thỏa min_sup in giá trị
+	/**
+	 * kiểm tra thỏa min_sup in giá trị
 	 * 
 	 */
 	private void prune() {
@@ -237,11 +256,16 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 				l.add(t);
 				all.add(t);
 			}
+			if(t.itemset.size()==1){
+				resultCount.add(t);
+			}
 		}
 		System.out.println("-+- L -+-");
-		for (Tuple t : l) {
+		
+		for (Tuple t : all) {
 			System.out.println(t.itemset + " : " + t.support);
 		}
+		
 	}
 
 	/**
@@ -305,16 +329,17 @@ public class AprioriServiceImpl extends BaseServiceImpl<Involve, Integer>{
 		for (Tuple t : l) {
 			System.out.println(t.itemset + " : " + t.support);
 		}
+		
 	}
 
 
 	private int[][] getDatabase() {
 		List<Involve> involves = aprioriRepository.findAllList();
-		Map<Integer, List<Integer>> maps = new HashMap<Integer, List<Integer>>();
+ 		Map<Integer, List<Integer>> maps = new HashMap<Integer, List<Integer>>();
 		List<Integer> temp;
 		for (Involve involve : involves) {
-			int list_no = involve.getIdType();
-			int object = involve.getIdInvolve();
+			int list_no = involve.getOrder().getId();
+			int object = involve.getGroupProduct().getId();
 			temp = maps.get(list_no);
 			if (temp == null) {
 				temp = new ArrayList<Integer>();

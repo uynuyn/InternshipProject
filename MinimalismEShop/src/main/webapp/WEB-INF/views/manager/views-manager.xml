@@ -8,49 +8,63 @@
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/manager/index.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/index.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="view-product" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/products.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="view-single-product" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/view-single-product.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="view-product-order" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/view-product-order.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="add-product" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/add-product.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
 
 	<definition name="add-product-old" extends="base.definition">
@@ -58,60 +72,77 @@
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/add-productold.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="listview" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/view-products.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="import-store" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/import-store.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="add-promotion" extends="base.definition">
 		<put-attribute name="head"
-		value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
+			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
 		<put-attribute name="menu"
 			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/add-promotion.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="list-order" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/list-order.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 	<definition name="update-product" extends="base.definition">
 		<put-attribute name="head"
 			value="/WEB-INF/views/include/head-admin.jsp"></put-attribute>
 		<put-attribute name="nav-bar"
 			value="/WEB-INF/views/include/nav-admin.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/include/nav-admin-left.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/include/nav-admin-left.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/manager/update-product.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp" />
+
 	</definition>
-	
+
 </tiles-definitions>

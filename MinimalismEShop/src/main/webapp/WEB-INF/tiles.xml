@@ -10,6 +10,5 @@
 		<put-attribute name="menu" value=""></put-attribute>
 		<put-attribute name="body" value=""></put-attribute>
 		<put-attribute name="footertop" value=""></put-attribute>
-		<put-attribute name="footer" value=""></put-attribute>
 	</definition>
 </tiles-definitions>

@@ -104,7 +104,7 @@ public class ManagerController {
 		productDto.setId(product.getId());
 		productDto.setName(product.getName());
 		productDto.setIdCategory(product.getCategory().getId());
-		
+		productDto.setImge(product.getImge());
 		session.setAttribute("product", product);
 		return "add-product-old";
 	}
@@ -202,6 +202,7 @@ public class ManagerController {
 		addGroupProduct.setName(productDto.getName());
 		addGroupProduct.setIdCategory(productDto.getIdCategory());
 		addGroupProduct.setId(productDto.getId());
+		addGroupProduct.setImge(productDto.getImge());
 		if (result.hasErrors()) {
 			
 			return "add-product-old";

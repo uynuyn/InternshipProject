@@ -2,9 +2,12 @@ package com.minimalism.shop.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,20 +22,21 @@ public class Involve implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 7012524030757954939L;
 	private Integer id;
-	private Integer idType;
-	private Integer idInvolve;
-
+	private Order order;
+	private GroupProduct groupProduct;
+	private Integer year;
+	
 	public Involve() {
 	}
 
-	public Involve(Integer idType, Integer idInvolve) {
-		this.idType = idType;
-		this.idInvolve = idInvolve;
+	public Involve(Order order, GroupProduct groupProduct, Integer year) {
+		this.order = order;
+		this.groupProduct = groupProduct;
+		this.year = year;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
@@ -41,23 +45,34 @@ public class Involve implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	@Column(name = "idType")
-	public Integer getIdType() {
-		return this.idType;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idOrder")
+	public Order getOrder() {
+		return this.order;
 	}
 
-	public void setIdType(Integer idType) {
-		this.idType = idType;
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idGroupProduct")
+	public GroupProduct getGroupProduct() {
+		return this.groupProduct;
 	}
 
-	@Column(name = "idInvolve")
-	public Integer getIdInvolve() {
-		return this.idInvolve;
+	public void setGroupProduct(GroupProduct groupProduct) {
+		this.groupProduct = groupProduct;
+	}
+	
+	@Column(name = "year")
+	public Integer getYear() {
+		return this.year;
 	}
 
-	public void setIdInvolve(Integer idInvolve) {
-		this.idInvolve = idInvolve;
+	public void setYear	(Integer year) {
+		this.year = year;
 	}
 
 }

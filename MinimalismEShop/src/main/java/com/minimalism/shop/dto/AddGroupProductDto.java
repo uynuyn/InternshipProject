@@ -8,6 +8,7 @@ public class AddGroupProductDto {
 	private String description;
 	private Integer size;
 	private Integer qty;
+	private String imge;
 	private CommonsMultipartFile[] image;
 	private Integer price;
 	private Integer idCategory;
@@ -88,4 +89,11 @@ public class AddGroupProductDto {
 	public void setEdit(boolean edit) {
 		this.edit = edit;
 	}
+	public String getImge() {
+		return imge;
+	}
+	public void setImge(String imge) {
+		this.imge = imge;
+	}
+	
 }

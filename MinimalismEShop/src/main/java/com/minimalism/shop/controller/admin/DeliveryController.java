@@ -28,7 +28,7 @@ public class DeliveryController {
 	@Autowired private UserServiceImpl userService;
 
 
-	@RequestMapping(value = "/list-order", method = RequestMethod.GET)
+	@RequestMapping(value = {"/list-order",""}, method = RequestMethod.GET)
 	public String listOrder(Model model, HttpServletRequest request) {
 		String date = request.getParameter("dateOrder");
 		List<Order> listOrder = new ArrayList<>();

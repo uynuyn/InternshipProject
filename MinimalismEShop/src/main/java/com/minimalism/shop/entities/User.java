@@ -7,12 +7,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -45,14 +45,22 @@ public class User implements Serializable {
 	private String lastname;
 
 	private Integer point;
+	
+	private Integer years;
+	
+	private String habit;
 
-	private Role idRole;
+	@Enumerated(EnumType.STRING)
+	private com.minimalism.shop.model.Role role;
 
 	private String addressStreet;
 
 	private String addressSuite;
 
 	private String addressCity;
+	
+	@Enumerated(EnumType.STRING)
+	private com.minimalism.shop.model.SocialMediaService socialMediaService;
 
 	@Transient
 	private List<Order> orders = new ArrayList<>();
@@ -137,16 +145,16 @@ public class User implements Serializable {
 	public void setPoint(Integer point) {
 		this.point = point;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idRole")
-	public Role getIdRole() {
-		return idRole;
+	
+	@Column(name = "years")
+	public Integer getYears() {
+		return this.years;
 	}
 
-	public void setIdRole(Role idRole) {
-		this.idRole = idRole;
+	public void setYears(Integer years) {
+		this.years = years;
 	}
-
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public List<Order> getOrders() {
 		return this.orders;
@@ -197,5 +205,32 @@ public class User implements Serializable {
 	public void setPermissions(List<Permission> permissions) {
 		this.permissions = permissions;
 	}
+	
+	public com.minimalism.shop.model.SocialMediaService getSocialMediaService() {
+		return socialMediaService ;
+	}
+
+	public void setSocialMediaService(com.minimalism.shop.model.SocialMediaService socialMediaService) {
+		this.socialMediaService  = socialMediaService ;
+	}
+	
+
+	public com.minimalism.shop.model.Role getRole() {
+		return role;
+	}
+
+	public void setRole(com.minimalism.shop.model.Role role) {
+		this.role = role;
+	}
+	@Column(name = "habit")
+	public String getHabit() {
+		return habit;
+	}
+
+	public void setHabit(String habit) {
+		this.habit = habit;
+	}
+	
+
 
 }

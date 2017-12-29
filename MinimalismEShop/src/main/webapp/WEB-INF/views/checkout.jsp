@@ -108,7 +108,21 @@
 												</p>
 											</div>
 										</spring:bind>
-										
+										<%-- <spring:bind path="years">
+											<div class="form-group ${status.error ? 'has-error' : ''}">
+												<p id="billing_phone_field"
+													class="form-row form-row-last validate-required validate-year">
+													<label class="" for="billing_years">Years <abbr
+														title="required" class="required">*</abbr>
+													</label>
+													<form:select path="years" id="billing_years" name="billing_years"
+														class="input-text" data-live-search="true">
+														<form:options items="${years }"/>
+														</form:select>
+													<form:errors path="years" class="control-label" />
+												</p>
+											</div>
+										</spring:bind> --%>
 										<spring:bind path="note">
 												<p id="billing_note_field"
 													class="form-row form-row-last validate-required validate-note">
@@ -125,7 +139,7 @@
 								</div>
 								<div class="col-2">
 									<div class="woocommerce-billing-fields">
-										<h3></h3>
+										<h3 style="color: white;">---</h3>
 										<spring:bind path="firstname">
 											<div class="form-group ${status.error ? 'has-error' : ''}">
 												<p id="billing_first_name_field"

@@ -29,41 +29,35 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
-	<beans:bean
+	<!-- <beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
-	
-	<!-- upload file  -->
-	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</beans:bean> -->
+
+	<!-- upload file -->
+	<beans:bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize">
 			<beans:value>1048576</beans:value>
 		</beans:property>
 	</beans:bean>
-	
-	<!-- <beans:bean	class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
- 		<beans:property name="loginFormUrl" value="/oauthlogin.jsp"/>
-	</beans:bean>
 
-	<beans:bean id="springSocialSecurityRememberMeServices"
-		class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
-		<beans:property name="userDetailsService" ref="springSocialSecurityUserDetailsService" />
-		<beans:property name="tokenRepository" ref="tokenRepository" />
-		<beans:property name="key" value="springSocialSecurity" />
-		<beans:property name="alwaysRemember" value="true" />
-		<beans:property name="tokenValiditySeconds" value="3600" />
-	</beans:bean>
- -->
+	<!-- <beans:bean class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"> 
+		<beans:property name="loginFormUrl" value="/oauthlogin.jsp"/> </beans:bean> 
+		<beans:bean id="springSocialSecurityRememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices"> 
+		<beans:property name="userDetailsService" ref="springSocialSecurityUserDetailsService" 
+		/> <beans:property name="tokenRepository" ref="tokenRepository" /> <beans:property 
+		name="key" value="springSocialSecurity" /> <beans:property name="alwaysRemember" 
+		value="true" /> <beans:property name="tokenValiditySeconds" value="3600" 
+		/> </beans:bean> -->
 
-<!-- 	<beans:bean id="tokenRepository"
-		class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
-		<beans:property name="createTableOnStartup" value="true" />
-		<beans:property name="dataSource" ref="dataSource" />
-	</beans:bean> -->
-	
-	
-	
+	<!-- <beans:bean id="tokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl"> 
+		<beans:property name="createTableOnStartup" value="true" /> <beans:property 
+		name="dataSource" ref="dataSource" /> </beans:bean> -->
+
+
+
 
 	<!-- Tiles -->
 	<beans:bean id="tilesConfigurer"
@@ -85,6 +79,14 @@
 		</beans:property>
 		<beans:property name="order" value="0" />
 	</beans:bean>
+<!-- 	<beans:bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<beans:property name="corePoolSize" value="5" />
+		<beans:property name="maxPoolSize" value="10" />
+		<beans:property name="waitForTasksToCompleteOnShutdown"
+			value="true"></beans:property>
+	</beans:bean>
+ -->
 
 	<!-- Driver connect db -->
 	<beans:bean id="dataSource"
@@ -136,7 +138,7 @@
 	</beans:bean>
 
 
-	<tx:annotation-driven transaction-manager="transactionManager"  />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- set max size upload -->
 	<beans:bean id="multipartResolver"
@@ -148,44 +150,36 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/verify" />
-			<exclude-mapping path="/home"/>
-			<beans:bean class="com.minimalism.shop.cmn.interceptor.VerificationInterceptor" />
+			<exclude-mapping path="/home" />
+			<beans:bean
+				class="com.minimalism.shop.cmn.interceptor.VerificationInterceptor" />
 		</interceptor>
 	</interceptors>
 	<interceptors>
 		<interceptor>
 			<mapping path="/checkout" />
-			<exclude-mapping path="/login"/>
-			<exclude-mapping path="/register"/>
-			<beans:bean class="com.minimalism.shop.cmn.interceptor.AuthenticateInterceptor" />
+			<exclude-mapping path="/login" />
+			<exclude-mapping path="/register" />
+			<beans:bean
+				class="com.minimalism.shop.cmn.interceptor.AuthenticateInterceptor" />
 		</interceptor>
 	</interceptors>
-<!-- 	<interceptors>
-		<interceptor>
-			<mapping path="/login" />
-			<mapping path="/register"/>
-			<exclude-mapping path="/home"/>
-			<beans:bean class="com.minimalism.shop.cmn.interceptor.UserInterceptor" />
-		</interceptor>
-	</interceptors>
-	<interceptors>
-		<interceptor>
-			<mapping path="/admin" />
-			<mapping path="/admins/**" />
-			<mapping path="/delivery/**" />
-			<exclude-mapping path="/login"/>
-			<beans:bean class="com.minimalism.shop.cmn.interceptor.AdminInterceptor" />
-		</interceptor>
-	</interceptors> -->
+	<!-- <interceptors> <interceptor> <mapping path="/login" /> <mapping path="/register"/> 
+		<exclude-mapping path="/home"/> <beans:bean class="com.minimalism.shop.cmn.interceptor.UserInterceptor" 
+		/> </interceptor> </interceptors> <interceptors> <interceptor> <mapping path="/admin" 
+		/> <mapping path="/admins/**" /> <mapping path="/delivery/**" /> <exclude-mapping 
+		path="/login"/> <beans:bean class="com.minimalism.shop.cmn.interceptor.AdminInterceptor" 
+		/> </interceptor> </interceptors> -->
 	<!-- Production implementation of the JavaMailSender interface, supporting 
 		both JavaMail MimeMessages and Spring SimpleMailMessages -->
-	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com" />
 		<beans:property name="port" value="587" />
 		<beans:property name="username" value="thucuyen.tran.0508@gmail.com" />
 		<beans:property name="password" value="thucuyen(0508))" />
- 		<beans:property name="defaultEncoding" value="UTF-8"/> 
- 
+		<beans:property name="defaultEncoding" value="UTF-8" />
+
 		<!-- The name of the property, following JavaBean naming conventions -->
 		<beans:property name="javaMailProperties">
 			<beans:props>
